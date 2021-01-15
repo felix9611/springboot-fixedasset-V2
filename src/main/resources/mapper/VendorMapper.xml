@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.company.project.mapper.VendorMapper">
+
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="com.company.project.entity.VendorEntity" id="vendorMap">
+        <result property="id" column="id"/>
+        <result property="vendorcode" column="vendorcode"/>
+        <result property="vendorname" column="vendorname"/>
+        <result property="vendortype" column="vendortype"/>
+        <result property="vendoraddress" column="vendoraddress"/>
+        <result property="vendorphone" column="vendorphone"/>
+        <result property="vendorfax" column="vendorfax"/>
+        <result property="vendorcontact" column="vendorcontact"/>
+        <result property="active" column="active"/>
+    </resultMap>
+
+
+</mapper>
