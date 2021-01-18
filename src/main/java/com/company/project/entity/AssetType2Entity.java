@@ -57,8 +57,5 @@ public class AssetType2Entity extends BaseEntity implements Serializable {
 		this.id = id;
 	}
 
-	public void AssetType(String id, String Name){
-		this.id = id;
-		this.typeName = Name;
-	}
+	
 }
