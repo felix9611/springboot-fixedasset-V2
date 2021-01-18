@@ -130,6 +130,7 @@
 </body>
 </html>
 <script src="/layui/layui.all.js"></script>
+<script src="/js/assetma.js"></script>
 <script src="/js/core.util.js"></script>
 <script>
     //获取token
@@ -204,12 +205,23 @@
                         return CoreUtil.selectAssetName(assetdatas, item.assetCode);
                         }
                     },
-                    {field: 'assetPlace', title: '地點', sort: true, templet: function (item) {
-                        return CoreUtil.selecPlacetId(placedatas, item.assetPlace);
+                    {field: 'assetPlace', title: '舊地點', sort: true, templet: function (item) {
+                        var asset = CoreUtil.selectAssetName(assetdatas, item.assetCode);
+                            if(asset != "(此資產不存在)"){
+                                return CoreUtil.selecPlacetId(placedatas, item.assetPlace);
+                            }else{
+                                return "(此資產不存在)";
+                            }
+
                         }
                     },
                     {field: 'status', title: '狀態', sort: true, templet: function (item) {
-                        return CoreUtil.selectStatus(item.status);
+                            var asset = CoreUtil.selectAssetName(assetdatas, item.assetCode);
+                            if(asset != "(此資產不存在)"){
+                                return CoreUtil.selectStatus(item.status);
+                            }else{
+                                return "不存在";
+                            }
                         }
                     },
                     {field: 'statusRemark', title: '狀態備註欄', sort: true},
