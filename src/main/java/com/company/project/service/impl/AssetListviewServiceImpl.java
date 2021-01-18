@@ -2,53 +2,46 @@ package com.company.project.service.impl;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
-import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 
-import com.company.project.mapper.AssetlistMapper;
-import com.company.project.entity.AssetlistEntity;
-import com.company.project.service.AssetlistService;
+import com.company.project.mapper.AssetListviewMapper;
+import com.company.project.entity.AssetListviewEntity;
+import com.company.project.service.AssetListviewService;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.util.List;
-import java.util.Objects;
 import java.util.concurrent.atomic.AtomicReference;
 
-
 @Transactional
-//@MapperScan("com.company.project.entity")
-@Service("assetlistService")
+@Service("assetListviewService")
 @Slf4j
-public class AssetlistServiceImpl extends ServiceImpl<AssetlistMapper, AssetlistEntity> implements AssetlistService {
+public class AssetListviewServiceImpl extends ServiceImpl<AssetListviewMapper, AssetListviewEntity> implements AssetListviewService {
 
     @Resource
-    private AssetlistMapper assetlistMapper;
+    private AssetListviewEntity assetListviewEntity;
 
     @Resource
-    private AssetlistEntity ate1;
-
-
+    private AssetListviewMapper assetListviewMapper;
 
     @Override
-    public void addAsset(AssetlistEntity vo) {
-        //String newCode;
-        //String Code = this.getNewAssetCode();
-        //vo.setAssetCode(Code);
+    public void newAsset(AssetListviewEntity vo){
+        String newCode = this.getNewAssetCode();
+        vo.setAssetCode(newCode);
         vo.setActive("1");
-        assetlistMapper.insert(vo);
-
+        assetListviewMapper.insert(vo);
+        //return true;
     }
 
     public String getNewAssetCode() {
-        LambdaQueryWrapper<AssetlistEntity> lqw = Wrappers.lambdaQuery();
-        //lqw.select(AssetlistEntity::getAssetCode);
+        LambdaQueryWrapper<AssetListviewEntity> lambdaQueryWrapper = Wrappers.lambdaQuery();
+        lambdaQueryWrapper.select(AssetListviewEntity::getAssetCode);
 
-        List<Object> assetcodes = assetlistMapper.selectObjs(lqw);
+        List<Object> assetcodes = assetListviewMapper.selectObjs(lambdaQueryWrapper);
         AtomicReference<Integer> maxAssetcodes = new AtomicReference<>(0);
 
         assetcodes.forEach(o -> {
@@ -84,6 +77,14 @@ public class AssetlistServiceImpl extends ServiceImpl<AssetlistMapper, Assetlist
     }
 
 
+    /**
+     * @return
+     **/
+    public JSONArray getAssetCodeName() {
+
+        List<AssetListviewEntity> list = assetListviewMapper.selectList(Wrappers.<AssetListviewEntity>lambdaQuery().eq(AssetListviewEntity::getActive, "1"));
+        return JSONArray.parseArray(JSON.toJSONString(list));
+    }
 
 
 }

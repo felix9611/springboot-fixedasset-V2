@@ -12,19 +12,14 @@
   <div class="panel-heading title"></div>
 <div class="layui-card-body">
 <form class="layui-form " action="" lay-filter="info" style="width: 700px;margin-top: 10px">
-#foreach($column in $columns)
-  #if($column.columnName == $pk.columnName)
-    <input name="${column.attrname}" hidden/>
-  #else
-    <div class="layui-form-item">
-      <label class="layui-form-label">${column.comments}</label>
+      <input name="id" hidden/>
+        <div class="layui-form-item">
+      <label class="layui-form-label"></label>
       <div class="layui-input-block">
-        <input type="${column.attrname}" name="${column.attrname}" placeholder="请输入${column.comments}" autocomplete="off" class="layui-input">
+        <input type="test1" name="test1" placeholder="请输入" autocomplete="off" class="layui-input">
       </div>
     </div>
-  #end
-#end
-<div class="layui-form-item">
+  <div class="layui-form-item">
   <div class="layui-input-block">
     <button type="submit" class="layui-btn" lay-submit="" lay-filter="submit">保存</button>
     <button  class="layui-btn layui-btn-primary" id="btn_cancel">返回</button>
@@ -35,7 +30,7 @@
 </div>
 
 <div class="table_div">
-  <div id="searchParam"  shiro:hasPermission="${classname}:list">
+  <div id="searchParam"  shiro:hasPermission="testcode:list">
     <div class="layui-form-item">
       <div class="layui-input-inline">
         <input type="text" id="key" class="layui-input"  autocomplete="off" placeholder="请输入">
@@ -52,13 +47,13 @@
 </div>
 <script type="text/html" id="toolbar">
   <div class="layui-btn-container">
-    <button class="layui-btn layui-btn-sm" lay-event="add"  shiro:hasPermission="${classname}:add">添加</button>
-    <button class="layui-btn layui-btn-sm" lay-event="batchDeleted" shiro:hasPermission="${classname}:delete">删除</button>
+    <button class="layui-btn layui-btn-sm" lay-event="add"  shiro:hasPermission="testcode:add">添加</button>
+    <button class="layui-btn layui-btn-sm" lay-event="batchDeleted" shiro:hasPermission="testcode:delete">删除</button>
   </div>
 </script>
 <script type="text/html" id="tool">
-  <a class="layui-btn layui-btn-xs" lay-event="edit" shiro:hasPermission="${classname}:update">编辑</a>
-  <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del" shiro:hasPermission="${classname}:delete">删除</a>
+  <a class="layui-btn layui-btn-xs" lay-event="edit" shiro:hasPermission="testcode:update">编辑</a>
+  <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del" shiro:hasPermission="testcode:delete">删除</a>
 </script>
 
 </body>
@@ -85,7 +80,7 @@
       , contentType: 'application/json'
       , headers: {"authorization": token}
       , page: true //开启分页
-      , url: '/${classname}/listByPage' //数据接口
+      , url: '/testcode/listByPage' //数据接口
       , method: 'POST'
       , parseData: function (res) { //将原始数据解析成 table 组件所规定的数据
         return {
@@ -97,10 +92,8 @@
       }
       , cols: [
         [
-          {type: 'checkbox', fixed: 'left'},
-#foreach($column in $columns)
-          {field: '${column.attrname}', title: '${column.comments}', sort: true},
-#end
+          {field: 'testCode', title: 'Test Code', sort: true},
+          {field: 'test1', title: 'Test input', sort: true},
           {width: 120, toolbar: "#tool", title: '操作'}
         ]
       ]
@@ -128,9 +121,9 @@
           $(".table_div").hide();
           $(".operation").show();
           $(".title").html("新增");
-#foreach($column in $columns)
-          $(".operation input[name=${column.attrname}]").val("");
-#end
+          $(".operation input[name=id]").val("");
+          $(".operation input[name=testCode]").val("");
+          $(".operation input[name=test1]").val("");
           break;
       };
     });
@@ -146,10 +139,10 @@
         case 'edit':
           $(".table_div").hide();
           $(".operation").show();
-          $(".title").html("編輯");
-#foreach($column in $columns)
-          $(".operation input[name=${column.attrname}]").val(data.${column.attrname});
-#end
+          $(".title").html("编辑");
+          $(".operation input[name=id]").val(data.id);
+          $(".operation input[name=testCode]").val(data.testCode);
+          $(".operation input[name=test1]").val(data.test1);
           break;
       }
     });
@@ -161,7 +154,7 @@
         limit: 10000,
         key: $("#key").val()
       };
-      CoreUtil.sendPost("/${classname}/listByPage", exportParams, function (res) {
+      CoreUtil.sendPost("/testcode/listByPage", exportParams, function (res) {
         //初始化渲染数据
         if (res.data != null && res.data.records != null) {
           table.exportFile(tableIns1.config.id, res.data.records, 'xls');
@@ -172,10 +165,10 @@
     //删除
     var tipDialog=function (ids) {
       layer.open({
-        content: "確定要删除?",
+        content: "确定要删除么?",
         yes: function(index, layero){
           layer.close(index); //如果设定了yes回调，需进行手工关闭
-          CoreUtil.sendDelete("/${classname}/delete",ids,function (res) {
+          CoreUtil.sendDelete("/testcode/delete",ids,function (res) {
             layer.msg(res.msg, {time:1000},function () {
               search();
             });
@@ -194,13 +187,13 @@
     //监听保存
     form.on('submit(submit)', function(data){
       if(data.field.id===undefined || data.field.id===null || data.field.id===""){
-        CoreUtil.sendPost("/${classname}/add",data.field,function (res) {
+        CoreUtil.sendPost("/testcode/add",data.field,function (res) {
           $(".table_div").show();
           $(".operation").hide();
           search();
         });
       }else {
-        CoreUtil.sendPut("/${classname}/update",data.field,function (res) {
+        CoreUtil.sendPut("/testcode/update",data.field,function (res) {
           $(".table_div").show();
           $(".operation").hide();
           search();

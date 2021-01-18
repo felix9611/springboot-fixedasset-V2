@@ -146,10 +146,7 @@
     var laydate = layui.laydate;
 
     var placedatas = "[[${@place2Service.getPlacetSel()}]]".replace(/&quot;/g,"\"");
-    var assetdatas = "[[${@assetlistService.getAssetCodeName()}]]".replace(/&quot;/g,"\"");
-
-
-
+    var assetdatas = "[[${@assetListviewService.getAssetCodeName()}]]".replace(/&quot;/g,"\"");
 
     layui.use(['table', 'layer', 'laydate'], function () {
 
