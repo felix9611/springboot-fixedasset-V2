@@ -19,7 +19,7 @@
     <div class="layui-form-item">
       <label class="layui-form-label">${column.comments}</label>
       <div class="layui-input-block">
-        <input type="${column.attrname}" name="${column.attrname}" placeholder="请输入${column.comments}" autocomplete="off" class="layui-input">
+        <input type="${column.attrname}" name="${column.attrname}" placeholder="請輸入${column.comments}" autocomplete="off" class="layui-input">
       </div>
     </div>
   #end
@@ -38,12 +38,12 @@
   <div id="searchParam"  shiro:hasPermission="${classname}:list">
     <div class="layui-form-item">
       <div class="layui-input-inline">
-        <input type="text" id="key" class="layui-input"  autocomplete="off" placeholder="请输入">
+        <input type="text" id="key" class="layui-input"  autocomplete="off" placeholder="請輸入">
       </div>
 
       <div class="layui-input-inline ">
-        <button class="layui-btn" onclick="search()"  id="search">查询</button>
-        <button class="layui-btn"   id="export">导出全部</button>
+        <button class="layui-btn" onclick="search()"  id="search">查詢</button>
+        <button class="layui-btn"   id="export">導出全部</button>
       </div>
     </div>
 
@@ -52,12 +52,12 @@
 </div>
 <script type="text/html" id="toolbar">
   <div class="layui-btn-container">
-    <button class="layui-btn layui-btn-sm" lay-event="add"  shiro:hasPermission="${classname}:add">添加</button>
+    <button class="layui-btn layui-btn-sm" lay-event="add"  shiro:hasPermission="${classname}:add">新增</button>
     <button class="layui-btn layui-btn-sm" lay-event="batchDeleted" shiro:hasPermission="${classname}:delete">删除</button>
   </div>
 </script>
 <script type="text/html" id="tool">
-  <a class="layui-btn layui-btn-xs" lay-event="edit" shiro:hasPermission="${classname}:update">编辑</a>
+  <a class="layui-btn layui-btn-xs" lay-event="edit" shiro:hasPermission="${classname}:update">編輯</a>
   <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del" shiro:hasPermission="${classname}:delete">删除</a>
 </script>
 
@@ -84,15 +84,15 @@
       elem: '#showTable'
       , contentType: 'application/json'
       , headers: {"authorization": token}
-      , page: true //开启分页
-      , url: '/${classname}/listByPage' //数据接口
+      , page: true
+      , url: '/${classname}/listByPage' //API PORT
       , method: 'POST'
-      , parseData: function (res) { //将原始数据解析成 table 组件所规定的数据
+      , parseData: function (res) {
         return {
-          "code": res.code, //解析接口状态
-          "msg": res.msg, //解析提示文本
-          "count": CoreUtil.isEmpty(res.data) ? 0 : res.data.total, //解析数据长度
-          "data": CoreUtil.isEmpty(res.data) ? null : res.data.records //解析数据列表
+          "code": res.code,
+          "msg": res.msg,
+          "count": CoreUtil.isEmpty(res.data) ? 0 : res.data.total,
+          "data": CoreUtil.isEmpty(res.data) ? null : res.data.records
         }
       }
       , cols: [
@@ -134,7 +134,7 @@
           break;
       };
     });
-    //列操作
+
     table.on('tool(showTable)',function (obj) {
       var data = obj.data;
       switch (obj.event) {
@@ -154,22 +154,22 @@
       }
     });
 
-    //导出
+    //Export
     $('#export').on('click', function () {
-      //原先分页limit
+
       var exportParams = {
         limit: 10000,
         key: $("#key").val()
       };
       CoreUtil.sendPost("/${classname}/listByPage", exportParams, function (res) {
-        //初始化渲染数据
+
         if (res.data != null && res.data.records != null) {
           table.exportFile(tableIns1.config.id, res.data.records, 'xls');
         }
       });
     });
 
-    //删除
+    //Delete
     var tipDialog=function (ids) {
       layer.open({
         content: "確定要删除?",
@@ -184,14 +184,14 @@
       });
     };
 
-    //返回
+    //Back
     $("#btn_cancel").click(function() {
       $(".table_div").show();
       $(".operation").hide();
       return false;
     });
 
-    //监听保存
+    //Save
     form.on('submit(submit)', function(data){
       if(data.field.id===undefined || data.field.id===null || data.field.id===""){
         CoreUtil.sendPost("/${classname}/add",data.field,function (res) {
@@ -211,15 +211,15 @@
     });
   });
 
-  //执行查询
+  //Search for List Page
   function search() {
-    //这里以搜索为例
+
     tableIns1.reload({
-      where: { //设定异步数据接口的额外参数，任意设
+      where: {
         key: $("#key").val()
       }
       , page: {
-        curr: 1 //重新从第 1 页开始
+        curr: 1 //Return to page 1
       }
     });
   };
