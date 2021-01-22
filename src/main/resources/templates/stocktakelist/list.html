@@ -425,11 +425,28 @@
         //详情监听保存
         form.on('submit(submitDetail)', function (data) {
             if (data.field.id === undefined || data.field.id === null || data.field.id === "") {
-                CoreUtil.sendPost("/stocktakelistDetail/add", data.field, function (res) {
-                    $(".table_div").show();
-                    layer.closeAll();
-                    searchDetail();
-                });
+                if(data.field.assetCode != "" && data.field.assetPlace != "" && data.field.status != ""){
+                    var checkData = assetMa.getAssetData(data.field.assetCode, assetdatas);
+                    console.log(checkData);
+                    if(checkData.assetCode != null){
+                        if(checkData.place == data.field.assetPlace){
+                            CoreUtil.sendPost("/stocktakelistDetail/add", data.field, function (res) {
+                                $(".table_div").show();
+                                layer.closeAll();
+                                searchDetail();
+                            });
+                        }else{
+                            //layer.msg("地點錯誤!");
+                            alert("地點錯誤!");
+                        }
+                    }else{
+                        //layer.msg("此記錄不存在!");
+                        alert("此記錄不存在!");
+                    }
+                }else{
+                    //layer.msg("請輸入所有欄位!");
+                    alert("請輸入所有欄位!");
+                }
             }
 
             return false;

@@ -1,22 +1,54 @@
-var AssetMa = (function () {
-    var AssetMa = {};
+var assetMa = (function () {
+    var assetMa = {};
 
-    AssetMa.getPerName = function (datas, id) {
-                                          datas = JSON.parse(datas);
-                                          var PerName = "";
+    assetMa.isEmpty = function(obj){
+            if(typeof obj == "undefined" || obj == null || obj == ""){
+                return true;
+            }else{
+                return false;
+            }
+        }
 
-                                          $.each(datas, function(index, dict) {
-                                              if (dict.id == ('' + id)) {
-                                                  PerName = dict.realName;
-                                                  return false;
-                                              }
-                                          });
-                                          if (CoreUtil.isEmpty(PerName)) {
-                                               PerName = "(不存在)";
-                                               return PerName;
+    assetMa.getPlaceName = function(assetCode, assetList){
+                                assetList = JSON.parse(assetList);
+                                console.log(assetList);
+                                var assetPlace = "";
+
+
+                                $.each(assetList, function(index, dict) {
+                                     if (dict.assetCode == ('' + assetCode)) {
+                                         assetPlace = dict.place;
+                                         return false;
+                                     }
+                                });
+
+                                if (assetMa.isEmpty(assetPlace)) {
+                                    return "(此資產不存在)";
+                                 }
+                                return assetPlace;
+                         }
+     assetMa.getAssetData = function(assetCode, assetList){
+                                     assetList = JSON.parse(assetList);
+                                     console.log(assetList);
+                                     var assetData = "";
+
+
+                                     $.each(assetList, function(index, dict) {
+                                          if (dict.assetCode == ('' + assetCode)) {
+                                              assetData = dict;
+                                              return false;
                                           }
-                                          return PerName;
+                                     });
+
+                                     if (assetMa.isEmpty(assetPlace)) {
+                                         return "(此資產不存在)";
                                       }
+                                     return assetData;
+                              }
+
+        return assetMa;
 
 
-})(AssetMa, window);
+
+
+})(assetMa, window);
