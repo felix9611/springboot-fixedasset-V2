@@ -29,7 +29,6 @@ var assetMa = (function () {
                          }
      assetMa.getAssetData = function(assetCode, assetList){
                                      assetList = JSON.parse(assetList);
-                                     console.log(assetList);
                                      var assetData = "";
 
 

@@ -206,13 +206,16 @@
                         }
                     },
                     {field: 'assetPlace', title: '舊地點', sort: true, templet: function (item) {
-                        var asset = CoreUtil.selectAssetName(assetdatas, item.assetCode);
-                            if(asset != "(此資產不存在)"){
-                                return CoreUtil.selecPlacetId(placedatas, item.assetPlace);
-                            }else{
-                                return "(此資產不存在)";
-                            }
 
+                            var asset = assetMa.getAssetData(item.assetCode, assetdatas);
+
+                            if(item.assetPlace == asset.Place){
+                                return CoreUtil.selecPlacetId(placedatas, asset.Place);
+                            }else if(item.assetCode == ""){
+                                return "(此資產不存在)";
+                            }else{
+                                return "(紀錄或有異)";
+                            }
                         }
                     },
                     {field: 'status', title: '狀態', sort: true, templet: function (item) {
@@ -266,25 +269,7 @@
                     var containCurrentIdFlag = (data.id === selectDictId);
                     tipDialog(ids,containCurrentIdFlag);
                     break;
-                case 'edit':
-                    $("#id").val(data.id);
-                    $(".operation input[name=name]").val(data.name);
-                    $(".operation input[name=remark]").val(data.remark);
-                    //捕获页
-                    layer.open({
-                        type: 1,
-                        skin: 'layui-layer-demo', //样式类名
-                        title: "添加字典",
-                        shadeClose: true, //开启遮罩关闭
-                        area: ['450px', '300px'], //宽高
-                        shade: 0.6, //遮罩透明度
-                        maxmin: true, //允许全屏最小化
-                        anim: 1, //0-6的动画形式，-1不开启
-                        content: $('#dictAdd'), //捕获的元素，注意：最好该指定的元素要存放在body最外层，否则可能被其它的相对元素所影响
-                        cancel: function () {
-                        }
-                    });
-                    break;
+
                 case 'setDetail':
                     var data = obj.data;
                     selectDictId = data.id;
@@ -297,19 +282,6 @@
         //详情表头工具
         table.on('toolbar(showTableDetail)', function (obj) {
             switch (obj.event) {
-                case 'batchDeleted':
-                    var checkStatus = table.checkStatus(obj.config.id);
-                    var data = checkStatus.data;
-                    if (data.length == 0) {
-                        layer.msg("请选择要批量删除的列");
-                    } else {
-                        var ids = [];
-                        $(data).each(function (index, item) {
-                            ids.push(item.id);
-                        });
-                        tipDialogDetail(ids);
-                    }
-                    break;
                 case 'add':
                     if (CoreUtil.isEmpty(selectDictId)) {
                         layer.msg("请先选中左侧行后，再执行添加操作", {time: 3000});
@@ -348,27 +320,6 @@
                     var ids = [];
                     ids.push(data.id);
                     tipDialogDetail(ids);
-                    break;
-                case 'edit':
-                    $("#detailId").val(data.id);
-                    $(".operation input[name=dictId]").val(data.dictId);
-                    $(".operation input[name=value]").val(data.value);
-                    $(".operation input[name=label]").val(data.label);
-                    $(".operation input[name=sort]").val(data.sort);
-                    //捕获页
-                    layer.open({
-                        type: 1,
-                        skin: 'layui-layer-demo', //样式类名
-                        title: "添加字典",
-                        shadeClose: true, //开启遮罩关闭
-                        area: ['450px', '300px'], //宽高
-                        shade: 0.6, //遮罩透明度
-                        maxmin: true, //允许全屏最小化
-                        anim: 1, //0-6的动画形式，-1不开启
-                        content: $('#dictAddDetail'), //捕获的元素，注意：最好该指定的元素要存放在body最外层，否则可能被其它的相对元素所影响
-                        cancel: function () {
-                        }
-                    });
                     break;
             }
         });
@@ -437,7 +388,12 @@
                             });
                         }else{
                             //layer.msg("地點錯誤!");
-                            alert("地點錯誤!");
+                            alert("警告 : 紀錄或有異, 請檢查清楚紀錄!");
+                             CoreUtil.sendPost("/stocktakelistDetail/add", data.field, function (res) {
+                                $(".table_div").show();
+                                layer.closeAll();
+                                searchDetail();
+                            });
                         }
                     }else{
                         //layer.msg("此記錄不存在!");
