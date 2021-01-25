@@ -8,6 +8,7 @@ import com.baomidou.mybatisplus.core.injector.methods.Update;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.company.project.common.exception.BusinessException;
 import com.company.project.common.exception.code.BaseResponseCode;
+import com.company.project.common.job.utils.ScheduleUtils;
 import com.company.project.entity.AssetlistEntity;
 import com.company.project.mapper.AssetlistMapper;
 import com.company.project.service.AssetlistService;
@@ -24,6 +25,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.sql.Wrapper;
+import java.util.Iterator;
 import java.util.List;
 
 @Component
@@ -48,5 +50,10 @@ public class AssetType2ServiceImpl extends ServiceImpl<AssetType2Mapper, AssetTy
         return JSONArray.parseArray(JSON.toJSONString(list));
     }
 
+    @Override
+    public void updateActive(AssetType2Entity assetType2) {
+        assetType2.setActive("0");
+        assetType2Mapper.updateById(assetType2);
+    }
 
 }

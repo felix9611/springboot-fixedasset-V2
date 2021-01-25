@@ -13,5 +13,7 @@ import com.company.project.entity.AssetListviewEntity;
 public interface AssetListviewService extends IService<AssetListviewEntity> {
 
     void newAsset(AssetListviewEntity vo);
+
+    void updateActive(AssetListviewEntity assetListview);
 }
 

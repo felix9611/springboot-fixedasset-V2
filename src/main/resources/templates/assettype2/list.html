@@ -109,19 +109,6 @@
     //表头工具
     table.on('toolbar(showTable)', function(obj){
       switch(obj.event){
-        case 'batchDeleted':
-          var checkStatus = table.checkStatus(obj.config.id);
-          var data = checkStatus.data;
-          if(data.length==0){
-            layer.msg("请选择要批量删除的列");
-          }else {
-            var ids = [];
-            $(data).each(function (index,item) {
-              ids.push(item.id);
-            });
-            tipDialog(ids);
-          }
-          break;
         case 'add':
           $(".table_div").hide();
           $(".operation").show();
@@ -138,9 +125,10 @@
       var data = obj.data;
       switch (obj.event) {
         case 'del':
-          var ids=[];
-          ids.push(data.id);
-          tipDialog(ids);
+          //var ids=[];
+         // var id;
+          //id.push(data.id);
+          tipDialog(data);
           break;
        /* case 'del':
                     deletedActive(data.id);
@@ -151,7 +139,6 @@
           $(".title").html("編輯");
           $(".operation input[name=id]").val(data.id);
           $(".operation input[name=typeCode]").val(data.typeCode);
-          //$(".operation input[name=typeCode]").attr(“readonly”,”readonly”);
           $(".operation input[name=typeName]").val(data.typeName);
           $(".operation input[name=active]").val(data.active);
           break;
@@ -189,12 +176,14 @@
                 }
             });
         };*/
-    var tipDialog=function (ids) {
+    var tipDialog=function (id) {
       layer.open({
         content: "確定要删除?",
         yes: function(index, layero){
-          layer.close(index); //如果设定了yes回调，需进行手工关闭
-          CoreUtil.sendDelete("/assetType2/delete",ids,function (res) {
+          layer.close(index);
+          console.log(id);
+          CoreUtil.sendDelete("/assetType2/delete", id,function (res) {
+         // CoreUtil.sendDelete("/assetType2/delete",ids,function (res) {
             layer.msg(res.msg, {time:1000},function () {
               search();
             });

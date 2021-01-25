@@ -12,5 +12,6 @@ import com.company.project.entity.LocationEntity;
  */
 public interface LocationService extends IService<LocationEntity> {
 
+    void updateActive(LocationEntity location);
 }
 

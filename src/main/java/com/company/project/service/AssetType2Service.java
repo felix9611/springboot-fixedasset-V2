@@ -21,5 +21,6 @@ import java.util.List;
 public interface AssetType2Service extends IService<AssetType2Entity> {
 
 
+    void updateActive(AssetType2Entity assetType2);
 }
 

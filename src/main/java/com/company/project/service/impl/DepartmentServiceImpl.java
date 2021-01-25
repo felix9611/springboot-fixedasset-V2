@@ -36,4 +36,9 @@ public class DepartmentServiceImpl extends ServiceImpl<DepartmentMapper, Departm
         return JSONArray.parseArray(JSON.toJSONString(list));
     }
 
+    @Override
+    public void updateActive(DepartmentEntity department) {
+        department.setActive("0");
+        departmentMapper.updateById(department);
+    }
 }

@@ -57,10 +57,16 @@ public class DepartmentController {
     @DeleteMapping("department/delete")
     @RequiresPermissions("department:delete")
     @ResponseBody
+    public DataResult delete(@RequestBody DepartmentEntity department){
+        departmentService.updateActive(department);
+        return DataResult.success();
+    }
+    /*
     public DataResult delete(@RequestBody @ApiParam(value = "id集合") List<String> ids){
         departmentService.removeByIds(ids);
         return DataResult.success();
     }
+    */
 
     @ApiOperation(value = "更新")
     @PutMapping("department/update")

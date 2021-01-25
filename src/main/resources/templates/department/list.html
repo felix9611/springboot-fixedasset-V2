@@ -114,19 +114,6 @@
     //表头工具
     table.on('toolbar(showTable)', function(obj){
       switch(obj.event){
-        case 'batchDeleted':
-          var checkStatus = table.checkStatus(obj.config.id);
-          var data = checkStatus.data;
-          if(data.length==0){
-            layer.msg("请选择要批量删除的列");
-          }else {
-            var ids = [];
-            $(data).each(function (index,item) {
-              ids.push(item.id);
-            });
-            tipDialog(ids);
-          }
-          break;
         case 'add':
           $(".table_div").hide();
           $(".operation").show();
@@ -144,9 +131,9 @@
       var data = obj.data;
       switch (obj.event) {
         case 'del':
-          var ids=[];
-          ids.push(data.id);
-          tipDialog(ids);
+          //var ids=[];
+          //ids.push(data.id);
+          tipDialog(data);
           break;
         case 'edit':
           $(".table_div").hide();

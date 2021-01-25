@@ -63,8 +63,8 @@ public class AssetType2Controller {
     @DeleteMapping("/assetType2/delete")
     @RequiresPermissions("assetType2:delete")
     @ResponseBody
-    public DataResult delete(@RequestBody @ApiParam(value = "id集合") List<String> ids){
-        assetType2Service.removeByIds(ids);
+    public DataResult delete(@RequestBody AssetType2Entity assetType2){
+        assetType2Service.updateActive(assetType2);
         return DataResult.success();
     }
 

@@ -55,11 +55,16 @@ public class AssetListviewController {
     @DeleteMapping("assetListview/delete")
     @RequiresPermissions("assetListview:delete")
     @ResponseBody
+    public DataResult delete(@RequestBody AssetListviewEntity assetListview){
+        assetListviewService.updateActive(assetListview);
+        return DataResult.success();
+    }
+    /*
     public DataResult delete(@RequestBody @ApiParam(value = "id集合") List<String> ids){
         assetListviewService.removeByIds(ids);
         return DataResult.success();
     }
-
+    */
     @ApiOperation(value = "更新")
     @PutMapping("assetListview/update")
     @RequiresPermissions("assetListview:update")

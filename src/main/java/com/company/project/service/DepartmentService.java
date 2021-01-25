@@ -14,5 +14,6 @@ import org.springframework.stereotype.Service;
 @Service
 public interface DepartmentService extends IService<DepartmentEntity> {
 
+    void updateActive(DepartmentEntity department);
 }
 

@@ -54,10 +54,14 @@ public class LocationController {
     @DeleteMapping("location/delete")
     @RequiresPermissions("location:delete")
     @ResponseBody
-    public DataResult delete(@RequestBody @ApiParam(value = "id集合") List<String> ids){
-        locationService.removeByIds(ids);
+    public DataResult delete(@RequestBody LocationEntity location){
+        locationService.updateActive(location);
         return DataResult.success();
     }
+   /* public DataResult delete(@RequestBody @ApiParam(value = "id集合") List<String> ids){
+        locationService.removeByIds(ids);
+        return DataResult.success();
+    }*/
 
     @ApiOperation(value = "更新")
     @PutMapping("location/update")

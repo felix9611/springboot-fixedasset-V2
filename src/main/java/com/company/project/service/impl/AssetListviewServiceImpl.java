@@ -37,6 +37,12 @@ public class AssetListviewServiceImpl extends ServiceImpl<AssetListviewMapper, A
         //return true;
     }
 
+    @Override
+    public void updateActive(AssetListviewEntity assetListview) {
+        assetListview.setActive("0");
+        assetListviewMapper.updateById(assetListview);
+    }
+
     public String getNewAssetCode() {
         LambdaQueryWrapper<AssetListviewEntity> lambdaQueryWrapper = Wrappers.lambdaQuery();
         lambdaQueryWrapper.select(AssetListviewEntity::getAssetCode);

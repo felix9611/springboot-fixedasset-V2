@@ -140,9 +140,9 @@
       var data = obj.data;
       switch (obj.event) {
         case 'del':
-          var ids=[];
-          ids.push(data.id);
-          tipDialog(ids);
+        //  var ids=[];
+         // ids.push(data.id);
+          tipDialog(data);
           break;
         case 'edit':
           $(".table_div").hide();
@@ -173,9 +173,9 @@
     //删除
     var tipDialog=function (ids) {
       layer.open({
-        content: "确定要删除么?",
+        content: "確定要删除?",
         yes: function(index, layero){
-          layer.close(index); //如果设定了yes回调，需进行手工关闭
+          layer.close(index);
           CoreUtil.sendDelete("/location/delete",ids,function (res) {
             layer.msg(res.msg, {time:1000},function () {
               search();

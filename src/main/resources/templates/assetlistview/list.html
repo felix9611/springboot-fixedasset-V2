@@ -222,17 +222,16 @@
         [
           {width: 110, field: 'assetCode', title: '資產編號', sort: true},
           {field: 'assetName', title: '資產名稱', sort: true},
-          {width: 180, field: 'assetType', title: '種類', sort: true, templet: function (item) {
+          {width: 180, field: 'assetType', title: '種類', templet: function (item) {
                         return CoreUtil.selecTypetId(datas, item.assetType);
                         }
                     },
-          {width: 160, field: 'buydate', title: '購入日期', sort: true},
-          //{field: 'serialnum', title: 'Serial Num', sort: true},
-          {width: 130, field: 'place', title: '地點', sort: true, templet: function (item) {
+          {width: 160, field: 'buydate', title: '購入日期'},
+          {width: 130, field: 'place', title: '地點', templet: function (item) {
                         return CoreUtil.selecPlacetId(placedatas, item.place);
                         }
           },
-          {width: 210, field: 'deptId', title: '所屬部門', sort: true, templet: function (item) {
+          {width: 210, field: 'deptId', title: '所屬部門', templet: function (item) {
                         return CoreUtil.selectDeptId(departdatas, item.deptId);
                         }
           },
@@ -289,9 +288,7 @@
       var data = obj.data;
       switch (obj.event) {
         case 'del':
-          var ids=[];
-          ids.push(data.id);
-          tipDialog(ids);
+          tipDialog(data);
           break;
         case 'edit':
           $(".table_div").hide();
