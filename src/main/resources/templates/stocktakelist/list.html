@@ -205,19 +205,8 @@
                         return CoreUtil.selectAssetName(assetdatas, item.assetCode);
                         }
                     },
-                    {field: 'assetPlace', title: '舊地點', sort: true, templet: function (item) {
-
-                            var asset = assetMa.getAssetData(item.assetCode, assetdatas);
-
-                            if(item.assetPlace == asset.Place){
-                                return CoreUtil.selecPlacetId(placedatas, asset.Place);
-                            }else if(item.assetCode == ""){
-                                return "(此資產不存在)";
-                            }else if(item.assetPlace != asset.Place){
-                                return "(紀錄或有異)";
-                            }else{
-                                return "(未有設置)";
-                            }
+                    {field: 'assetPlace', title: '地點', sort: true, templet: function (item) {
+                        return CoreUtil.selecPlacetId(placedatas, asset.Place);
                         }
                     },
                     {field: 'status', title: '狀態', sort: true, templet: function (item) {
@@ -391,11 +380,6 @@
                         }else{
                             //layer.msg("地點錯誤!");
                             alert("警告 : 紀錄或有異, 請檢查清楚紀錄!");
-                             CoreUtil.sendPost("/stocktakelistDetail/add", data.field, function (res) {
-                                $(".table_div").show();
-                                layer.closeAll();
-                                searchDetail();
-                            });
                         }
                     }else{
                         //layer.msg("此記錄不存在!");
