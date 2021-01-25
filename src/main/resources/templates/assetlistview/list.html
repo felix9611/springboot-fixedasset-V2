@@ -57,7 +57,7 @@
     <div class="layui-form-item">
         <label class="layui-form-label">內容</label>
         <div class="layui-input-block">
-            <textarea placeholder="內容" class="layui-textarea" name="description"></textarea>
+            <textarea placeholder="內容" class="layui-textarea" id="description" name="description"></textarea>
             <!--<input type="description" name="description" placeholder="內容" autocomplete="off" class="layui-input">-->
 
         </div>
@@ -113,7 +113,7 @@
         <label class="layui-form-label">備註</label>
         <div class="layui-input-block">
             <!--<input type="remark" name="remark" placeholder="備註" autocomplete="off" class="layui-input">-->
-            <textarea placeholder="備註" class="layui-textarea" name="remark"></textarea>
+            <textarea placeholder="備註" class="layui-textarea" id="remark" name="remark"></textarea>
 
         </div>
     </div>
@@ -197,7 +197,10 @@
   var placedatas = "[[${@place2Service.getPlacetSel()}]]".replace(/&quot;/g,"\"");
   var departdatas = "[[${@departmentService.getDeptId()}]]".replace(/&quot;/g,"\"");
 
-  layui.use(['table', 'layer', 'laydate'], function () {
+  layui.use(['table', 'layer', 'laydate', 'layedit'], function () {
+
+
+   var layedit = layui.layedit;
 
     //加载table
     tableIns1 = table.render({
@@ -320,8 +323,9 @@
                         $("#responStaff").find('option[value="'+data.responStaff+'"]').prop('selected',true);
                         form.render();
                     }
-          layedit.setContent(editIndex, data.remark);
-          layedit.setContent(editIndex, data.description);
+           $('#remark').html(data.remark);
+           $('#descriptio').html(data.description);
+
           break;
       }
     });

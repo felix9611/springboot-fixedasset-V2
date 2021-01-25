@@ -213,8 +213,10 @@
                                 return CoreUtil.selecPlacetId(placedatas, asset.Place);
                             }else if(item.assetCode == ""){
                                 return "(此資產不存在)";
-                            }else{
+                            }else if(item.assetPlace != asset.Place){
                                 return "(紀錄或有異)";
+                            }else{
+                                return "(未有設置)";
                             }
                         }
                     },
