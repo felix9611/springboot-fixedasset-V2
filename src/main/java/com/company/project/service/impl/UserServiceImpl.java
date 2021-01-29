@@ -25,6 +25,7 @@ import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -36,7 +37,8 @@ import java.util.List;
  * @version V1.0
  * @date 2020年3月18日
  */
-@Service
+@Transactional
+@Service("UserService")
 @Slf4j
 public class UserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> implements UserService {
 
