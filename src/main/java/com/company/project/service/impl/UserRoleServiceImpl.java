@@ -1,6 +1,7 @@
 package com.company.project.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.toolkit.CollectionUtils;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.company.project.entity.SysUserRole;
@@ -35,7 +36,7 @@ public class UserRoleServiceImpl extends ServiceImpl<SysUserRoleMapper, SysUserR
     @Transactional(rollbackFor = Exception.class)
     @Override
     public void addUserRoleInfo(UserRoleOperationReqVO vo) {
-        if (vo.getRoleIds() == null || vo.getRoleIds().isEmpty()) {
+        if (CollectionUtils.isEmpty(vo.getRoleIds())) {
             return;
         }
         List<SysUserRole> list = new ArrayList<>();
@@ -48,5 +49,10 @@ public class UserRoleServiceImpl extends ServiceImpl<SysUserRoleMapper, SysUserR
         sysUserRoleMapper.delete(Wrappers.<SysUserRole>lambdaQuery().eq(SysUserRole::getUserId, vo.getUserId()));
         //批量插入
         this.saveBatch(list);
+    }
+
+    @Override
+    public List getUserIdsByRoleId(String roleId) {
+        return sysUserRoleMapper.selectObjs(Wrappers.<SysUserRole>lambdaQuery().select(SysUserRole::getUserId).eq(SysUserRole::getRoleId, roleId));
     }
 }

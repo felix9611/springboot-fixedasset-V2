@@ -12,25 +12,25 @@ public enum BaseResponseCode implements ResponseCodeInterface {
     /**
      * 错误码
      */
-    SUCCESS(0,"操作成功"),
-    SYSTEM_BUSY(500001, "系统繁忙，请稍候再试"),
-    OPERATION_ERRO(500002,"操作失败"),
+    SUCCESS(0, "操作成功"),
+    SYSTEM_BUSY(500001, "系統繁忙，請稍候再試"),
+    OPERATION_ERRO(500002, "操作失敗"),
 
-    TOKEN_ERROR(401001, "登录凭证已过期，请重新登录"),
-    DATA_ERROR(401003,"传入数据异常"),
-    NOT_ACCOUNT(401004, "该用户不存在,请先注册"),
-    USER_LOCK(401005, "该用户已被锁定，请联系运营人员"),
-    PASSWORD_ERROR(401006,"用户名或密码错误"),
-    METHODARGUMENTNOTVALIDEXCEPTION(401007, "方法参数校验异常"),
-    UNAUTHORIZED_ERROR(401008, "权鉴校验不通过"),
-    ROLE_PERMISSION_RELATION(401009, "该菜单权限存在子集关联，不允许删除"),
-    OLD_PASSWORD_ERROR(401010,"旧密码不正确"),
-    NOT_PERMISSION_DELETED_DEPT(401011,"该组织机构下还关联着用户，不允许删除"),
-    OPERATION_MENU_PERMISSION_CATALOG_ERROR(401012,"操作后的菜单类型是目录，所属菜单必须为默认顶级菜单或者目录"),
-    OPERATION_MENU_PERMISSION_MENU_ERROR(401013,"操作后的菜单类型是菜单，所属菜单必须为目录类型"),
-    OPERATION_MENU_PERMISSION_BTN_ERROR(401013,"操作后的菜单类型是按钮，所属菜单必须为菜单类型"),
-    OPERATION_MENU_PERMISSION_URL_NOT_NULL(401015,"菜单权限的url不能为空"),
-    OPERATION_MENU_PERMISSION_URL_PERMS_NULL(401016,"菜单权限的标识符不能为空"),
+    TOKEN_ERROR(401001, "登錄憑證已過期，請重新登錄 "),
+    DATA_ERROR(401003, "傳入數據異常 "),
+    NOT_ACCOUNT(401004, "該用戶不存在,請先註冊"),
+    USER_LOCK(401005, "該用戶已被鎖定，請聯繫運營人員 "),
+    PASSWORD_ERROR(401006, "用戶名或密碼錯誤"),
+    METHODARGUMENTNOTVALIDEXCEPTION(401007, "方法參數校驗異常"),
+    UNAUTHORIZED_ERROR(401008, "權鑑校驗不通過"),
+    ROLE_PERMISSION_RELATION(401009, "該菜單權限存在子集關聯，不允許刪除"),
+    OLD_PASSWORD_ERROR(401010, "舊密碼不正確"),
+    NOT_PERMISSION_DELETED_DEPT(401011, "該組織機構下還關聯著用戶，不允許刪除"),
+    OPERATION_MENU_PERMISSION_CATALOG_ERROR(401012, "操作後的菜單類型是目錄，所屬菜單必須為默認頂級菜單或者目錄"),
+    OPERATION_MENU_PERMISSION_MENU_ERROR(401013, "操作後的菜單類型是菜單，所屬菜單必須為目錄類型"),
+    OPERATION_MENU_PERMISSION_BTN_ERROR(401013, "操作後的菜單類型是按鈕，所屬菜單必須為菜單類型"),
+    OPERATION_MENU_PERMISSION_URL_NOT_NULL(401015, "菜單權限的url不能為空"),
+    OPERATION_MENU_PERMISSION_URL_PERMS_NULL(401016, "菜單權限的標識符不能為空"),
     ;
 
     /**

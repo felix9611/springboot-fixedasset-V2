@@ -48,7 +48,7 @@ public class SysUser extends BaseEntity implements Serializable {
     @TableField(exist = false)
     private String deptNo;
 
-    @TableField("real_name")
+
     private String realName;
 
     private String nickName;

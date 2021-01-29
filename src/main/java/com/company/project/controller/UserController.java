@@ -19,6 +19,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.apache.shiro.subject.Subject;
+import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
@@ -61,7 +62,7 @@ public class UserController {
     @PostMapping("/user/register")
     @ApiOperation(value = "用户注册接口")
     public DataResult register(@RequestBody @Valid SysUser vo) {
-       userService.register(vo);
+        userService.register(vo);
         return DataResult.success();
     }
 
@@ -180,13 +181,14 @@ public class UserController {
         LambdaQueryWrapper<SysUserRole> queryWrapper = Wrappers.lambdaQuery();
         queryWrapper.eq(SysUserRole::getUserId, userId);
         userRoleService.remove(queryWrapper);
-        if (null != roleIds && !roleIds.isEmpty()) {
+        if (!CollectionUtils.isEmpty(roleIds)) {
             UserRoleOperationReqVO reqVO = new UserRoleOperationReqVO();
             reqVO.setUserId(userId);
             reqVO.setRoleIds(roleIds);
             userRoleService.addUserRoleInfo(reqVO);
         }
+        //刷新权限
         httpSessionService.refreshUerId(userId);
-        return  DataResult.success();
+        return DataResult.success();
     }
 }

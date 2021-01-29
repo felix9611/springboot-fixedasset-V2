@@ -6,19 +6,16 @@ import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.core.env.Environment;
 
 import java.net.InetAddress;
 
 @SpringBootApplication(exclude = DruidDataSourceAutoConfigure.class)
-@MapperScan(value = {"com.company.project.mapper"})
-//@ComponentScan(basePackages = {"com.company.project"})
-//@ComponentScan("com.company.project.entity")
+@MapperScan("com.company.project.mapper")
 @Slf4j
 public class CompanyProjectApplication {
 
-    public static void main(String[] args) throws Exception{
+    public static void main(String[] args) throws Exception {
         ConfigurableApplicationContext application = SpringApplication.run(CompanyProjectApplication.class, args);
 
         Environment env = application.getEnvironment();

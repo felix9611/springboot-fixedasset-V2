@@ -4,13 +4,13 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.core.toolkit.CollectionUtils;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.company.project.common.exception.BusinessException;
 import com.company.project.common.exception.code.BaseResponseCode;
 import com.company.project.common.utils.PasswordUtils;
-import com.company.project.entity.AssetType2Entity;
 import com.company.project.entity.SysDept;
 import com.company.project.entity.SysRole;
 import com.company.project.entity.SysUser;
@@ -25,7 +25,6 @@ import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -37,8 +36,7 @@ import java.util.List;
  * @version V1.0
  * @date 2020年3月18日
  */
-@Transactional
-@Service("UserService")
+@Service
 @Slf4j
 public class UserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> implements UserService {
 
@@ -186,7 +184,7 @@ public class UserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impleme
         }
         queryWrapper.orderByDesc(SysUser::getCreateTime);
         IPage<SysUser> iPage = sysUserMapper.selectPage(page, queryWrapper);
-        if (!iPage.getRecords().isEmpty()) {
+        if (!CollectionUtils.isEmpty(iPage.getRecords())) {
             for (SysUser sysUser : iPage.getRecords()) {
                 SysDept sysDept = sysDeptMapper.selectById(sysUser.getDeptId());
                 if (sysDept != null) {
@@ -210,7 +208,7 @@ public class UserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impleme
         vo.setStatus(1);
         vo.setCreateWhere(1);
         sysUserMapper.insert(vo);
-        if (null != vo.getRoleIds() && !vo.getRoleIds().isEmpty()) {
+        if (!CollectionUtils.isEmpty(vo.getRoleIds())) {
             UserRoleOperationReqVO reqVO = new UserRoleOperationReqVO();
             reqVO.setUserId(vo.getId());
             reqVO.setRoleIds(vo.getRoleIds());
@@ -237,6 +235,7 @@ public class UserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impleme
         }
         sysUser.setPassword(PasswordUtils.encode(vo.getNewPwd(), sysUser.getSalt()));
         sysUserMapper.updateById(sysUser);
+        //退出用户
         httpSessionService.abortAllUserByToken();
 
     }

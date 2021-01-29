@@ -7,6 +7,7 @@ import com.company.project.common.exception.BusinessException;
 import com.company.project.common.exception.code.BaseResponseCode;
 import com.company.project.entity.SysPermission;
 import com.company.project.entity.SysRolePermission;
+import com.company.project.entity.SysUserRole;
 import com.company.project.mapper.SysPermissionMapper;
 import com.company.project.service.HttpSessionService;
 import com.company.project.service.PermissionService;
@@ -17,6 +18,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
 
 import javax.annotation.Resource;
@@ -40,7 +42,7 @@ public class PermissionServiceImpl extends ServiceImpl<SysPermissionMapper, SysP
     @Resource
     private RolePermissionService rolePermissionService;
     @Resource
-    private  SysPermissionMapper sysPermissionMapper;
+    private SysPermissionMapper sysPermissionMapper;
     @Resource
     private HttpSessionService httpSessionService;
 
@@ -53,11 +55,11 @@ public class PermissionServiceImpl extends ServiceImpl<SysPermissionMapper, SysP
     @Override
     public List<SysPermission> getPermission(String userId) {
         List<String> roleIds = userRoleService.getRoleIdsByUserId(userId);
-        if (roleIds.isEmpty()) {
+        if (CollectionUtils.isEmpty(roleIds)) {
             return null;
         }
         List<Object> permissionIds = rolePermissionService.listObjs(Wrappers.<SysRolePermission>lambdaQuery().select(SysRolePermission::getPermissionId).in(SysRolePermission::getRoleId, roleIds));
-        if (permissionIds.isEmpty()) {
+        if (CollectionUtils.isEmpty(permissionIds)) {
             return null;
         }
 
@@ -73,6 +75,8 @@ public class PermissionServiceImpl extends ServiceImpl<SysPermissionMapper, SysP
     @Transactional(rollbackFor = Exception.class)
     @Override
     public void deleted(String permissionId) {
+        //获取关联userId
+        List<String> userIds = getUserIdsById(permissionId);
         SysPermission sysPermission = sysPermissionMapper.selectById(permissionId);
         if (null == sysPermission) {
             log.error("传入 的 id:{}不合法", permissionId);
@@ -80,16 +84,25 @@ public class PermissionServiceImpl extends ServiceImpl<SysPermissionMapper, SysP
         }
         //获取下一级
         List<SysPermission> childs = sysPermissionMapper.selectList(Wrappers.<SysPermission>lambdaQuery().eq(SysPermission::getPid, permissionId));
-        if (!childs.isEmpty()) {
+        if (!CollectionUtils.isEmpty(userIds)) {
             throw new BusinessException(BaseResponseCode.ROLE_PERMISSION_RELATION);
         }
         sysPermissionMapper.deleteById(permissionId);
         //删除和角色关联
         rolePermissionService.remove(Wrappers.<SysRolePermission>lambdaQuery().eq(SysRolePermission::getPermissionId, permissionId));
-        //刷新权限
-        httpSessionService.refreshPermission(permissionId);
+
+        if (!CollectionUtils.isEmpty(userIds)) {
+            //刷新权限
+            userIds.parallelStream().forEach(httpSessionService::refreshUerId);
+        }
+
     }
 
+    @Override
+    public void updatePermission(SysPermission vo) {
+        sysPermissionMapper.updateById(vo);
+        httpSessionService.refreshPermission(vo.getId());
+    }
 
     /**
      * 获取所有菜单权限
@@ -97,7 +110,7 @@ public class PermissionServiceImpl extends ServiceImpl<SysPermissionMapper, SysP
     @Override
     public List<SysPermission> selectAll() {
         List<SysPermission> result = sysPermissionMapper.selectList(Wrappers.<SysPermission>lambdaQuery().orderByAsc(SysPermission::getOrderNum));
-        if (!result.isEmpty()) {
+        if (!CollectionUtils.isEmpty(result)) {
             for (SysPermission sysPermission : result) {
                 SysPermission parent = sysPermissionMapper.selectById(sysPermission.getPid());
                 if (parent != null) {
@@ -116,7 +129,7 @@ public class PermissionServiceImpl extends ServiceImpl<SysPermissionMapper, SysP
 
         List<SysPermission> list = getPermission(userId);
         Set<String> permissions = new HashSet<>();
-        if (null == list || list.isEmpty()) {
+        if (CollectionUtils.isEmpty(list)) {
             return null;
         }
         for (SysPermission sysPermission : list) {
@@ -143,7 +156,7 @@ public class PermissionServiceImpl extends ServiceImpl<SysPermissionMapper, SysP
     private List<PermissionRespNode> getTree(List<SysPermission> all, boolean type) {
 
         List<PermissionRespNode> list = new ArrayList<>();
-        if (all == null || all.isEmpty()) {
+        if (CollectionUtils.isEmpty(all)) {
             return list;
         }
         for (SysPermission sysPermission : all) {
@@ -221,7 +234,7 @@ public class PermissionServiceImpl extends ServiceImpl<SysPermissionMapper, SysP
     public List<PermissionRespNode> selectAllMenuByTree(String permissionId) {
 
         List<SysPermission> list = selectAll();
-        if (!list.isEmpty() && !StringUtils.isEmpty(permissionId)) {
+        if (!CollectionUtils.isEmpty(list) && !StringUtils.isEmpty(permissionId)) {
             for (SysPermission sysPermission : list) {
                 if (sysPermission.getId().equals(permissionId)) {
                     list.remove(sysPermission);
@@ -239,4 +252,18 @@ public class PermissionServiceImpl extends ServiceImpl<SysPermissionMapper, SysP
         result.add(respNode);
         return result;
     }
+
+    @Override
+    public List getUserIdsById(String id) {
+        //根据权限id，获取所有角色id
+        //根据权限id，获取所有角色id
+        List<Object> roleIds = rolePermissionService.listObjs(Wrappers.<SysRolePermission>lambdaQuery().select(SysRolePermission::getRoleId).eq(SysRolePermission::getPermissionId, id));
+        if (!CollectionUtils.isEmpty(roleIds)) {
+            //根据角色id， 获取关联用户
+            return userRoleService.listObjs(Wrappers.<SysUserRole>lambdaQuery().select(SysUserRole::getUserId).in(SysUserRole::getRoleId, roleIds));
+        }
+        return null;
+    }
+
+
 }

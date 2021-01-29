@@ -6,7 +6,6 @@ import com.company.project.service.UserRoleService;
 import com.company.project.vo.req.UserRoleOperationReqVO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,7 +23,6 @@ import javax.validation.Valid;
  */
 @RequestMapping("/sys")
 @RestController
-@MapperScan("com.company.project.entity")
 @Api(tags = "组织管理-用户和角色关联接口")
 public class UserRoleController {
     @Resource

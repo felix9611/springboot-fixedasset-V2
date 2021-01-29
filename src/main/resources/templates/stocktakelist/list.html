@@ -206,7 +206,7 @@
                         }
                     },
                     {field: 'assetPlace', title: '地點', sort: true, templet: function (item) {
-                        return CoreUtil.selecPlacetId(placedatas, asset.Place);
+                        return CoreUtil.selecPlacetId(placedatas, item.assetPlace);
                         }
                     },
                     {field: 'status', title: '狀態', sort: true, templet: function (item) {

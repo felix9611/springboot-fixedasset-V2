@@ -2,8 +2,6 @@ package com.company.project.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.company.project.entity.SysRole;
-import org.apache.ibatis.annotations.Mapper;
-import org.springframework.stereotype.Repository;
 
 /**
  * 角色 Mapper
@@ -12,8 +10,6 @@ import org.springframework.stereotype.Repository;
  * @version V1.0
  * @date 2020年3月18日
  */
-@Mapper
-@Repository
 public interface SysRoleMapper extends BaseMapper<SysRole> {
 
 }
