@@ -133,8 +133,12 @@
 <script src="/js/assetma.js"></script>
 <script src="/js/core.util.js"></script>
 <script>
+
+
     //获取token
     var token = CoreUtil.getData("access_token");
+
+    console.log(token);
     //地址栏转义token中的#号
     var tokenQuery = token.replace("#", "%23");
     var tableIns1;

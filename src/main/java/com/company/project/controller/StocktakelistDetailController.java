@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.company.project.entity.AssetlistEntity;
 import com.company.project.mapper.AssetlistMapper;
+import io.swagger.annotations.Api;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
@@ -28,6 +29,7 @@ import javax.annotation.Resource;
  * @email *****@mail.com
  * @date 2020-11-25 21:02:34
  */
+@Api(tags = "盤點詳細")
 @Controller
 @RequestMapping("/")
 public class StocktakelistDetailController {
@@ -66,17 +68,17 @@ public class StocktakelistDetailController {
         return DataResult.success();
     }
 
-    @ApiOperation(value = "删除")
+ /*   @ApiOperation(value = "删除")
     @DeleteMapping("stocktakelistDetail/delete")
     @RequiresPermissions("stocktakelistDetail:delete")
     @ResponseBody
     public DataResult delete(@RequestBody @ApiParam(value = "id集合") List<String> ids){
         stocktakelistDetailService.removeByIds(ids);
         return DataResult.success();
-    }
+    }*/
 
 
-    @ApiOperation(value = "查询分页数据")
+    @ApiOperation(value = "查詢分頁數據")
     @PostMapping("stocktakelistDetail/listByPage")
     @RequiresPermissions("stocktakelistDetail:list")
     @ResponseBody

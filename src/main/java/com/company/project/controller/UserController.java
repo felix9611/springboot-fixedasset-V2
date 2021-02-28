@@ -36,7 +36,7 @@ import java.util.List;
  * @date 2020年3月18日
  */
 @RestController
-@Api(tags = "组织模块-用户管理")
+@Api(tags = "組織模塊-用戶管理")
 @RequestMapping("/sys")
 @Slf4j
 public class UserController {
@@ -48,37 +48,46 @@ public class UserController {
     private HttpSessionService httpSessionService;
 
     @PostMapping(value = "/user/login")
-    @ApiOperation(value = "用户登录接口")
+    @ApiOperation(value = "用戶登入接口")
     public DataResult login(@RequestBody @Valid SysUser vo, HttpServletRequest request) {
         //判断验证码
         if (!CaptchaUtil.ver(vo.getCaptcha(), request)) {
             // 清除session中的验证码
             CaptchaUtil.clear(request);
-            return DataResult.fail("验证码错误！");
+            return DataResult.fail("驗證碼錯誤 ！");
         }
         return DataResult.success(userService.login(vo));
     }
 
+    @PostMapping(value = "/user/phoneLogin")
+    @ApiOperation(value = "用戶手機登入接口")
+    public DataResult phoneLogin(@RequestBody @Valid SysUser vo) {
+
+
+
+        return DataResult.success(userService.login(vo));
+    }
+
     @PostMapping("/user/register")
-    @ApiOperation(value = "用户注册接口")
+    @ApiOperation(value = "用戶註冊接口")
     public DataResult register(@RequestBody @Valid SysUser vo) {
         userService.register(vo);
         return DataResult.success();
     }
 
     @GetMapping("/user/unLogin")
-    @ApiOperation(value = "引导客户端去登录")
+    @ApiOperation(value = "引導客戶端進行登錄")
     public DataResult unLogin() {
         return DataResult.getResult(BaseResponseCode.TOKEN_ERROR);
     }
 
     @PutMapping("/user")
-    @ApiOperation(value = "更新用户信息接口")
-    @LogAnnotation(title = "用户管理", action = "更新用户信息")
+    @ApiOperation(value = "更新用戶資料接口")
+    @LogAnnotation(title = "用户管理", action = "更新用戶資料")
     @RequiresPermissions("sys:user:update")
     public DataResult updateUserInfo(@RequestBody SysUser vo) {
         if (StringUtils.isEmpty(vo.getId())) {
-            return DataResult.fail("id不能为空");
+            return DataResult.fail("id不能為空");
         }
 
         userService.updateUserInfo(vo);
@@ -86,49 +95,49 @@ public class UserController {
     }
 
     @PutMapping("/user/info")
-    @ApiOperation(value = "更新用户信息接口")
-    @LogAnnotation(title = "用户管理", action = "更新用户信息")
+    @ApiOperation(value = "更新用戶資料接口")
+    @LogAnnotation(title = "用戶管理", action = "更新用戶資料")
     public DataResult updateUserInfoById(@RequestBody SysUser vo) {
         userService.updateUserInfoMy(vo);
         return DataResult.success();
     }
 
     @GetMapping("/user/{id}")
-    @ApiOperation(value = "查询用户详情接口")
-    @LogAnnotation(title = "用户管理", action = "查询用户详情")
+    @ApiOperation(value = "查詢用戶詳情接口")
+    @LogAnnotation(title = "用戶管理", action = "查詢用戶詳情")
     @RequiresPermissions("sys:user:detail")
     public DataResult detailInfo(@PathVariable("id") String id) {
         return DataResult.success(userService.getById(id));
     }
 
     @GetMapping("/user")
-    @ApiOperation(value = "查询用户详情接口")
-    @LogAnnotation(title = "用户管理", action = "查询用户详情")
+    @ApiOperation(value = "查詢用戶詳情接口")
+    @LogAnnotation(title = "用戶管理", action = "查詢用戶詳情")
     public DataResult youSelfInfo() {
         String userId = httpSessionService.getCurrentUserId();
         return DataResult.success(userService.getById(userId));
     }
 
     @PostMapping("/users")
-    @ApiOperation(value = "分页获取用户列表接口")
+    @ApiOperation(value = "分頁獲取用戶列表接口")
     @RequiresPermissions("sys:user:list")
-    @LogAnnotation(title = "用户管理", action = "分页获取用户列表")
+    @LogAnnotation(title = "用戶管理", action = "分頁獲取用戶列表")
     public DataResult pageInfo(@RequestBody SysUser vo) {
         return DataResult.success(userService.pageInfo(vo));
     }
 
     @PostMapping("/user")
-    @ApiOperation(value = "新增用户接口")
+    @ApiOperation(value = "新增用戶接口")
     @RequiresPermissions("sys:user:add")
-    @LogAnnotation(title = "用户管理", action = "新增用户")
+    @LogAnnotation(title = "用戶管理", action = "新增用戶")
     public DataResult addUser(@RequestBody @Valid SysUser vo) {
         userService.addUser(vo);
         return DataResult.success();
     }
 
     @GetMapping("/user/logout")
-    @ApiOperation(value = "退出接口")
-    @LogAnnotation(title = "用户管理", action = "退出")
+    @ApiOperation(value = "登出接口")
+    @LogAnnotation(title = "用戶管理", action = "登出")
     public DataResult logout() {
         httpSessionService.abortUserByToken();
         Subject subject = SecurityUtils.getSubject();
@@ -137,11 +146,11 @@ public class UserController {
     }
 
     @PutMapping("/user/pwd")
-    @ApiOperation(value = "修改密码接口")
-    @LogAnnotation(title = "用户管理", action = "更新密码")
+    @ApiOperation(value = "更新密碼接口")
+    @LogAnnotation(title = "用戶管理", action = "更新密碼")
     public DataResult updatePwd(@RequestBody SysUser vo) {
         if (StringUtils.isEmpty(vo.getOldPwd()) || StringUtils.isEmpty(vo.getNewPwd())) {
-            return DataResult.fail("旧密码与新密码不能为空");
+            return DataResult.fail("舊密碼與新密碼不能為空");
         }
         String userId = httpSessionService.getCurrentUserId();
         vo.setId(userId);
@@ -150,10 +159,10 @@ public class UserController {
     }
 
     @DeleteMapping("/user")
-    @ApiOperation(value = "删除用户接口")
-    @LogAnnotation(title = "用户管理", action = "删除用户")
+    @ApiOperation(value = "刪除用戶接口")
+    @LogAnnotation(title = "用戶管理", action = "刪除用戶")
     @RequiresPermissions("sys:user:deleted")
-    public DataResult deletedUser(@RequestBody @ApiParam(value = "用户id集合") List<String> userIds) {
+    public DataResult deletedUser(@RequestBody @ApiParam(value = "用戶id集合") List<String> userIds) {
         //删除用户， 删除redis的绑定的角色跟权限
         httpSessionService.abortUserByUserIds(userIds);
         LambdaQueryWrapper<SysUser> queryWrapper = Wrappers.lambdaQuery();
@@ -163,8 +172,8 @@ public class UserController {
     }
 
     @GetMapping("/user/roles/{userId}")
-    @ApiOperation(value = "赋予角色-获取所有角色接口")
-    @LogAnnotation(title = "用户管理", action = "赋予角色-获取所有角色接口")
+    @ApiOperation(value = "賦予角色-獲取所有角色接口")
+    @LogAnnotation(title = "用戶管理", action = "賦予角色-獲取所有角色接口")
     @RequiresPermissions("sys:user:role:detail")
     public DataResult getUserOwnRole(@PathVariable("userId") String userId) {
         DataResult result = DataResult.success();
@@ -173,8 +182,8 @@ public class UserController {
     }
 
     @PutMapping("/user/roles/{userId}")
-    @ApiOperation(value = "赋予角色-用户赋予角色接口")
-    @LogAnnotation(title = "用户管理", action = "赋予角色-用户赋予角色接口")
+    @ApiOperation(value = "賦予角色-獲取所有角色接口")
+    @LogAnnotation(title = "用戶管理", action = "賦予角色-獲取所有角色接口")
     @RequiresPermissions("sys:user:update:role")
     public DataResult setUserOwnRole(@PathVariable("userId") String userId, @RequestBody List<String> roleIds) {
 

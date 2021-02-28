@@ -6,6 +6,7 @@ import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.company.project.common.aop.annotation.LogAnnotation;
 import com.company.project.mapper.AssetType2Mapper;
 import io.netty.util.internal.StringUtil;
+import io.swagger.annotations.Api;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;
@@ -32,6 +33,7 @@ import javax.annotation.Resource;
  * @email *****@mail.com
  * @date 2020-11-15 17:48:59
  */
+@Api(tags = "類別管理")
 @Controller
 @RequestMapping("/")
 public class AssetType2Controller {
@@ -77,7 +79,7 @@ public class AssetType2Controller {
         return DataResult.success();
     }
 
-    @ApiOperation(value = "查询分页数据")
+    @ApiOperation(value = "查詢分頁數據")
     @PostMapping("assetType2/listByPage")
     @RequiresPermissions("assetType2:list")
     @ResponseBody

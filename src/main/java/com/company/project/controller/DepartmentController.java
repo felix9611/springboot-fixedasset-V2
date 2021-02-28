@@ -3,6 +3,7 @@ package com.company.project.controller;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.company.project.entity.AssetType2Entity;
+import io.swagger.annotations.Api;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;
@@ -29,6 +30,7 @@ import javax.annotation.Resource;
  * @email *****@mail.com
  * @date 2020-11-20 10:15:04
  */
+@Api(tags = "部門管理")
 @Controller
 @RequestMapping("/")
 public class DepartmentController {

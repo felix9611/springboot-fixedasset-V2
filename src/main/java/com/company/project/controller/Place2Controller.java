@@ -2,6 +2,7 @@ package com.company.project.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
+import io.swagger.annotations.Api;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;
@@ -27,6 +28,7 @@ import com.company.project.service.Place2Service;
  * @email *****@mail.com
  * @date 2020-11-15 18:53:25
  */
+@Api(tags = "地點管理")
 @Controller
 @RequestMapping("/")
 public class Place2Controller {

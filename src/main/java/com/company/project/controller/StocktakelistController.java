@@ -2,6 +2,7 @@ package com.company.project.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
+import io.swagger.annotations.Api;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;
@@ -28,6 +29,7 @@ import javax.annotation.Resource;
  * @email *****@mail.com
  * @date 2020-11-25 20:33:06
  */
+@Api(tags = "盤點")
 @Controller
 @RequestMapping("/")
 public class StocktakelistController {
@@ -62,16 +64,16 @@ public class StocktakelistController {
         return DataResult.success();
     }
 
-    @ApiOperation(value = "更新")
+  /*  @ApiOperation(value = "更新")
     @PutMapping("stocktakelist/update")
     @RequiresPermissions("stocktakelist:update")
     @ResponseBody
     public DataResult update(@RequestBody StocktakelistEntity stocktakelist){
         stocktakelistService.updateById(stocktakelist);
         return DataResult.success();
-    }
+    }*/
 
-    @ApiOperation(value = "查询分页数据")
+    @ApiOperation(value = "查詢分頁數據")
     @PostMapping("stocktakelist/listByPage")
     @RequiresPermissions("stocktakelist:list")
     @ResponseBody

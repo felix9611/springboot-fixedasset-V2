@@ -1,6 +1,7 @@
 package com.company.project.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import io.swagger.annotations.Api;
 import org.springframework.util.StringUtils;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
@@ -27,6 +28,7 @@ import com.company.project.service.AssetListviewService;
  * @email *****@mail.com
  * @date 2021-01-17 17:53:32
  */
+@Api(tags = "資產清單")
 @Controller
 @RequestMapping("/")
 public class AssetListviewController {
@@ -74,7 +76,7 @@ public class AssetListviewController {
         return DataResult.success();
     }
 
-    @ApiOperation(value = "查询分页数据")
+    @ApiOperation(value = "查詢分頁數據")
     @PostMapping("assetListview/listByPage")
     @RequiresPermissions("assetListview:list")
     @ResponseBody

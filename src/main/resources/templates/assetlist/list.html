@@ -279,7 +279,7 @@
           $(".operation").show();
           $(".title").html("新增");
           $(".operation input[name=id]").val("");
-          //$(".operation input[name=assetCode]").val("");
+          $(".operation input[name=assetCode]").val("").attr("readonly","readonly");
           $(".operation input[name=assetName]").val("");
           //$(".operation input[name=assetType]").val("");
           $("#assetType option:first").prop("selected", 'selected');
@@ -316,7 +316,7 @@
           $(".operation").show();
           $(".title").html("編輯");
           $(".operation input[name=id]").val(data.id);
-          //$(".operation input[name=assetCode]").val(data.assetCode);
+          $(".operation input[name=assetCode]").val(data.assetCode).attr("readonly","readonly");
           $(".operation input[name=assetName]").val(data.assetName);
           $(".operation date[name=buydate]").val(data.buydate);
           $(".operation input[name=unit]").val(data.unit);
@@ -356,7 +356,7 @@
           $(".operation").show();
           $(".title").html("查閱");
           $(".operation input[name=id]").val(data.id).attr("readonly","readonly");
-          //$(".operation input[name=assetCode]").val(data.assetCode);
+          //$(".operation input[name=assetCode]").val(data.assetCode).attr("readonly","readonly");
           $(".operation input[name=assetName]").val(data.assetName).attr("readonly","readonly");
           $(".operation date[name=buydate]").val(data.buydate).attr("readonly","readonly");
           $(".operation input[name=unit]").val(data.unit).attr("readonly","readonly");

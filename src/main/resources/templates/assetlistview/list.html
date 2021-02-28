@@ -14,6 +14,12 @@
 <form class="layui-form " action="" lay-filter="info" style="width: 700px;margin-top: 10px">
       <input name="id" hidden/>
     <div class="layui-form-item">
+        <div class="layui-form-item">
+            <label class="layui-form-label">資產編號</label>
+            <div class="layui-input-block">
+                <input type="assetCode" name="assetCode" placeholder="會自動產生" autocomplete="off" class="layui-input" readonly>
+            </div>
+        </div>
         <label class="layui-form-label">資產名稱</label>
         <div class="layui-input-block">
             <input type="assetName" name="assetName" placeholder="資產名稱" autocomplete="off" class="layui-input">
@@ -263,7 +269,7 @@
           $(".operation").show();
           $(".title").html("新增");
           $(".operation input[name=id]").val("");
-          //$(".operation input[name=assetCode]").val("");
+          $(".operation input[name=assetCode]").val("");
           $(".operation input[name=assetName]").val("");
           //$(".operation input[name=assetType]").val("");
           $("#assetType option:first").prop("selected", 'selected');
@@ -295,7 +301,7 @@
           $(".operation").show();
           $(".title").html("編輯");
           $(".operation input[name=id]").val(data.id);
-          //$(".operation input[name=assetCode]").val(data.assetCode);
+          $(".operation input[name=assetCode]").val(data.assetCode);
           $(".operation input[name=assetName]").val(data.assetName);
           $(".operation date[name=buydate]").val(data.buydate);
           $(".operation input[name=unit]").val(data.unit);
