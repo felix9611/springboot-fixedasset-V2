@@ -1,6 +1,7 @@
 package com.company.project.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.company.project.entity.Place2Entity;
 import io.swagger.annotations.Api;
 import org.springframework.util.StringUtils;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
@@ -19,6 +20,7 @@ import com.company.project.common.utils.DataResult;
 import com.company.project.entity.AssetListviewEntity;
 import com.company.project.service.AssetListviewService;
 
+import javax.annotation.Resource;
 
 
 /**
@@ -34,6 +36,8 @@ import com.company.project.service.AssetListviewService;
 public class AssetListviewController {
     @Autowired
     private AssetListviewService assetListviewService;
+
+
 
 
     /**
@@ -76,6 +80,42 @@ public class AssetListviewController {
         return DataResult.success();
     }
 
+    @ApiOperation(value = "查詢分頁數據(新)")
+    @PostMapping("assetListview/listPage")
+    @RequiresPermissions("assetListview:list")
+    @ResponseBody
+    public DataResult findListPage(@RequestBody AssetListviewEntity assetListview){
+        Page page = new Page(assetListview.getPage(), assetListview.getLimit());
+        LambdaQueryWrapper<AssetListviewEntity> queryWrapper = Wrappers.lambdaQuery();
+
+        if(!StringUtils.isEmpty(assetListview.getAssetCode())){
+            queryWrapper.like(AssetListviewEntity::getAssetCode, assetListview.getAssetCode());
+        }
+        if(!StringUtils.isEmpty(assetListview.getAssetName())){
+            queryWrapper.like(AssetListviewEntity::getAssetName, assetListview.getAssetName());
+        }
+        if(!StringUtils.isEmpty(assetListview.getAssetType())){
+            queryWrapper.eq(AssetListviewEntity::getAssetType, assetListview.getAssetType());
+        }
+        if(!StringUtils.isEmpty(assetListview.getPlace())){
+            queryWrapper.eq(AssetListviewEntity::getPlace, assetListview.getPlace());
+        }
+        if(!StringUtils.isEmpty(assetListview.getDeptId())){
+            queryWrapper.eq(AssetListviewEntity::getDeptId, assetListview.getDeptId());
+
+        }
+        queryWrapper.orderByDesc(true, AssetListviewEntity::getAssetCode);
+        queryWrapper.eq(AssetListviewEntity::getActive, "1");
+
+
+
+
+        //查询条件示例
+        //queryWrapper.eq(AssetListviewEntity::getId, assetListview.getId());
+        IPage<AssetListviewEntity> iPage = assetListviewService.page(page, queryWrapper);
+        return DataResult.success(iPage);
+    }
+
     @ApiOperation(value = "查詢分頁數據")
     @PostMapping("assetListview/listByPage")
     @RequiresPermissions("assetListview:list")
@@ -100,6 +140,7 @@ public class AssetListviewController {
             queryWrapper.eq(AssetListviewEntity::getDeptId, assetListview.getDeptId());
         }
 
+        queryWrapper.orderByDesc(true, AssetListviewEntity::getAssetCode);
         queryWrapper.eq(AssetListviewEntity::getActive, "1");
 
 
