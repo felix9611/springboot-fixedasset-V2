@@ -26,8 +26,6 @@ import javax.annotation.Resource;
 /**
  * 
  *
- * @author wenbin
- * @email *****@mail.com
  * @date 2021-01-17 17:53:32
  */
 @Api(tags = "資產清單")
@@ -143,9 +141,6 @@ public class AssetListviewController {
         queryWrapper.orderByDesc(true, AssetListviewEntity::getAssetCode);
         queryWrapper.eq(AssetListviewEntity::getActive, "1");
 
-
-        //查询条件示例
-        //queryWrapper.eq(AssetListviewEntity::getId, assetListview.getId());
         IPage<AssetListviewEntity> iPage = assetListviewService.page(page, queryWrapper);
         return DataResult.success(iPage);
     }
