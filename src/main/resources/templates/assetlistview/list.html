@@ -142,12 +142,7 @@
         <div class="layui-input-inline">
             <input type="text" id="assetName" class="layui-input"  autocomplete="off" placeholder="資產名稱搜尋">
         </div>
-        <div class="layui-input-inline">
-            <select id="placesel" name="placesel" class="select-type" lay-filter="select-type" th:with="placesel=${@place2Service.getPlacetSel()}">
-                <option></option>
-                <option th:each="dict : ${placesel}" th:text="${dict.placeName}" th:value="${dict.id}"></option>
-            </select>
-        </div>
+
 
         <div class="layui-input-inline">
             <select id="typeSel" name="typeSel" class="select-type"  lay-filter="select-type" th:with="assetType=${@assetType2Service.getAssettype()}">
@@ -398,7 +393,6 @@
         assetCode: $("#assetCode").val(),
         assetName: $("#assetName").val(),
         assetType: $("#typeSel").val(),
-        place: $("#placesel").val(),
         deptId: $("#deptSel").val(),
       }
       , page: {

@@ -45,6 +45,37 @@ var assetMa = (function () {
                                      return assetData;
                               }
 
+      assetMa.idGetAssetName = function(id, assetList){
+                                      list = JSON.parse(assetList);
+                                      console.log(list);
+                                      var assetName = "";
+
+
+                                      $.each(list, function(index, dict) {
+                                           if (dict.id == ('' + id)) {
+                                               assetName = dict.assetName;
+                                               return false;
+                                           }
+                                      });
+
+                                      return assetName;
+                               }
+      assetMa.idGetAssetCode = function(id, assetList){
+            list = JSON.parse(assetList);
+            console.log(assetList);
+            var assetCode = "";
+
+
+            $.each(list, function(index, dict) {
+                 if (dict.id == ('' + id)) {
+                     assetCode = dict.assetCode;
+                     return false;
+                  }
+            });
+
+            return assetCode;
+       }
+
         return assetMa;
 
 

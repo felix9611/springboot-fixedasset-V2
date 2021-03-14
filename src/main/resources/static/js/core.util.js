@@ -169,6 +169,37 @@ var CoreUtil = (function () {
                                       return assetCode;
                                   }
 
+        coreUtil.idGetAssetName = function(id, assetList){
+                                              assetList = JSON.parse(assetList);
+                                              console.log(assetList);
+                                              var assetName = "";
+
+
+                                              $.each(assetList, function(index, dict) {
+                                                   if (dict.id == ('' + id)) {
+                                                       assetName = dict.assetName;
+                                                       return false;
+                                                   }
+                                              });
+
+                                              return assetName;
+                                       }
+        coreUtil.idGetAssetCode = function(id, assetList){
+                                                      assetList = JSON.parse(assetList);
+                                                      console.log(assetList);
+                                                      var assetCode = "";
+
+
+                                                      $.each(assetList, function(index, dict) {
+                                                           if (dict.id == ('' + id)) {
+                                                               assetCode = dict.assetCode;
+                                                               return false;
+                                                           }
+                                                      });
+
+                                                      return assetCode;
+                                               }
+
         coreUtil.selectAssetName = function (datas, id) {
                                               datas = JSON.parse(datas);
                                               var assetName = "";

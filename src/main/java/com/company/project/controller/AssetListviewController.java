@@ -131,9 +131,6 @@ public class AssetListviewController {
         if(!StringUtils.isEmpty(assetListview.getAssetType())){
             queryWrapper.eq(AssetListviewEntity::getAssetType, assetListview.getAssetType());
         }
-        if(!StringUtils.isEmpty(assetListview.getPlace())){
-            queryWrapper.eq(AssetListviewEntity::getPlace, assetListview.getPlace());
-        }
         if(!StringUtils.isEmpty(assetListview.getDeptId())){
             queryWrapper.eq(AssetListviewEntity::getDeptId, assetListview.getDeptId());
         }

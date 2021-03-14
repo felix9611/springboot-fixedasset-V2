@@ -33,33 +33,27 @@
   <div id="searchParam"  shiro:hasPermission="assetPlace:list">
     <div class="layui-form-item">
       <div class="layui-input-inline">
-        <input type="text" id="key" class="layui-input"  autocomplete="off" placeholder="請輸入">
+        <select id="placesel" name="placesel" class="select-type" lay-filter="select-type" th:with="placesel=${@place2Service.getPlacetSel()}">
+          <option></option>
+          <option th:each="dict : ${placesel}" th:text="${dict.placeName}" th:value="${dict.id}"></option>
+        </select>
       </div>
 
       <div class="layui-input-inline ">
         <button class="layui-btn" onclick="search()"  id="search">查詢</button>
-        <button class="layui-btn"   id="export">導出全部</button>
       </div>
     </div>
 
   </div>
   <table class="layui-table" id="showTable" lay-filter="showTable" ></table>
 </div>
-<script type="text/html" id="toolbar">
-  <div class="layui-btn-container">
-    <button class="layui-btn layui-btn-sm" lay-event="add"  shiro:hasPermission="assetPlace:add">新增</button>
-    <button class="layui-btn layui-btn-sm" lay-event="batchDeleted" shiro:hasPermission="assetPlace:delete">删除</button>
-  </div>
-</script>
-<script type="text/html" id="tool">
-  <a class="layui-btn layui-btn-xs" lay-event="edit" shiro:hasPermission="assetPlace:update">編輯</a>
-  <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del" shiro:hasPermission="assetPlace:delete">删除</a>
-</script>
+
 
 </body>
 </html>
 <script src="/layui/layui.all.js"></script>
 <script src="/js/core.util.js"></script>
+<script src="/js/assetma.js"></script>
 <script>
   //获取token
   var token = CoreUtil.getData("access_token");
@@ -72,6 +66,7 @@
   var $ = jQuery = layui.jquery;
   var laydate = layui.laydate;
 
+  var assetData = "[[${@assetListviewService.getAssetCodeName()}]]".replace(/&quot;/g,"\"");
   var placeData = "[[${@place2Service.getPlacetSel()}]]".replace(/&quot;/g,"\"");
 
   layui.use(['table', 'layer', 'laydate'], function () {
@@ -94,8 +89,16 @@
       }
       , cols: [
         [
-          {field: 'assetId', title: '', sort: true},
+          //{field: 'assetId', title: '', sort: true},
           //{field: 'placeId', title: '', sort: true},
+          {field: 'assetCode', title: '資產代碼', sort: true, templet: function (item) {
+                        return assetMa.idGetAssetCode(item.assetId, assetData);
+                        }
+                    },
+          {field: 'assetName', title: '資產名稱', sort: true, templet: function (item) {
+                        return assetMa.idGetAssetName(item.assetId, assetData);
+                        }
+                    },
           {field: 'assetPlace', title: '地點', sort: true, templet: function (item) {
                         return CoreUtil.selecPlacetId(placeData, item.placeId);
                         }
@@ -211,7 +214,7 @@
 
     tableIns1.reload({
       where: {
-        key: $("#key").val()
+        placeId: $("#placesel").val(),
       }
       , page: {
         curr: 1 //Return to page 1
