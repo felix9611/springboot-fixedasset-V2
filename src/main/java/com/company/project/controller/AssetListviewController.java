@@ -74,7 +74,7 @@ public class AssetListviewController {
     @RequiresPermissions("assetListview:update")
     @ResponseBody
     public DataResult update(@RequestBody AssetListviewEntity assetListview){
-        assetListviewService.updateById(assetListview);
+        assetListviewService.updateAsset(assetListview);
         return DataResult.success();
     }
 

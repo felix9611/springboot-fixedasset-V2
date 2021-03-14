@@ -15,5 +15,7 @@ public interface AssetListviewService extends IService<AssetListviewEntity> {
     void newAsset(AssetListviewEntity vo);
 
     void updateActive(AssetListviewEntity assetListview);
+
+    void updateAsset(AssetListviewEntity assetListview);
 }
 

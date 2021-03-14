@@ -4,7 +4,10 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
+import com.company.project.entity.AssetPlaceEntity;
+import com.company.project.mapper.AssetPlaceMapper;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.shiro.authz.annotation.RequiresAuthentication;
 import org.springframework.stereotype.Service;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 
@@ -28,6 +31,11 @@ public class AssetListviewServiceImpl extends ServiceImpl<AssetListviewMapper, A
     @Resource
     private AssetListviewMapper assetListviewMapper;
 
+    @Resource private AssetPlaceEntity assetPlaceEntity;
+
+    @Resource private AssetPlaceMapper assetPlaceMapper;
+
+
     @Override
     public void newAsset(AssetListviewEntity vo){
         String newCode = this.getNewAssetCode();
@@ -41,6 +49,24 @@ public class AssetListviewServiceImpl extends ServiceImpl<AssetListviewMapper, A
     public void updateActive(AssetListviewEntity assetListview) {
         assetListview.setActive("0");
         assetListviewMapper.updateById(assetListview);
+    }
+
+    @Override
+    public void updateAsset(AssetListviewEntity assetListview) {
+        this.setAssetToPlace(assetListview.getId(), assetListview.getPlace());
+        assetListviewMapper.updateById(assetListview);
+    }
+
+    private void setAssetToPlace(final String assetId, String placeId){
+        assetPlaceEntity.setAssetId(assetId);
+        assetPlaceEntity.setPlaceId(placeId);
+        String selectData = assetPlaceMapper.selectAssetId(assetPlaceEntity);
+        if(selectData == null){
+            assetPlaceMapper.insert(assetPlaceEntity);
+        }else{
+            assetPlaceMapper.updateAssetAtPlace(assetPlaceEntity);
+        }
+
     }
 
     public String getNewAssetCode() {
