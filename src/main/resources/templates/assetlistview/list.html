@@ -276,8 +276,9 @@
           $(".operation input[name=invoiceno]").val("");
           $(".operation input[name=invoicenodate]").val("");
           $(".operation input[name=deptId]").val("");
-          //$(".operation input[name=place]").val("");
-          $("#place option:first").prop("selected", 'selected');
+
+          $("#place").attr("disabled","disabled");
+
           $("#responStaff option:first").prop("selected", 'selected');
           //$(".operation input[name=remark]").val("");
           layedit.setContent(editIndex, "");

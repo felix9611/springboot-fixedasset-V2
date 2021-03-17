@@ -2,10 +2,7 @@ package com.company.project.mapper;
 
 import com.company.project.entity.AssetPlaceEntity;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.Update;
+import org.apache.ibatis.annotations.*;
 
 /**
  * 
@@ -27,5 +24,10 @@ public interface AssetPlaceMapper extends BaseMapper<AssetPlaceEntity> {
      */
     @Select("SELECT asset_id FROM asset_place WHERE asset_id = #{assetPlaceEntity.assetId}")
     String selectAssetId(@Param("assetPlaceEntity") AssetPlaceEntity assetPlaceEntity);
-	
+
+    /**
+     * @param assetPlaceEntity
+     */
+    @Delete("DELETE FROM asset_place WHERE asset_id = #{assetPlaceEntity.assetId}")
+    void removeRecord(@Param("assetPlaceEntity") AssetPlaceEntity assetPlaceEntity);
 }

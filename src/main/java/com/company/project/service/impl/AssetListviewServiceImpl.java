@@ -48,6 +48,7 @@ public class AssetListviewServiceImpl extends ServiceImpl<AssetListviewMapper, A
     @Override
     public void updateActive(AssetListviewEntity assetListview) {
         assetListview.setActive("0");
+        this.removeAssetToPlace(assetListview.getId());
         assetListviewMapper.updateById(assetListview);
     }
 
@@ -58,15 +59,24 @@ public class AssetListviewServiceImpl extends ServiceImpl<AssetListviewMapper, A
     }
 
     private void setAssetToPlace(final String assetId, String placeId){
-        assetPlaceEntity.setAssetId(assetId);
-        assetPlaceEntity.setPlaceId(placeId);
-        String selectData = assetPlaceMapper.selectAssetId(assetPlaceEntity);
-        if(selectData == null){
-            assetPlaceMapper.insert(assetPlaceEntity);
-        }else{
-            assetPlaceMapper.updateAssetAtPlace(assetPlaceEntity);
+        if(placeId != null && assetId != null) {
+            assetPlaceEntity.setAssetId(assetId);
+            assetPlaceEntity.setPlaceId(placeId);
+            String selectData = assetPlaceMapper.selectAssetId(assetPlaceEntity);
+            if (selectData == null) {
+                assetPlaceMapper.insert(assetPlaceEntity);
+            } else {
+                assetPlaceMapper.updateAssetAtPlace(assetPlaceEntity);
+            }
         }
+    }
 
+    private void removeAssetToPlace(final String assetId){
+        assetPlaceEntity.setAssetId(assetId);
+        String selectData = assetPlaceMapper.selectAssetId(assetPlaceEntity);
+        if(selectData != null) {
+            assetPlaceMapper.removeRecord(assetPlaceEntity);
+        }
     }
 
     public String getNewAssetCode() {
