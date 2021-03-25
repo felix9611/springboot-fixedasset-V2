@@ -4,7 +4,6 @@ import com.company.project.common.utils.DataResult;
 import com.company.project.common.utils.SpringContextUtils;
 import com.company.project.entity.SysJobEntity;
 import com.company.project.entity.SysJobLogEntity;
-import com.company.project.service.SysJobLogService;
 import org.apache.commons.lang.StringUtils;
 import org.quartz.JobExecutionContext;
 import org.slf4j.Logger;
@@ -24,11 +23,11 @@ import java.lang.reflect.Method;
 public class ScheduleJob extends QuartzJobBean {
     private Logger logger = LoggerFactory.getLogger(getClass());
 
-    final SysJobLogService sysJobLogService;
+    //final SysJobLogService sysJobLogService;
 
-    public ScheduleJob(SysJobLogService sysJobLogService) {
-        this.sysJobLogService = sysJobLogService;
-    }
+   // public ScheduleJob(SysJobLogService sysJobLogService) {
+      //  this.sysJobLogService = sysJobLogService;
+   // }
 
 
     @Override
@@ -37,7 +36,7 @@ public class ScheduleJob extends QuartzJobBean {
                 .get(SysJobEntity.JOB_PARAM_KEY);
 
         //获取spring bean
-        SysJobLogService scheduleJobLogService = (SysJobLogService) SpringContextUtils.getBean("sysJobLogService");
+       // SysJobLogService scheduleJobLogService = (SysJobLogService) SpringContextUtils.getBean("sysJobLogService");
 
         //数据库保存执行记录
         SysJobLogEntity log = new SysJobLogEntity();
@@ -54,8 +53,8 @@ public class ScheduleJob extends QuartzJobBean {
 
             Object target = SpringContextUtils.getBean(scheduleJob.getBeanName());
             assert target != null;
-            Method method = target.getClass().getDeclaredMethod("run", String.class);
-            method.invoke(target, scheduleJob.getParams());
+//            Method method = target.getClass().getDeclaredMethod("run", String.class);
+       //     method.invoke(target, scheduleJob.getParams());
 
             //任务执行总时长
             long times = System.currentTimeMillis() - startTime;
@@ -75,8 +74,8 @@ public class ScheduleJob extends QuartzJobBean {
             log.setStatus(1);
             log.setError(StringUtils.substring(e.toString(), 0, 2000));
         } finally {
-            assert scheduleJobLogService != null;
-            scheduleJobLogService.save(log);
+           // assert scheduleJobLogService != null;
+            //scheduleJobLogService.save(log);
         }
     }
 

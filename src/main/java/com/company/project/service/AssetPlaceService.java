@@ -12,5 +12,7 @@ import com.company.project.entity.AssetPlaceEntity;
  */
 public interface AssetPlaceService extends IService<AssetPlaceEntity> {
 
+
+
 }
 

@@ -11,12 +11,12 @@ import org.springframework.stereotype.Component;
  * @author wenbin
  * @version V1.0
  * @date 2020年3月18日
- */
+ *//*
 @Component("testTask")
 public class TestTask {
     private Logger logger = LoggerFactory.getLogger(getClass());
 
-	public void run(String params){
+	/*public void run(String params){
 		logger.debug("TestTask定时任务正在执行，参数为：{}", params);
 	}
-}
+}*/

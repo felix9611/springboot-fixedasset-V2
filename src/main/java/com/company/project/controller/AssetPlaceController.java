@@ -43,7 +43,7 @@ public class AssetPlaceController {
         }
 
 
-    @ApiOperation(value = "查询分页数据")
+    @ApiOperation(value = "查詢分頁數據")
     @PostMapping("assetPlace/listByPage")
     @RequiresPermissions("assetPlace:list")
     @ResponseBody
