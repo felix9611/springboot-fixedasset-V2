@@ -48,7 +48,7 @@
                 <label class="layui-form-label">購買日期</label>
                 <div class="layui-input-block">
 
-                    <input type="date" model="datetime" timeFormat="yyyy-MM-dd" name="buydate" placeholder="購買日期" autocomplete="off" class="layui-input">
+                    <input type="text" id="buydate" name="buydate" placeholder="購買日期" autocomplete="off" class="layui-input">
                 </div>
             </div>
         </div>
@@ -72,7 +72,7 @@
         <label class="layui-form-label">發票日期</label>
         <div class="layui-input-block">
 
-            <input type="date" model="datetime" timeFormat="yyyy-MM-dd"  name="invoicenodate" placeholder="發票日" autocomplete="off" class="layui-input">
+            <input type="text" id="invoicenodate"  name="invoicenodate" placeholder="發票日" autocomplete="off" class="layui-input">
         </div>
     </div>
     <div class="layui-form-item">
@@ -183,6 +183,7 @@
 <script src="/layui/layui.all.js"></script>
 <script src="/js/core.util.js"></script>
 <script>
+
   //获取token
   var token = CoreUtil.getData("access_token");
   //地址栏转义token中的#号
@@ -269,12 +270,14 @@
           //$(".operation input[name=assetType]").val("");
           $("#assetType option:first").prop("selected", 'selected');
           $(".operation input[name=unit]").val("");
-          $(".operation input[name=buydate]").val("");
+          //$(".operation input[name=buydate]").val("");
+          laydate.render({elem: '#buydate'});
           $(".operation input[name=description]").val("");
           $(".operation input[name=cost]").val("");
           $(".operation input[name=serialnum]").val("");
           $(".operation input[name=invoiceno]").val("");
-          $(".operation input[name=invoicenodate]").val("");
+          //$(".operation input[name=invoicenodate]").val("");
+          laydate.render({elem: '#invoicenodate'});
           $(".operation input[name=deptId]").val("");
 
           $("#place").attr("disabled","disabled");
@@ -293,18 +296,31 @@
           tipDialog(data);
           break;
         case 'edit':
+        console.log(data.buydate);
           $(".table_div").hide();
           $(".operation").show();
           $(".title").html("編輯");
           $(".operation input[name=id]").val(data.id);
           $(".operation input[name=assetCode]").val(data.assetCode);
           $(".operation input[name=assetName]").val(data.assetName);
-          $(".operation date[name=buydate]").val(data.buydate);
+           //$(".operation date[name=buydate]").val(data.buydate);
+         // $("#buydate").find('date[value="'+data.buydate.substring(0, 10)+'"]').prop('selected',true);
+         console.log(data.buydate.substring(0, 10));
+                    var buydateStr = data.buydate.substring(0, 10);
+                laydate.render({
+                    elem: '#buydate'
+                    ,value: buydateStr
+                    });
           $(".operation input[name=unit]").val(data.unit);
           $(".operation input[name=cost]").val(data.cost);
           $(".operation input[name=serialnum]").val(data.serialnum);
           $(".operation input[name=invoiceno]").val(data.invoiceno);
-          $(".operation date[name=invoicenodate]").val(data.invoicenodate);
+          //$(".operation date[name=invoicenodate]").val(data.invoicenodate);
+              var invoicenodateStr = data.invoicenodate.substring(0, 10);
+                laydate.render({
+                    elem: '#invoicenodate'
+                    ,value: invoicenodateStr
+                    });
           if (!CoreUtil.isEmpty(data.assetType)) {
                         $("#assetType").find('option[value="'+data.assetType+'"]').prop('selected',true);
                         form.render();
