@@ -22,7 +22,14 @@
         <div class="layui-form-item">
             <label class="layui-form-label">姓名</label>
             <div class="layui-input-block">
-                <input type="realName" name="realName" placeholder="請輸入姓名" autocomplete="off" class="layui-input">
+                <input type="text" name="realName" placeholder="請輸入姓名" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <label class="layui-form-label">暱稱</label>
+            <div class="layui-input-block">
+                <input type="text" name="nickName" placeholder="請輸入暱稱" autocomplete="off" class="layui-input">
             </div>
         </div>
 
@@ -80,6 +87,7 @@
                 $(".layui-container input[name=id]").val(res.data.id);
                 $(".layui-container input[name=username]").val(res.data.username);
                 $(".layui-container input[name=realName]").val(res.data.realName);
+                $(".layui-container input[name=nickName]").val(res.data.nickName);
                 $(".layui-container input[name=email]").val(res.data.email);
                 $(".layui-container input[name=phone]").val(res.data.phone);
                 $(".layui-container input[name=sex][value=1]").attr("checked", res.data.sex == 1 ? true : false);

@@ -3,11 +3,8 @@ package com.company.project.service.impl;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.company.project.common.exception.BusinessException;
-import com.company.project.entity.AssetlistEntity;
 import com.company.project.entity.StocktakelistEntity;
-import com.company.project.mapper.AssetlistMapper;
 import com.company.project.mapper.StocktakelistMapper;
-import com.company.project.service.AssetlistService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
@@ -33,14 +30,6 @@ public class StocktakelistDetailServiceImpl extends ServiceImpl<StocktakelistDet
     @Resource
     private StocktakelistMapper stocktakelistMapper;
 
-    @Resource
-    private AssetlistEntity assetlistEntity;
-
-    @Resource
-    private AssetlistMapper assetlistMapper;
-
-    @Resource
-    private AssetlistService assetlistService;
 
     @Resource
     private StocktakelistDetailEntity stocktakelistDetailEntity;

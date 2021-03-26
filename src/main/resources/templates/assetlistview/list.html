@@ -306,21 +306,15 @@
            //$(".operation date[name=buydate]").val(data.buydate);
          // $("#buydate").find('date[value="'+data.buydate.substring(0, 10)+'"]').prop('selected',true);
          console.log(data.buydate.substring(0, 10));
-                    var buydateStr = data.buydate.substring(0, 10);
-                laydate.render({
-                    elem: '#buydate'
-                    ,value: buydateStr
-                    });
+          var buydateStr = data.buydate.substring(0, 10);
+          laydate.render({ elem: '#buydate' ,value: buydateStr});
           $(".operation input[name=unit]").val(data.unit);
           $(".operation input[name=cost]").val(data.cost);
           $(".operation input[name=serialnum]").val(data.serialnum);
           $(".operation input[name=invoiceno]").val(data.invoiceno);
           //$(".operation date[name=invoicenodate]").val(data.invoicenodate);
-              var invoicenodateStr = data.invoicenodate.substring(0, 10);
-                laydate.render({
-                    elem: '#invoicenodate'
-                    ,value: invoicenodateStr
-                    });
+          var invoicenodateStr = data.invoicenodate.substring(0, 10);
+          laydate.render({  elem: '#invoicenodate',value: invoicenodateStr });
           if (!CoreUtil.isEmpty(data.assetType)) {
                         $("#assetType").find('option[value="'+data.assetType+'"]').prop('selected',true);
                         form.render();

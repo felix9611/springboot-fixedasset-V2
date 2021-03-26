@@ -2,8 +2,6 @@ package com.company.project.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
-import com.company.project.entity.AssetlistEntity;
-import com.company.project.mapper.AssetlistMapper;
 import io.swagger.annotations.Api;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.util.StringUtils;
@@ -37,11 +35,7 @@ public class StocktakelistDetailController {
     @Resource
     private StocktakelistDetailService stocktakelistDetailService;
 
-    @Resource
-    private AssetlistMapper assetlistMapper;
 
-    @Resource
-    private AssetlistEntity assetlistEntity;
 
 
     /**
