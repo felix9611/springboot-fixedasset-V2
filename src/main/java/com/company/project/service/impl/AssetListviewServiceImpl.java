@@ -42,7 +42,9 @@ public class AssetListviewServiceImpl extends ServiceImpl<AssetListviewMapper, A
         vo.setAssetCode(newCode);
         vo.setActive("1");
         assetListviewMapper.insert(vo);
-        //return true;
+        if(vo.getPlace()!= null){
+            setAssetToPlace(vo.getId(), vo.getPlace());
+        }
     }
 
     @Override

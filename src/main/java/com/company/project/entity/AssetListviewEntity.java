@@ -12,6 +12,8 @@ import java.util.Date;
 import lombok.Data;
 import org.springframework.stereotype.Component;
 
+import javax.persistence.GeneratedValue;
+
 /**
  * 
  *
@@ -120,6 +122,8 @@ public class AssetListviewEntity extends BaseEntity implements Serializable {
 	 */
 	@TableField("active")
 	private String active;
+ 
+
 
 
 }

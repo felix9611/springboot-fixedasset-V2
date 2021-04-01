@@ -38,7 +38,7 @@ public class SysFilesController {
     public DataResult add(@RequestParam(value = "file") MultipartFile file) {
         //判断文件是否空
         if (file == null || file.getOriginalFilename() == null || "".equalsIgnoreCase(file.getOriginalFilename().trim())) {
-            return DataResult.fail("文件为空");
+            return DataResult.fail("文件為空");
         }
         return sysFilesService.saveFile(file);
     }
