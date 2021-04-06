@@ -1,8 +1,13 @@
 # 端口
 server:
-  port: 9250
+  port: 9255
 
 spring:
+  jpa:
+    properties:
+      hibernate:
+        show_sql: false
+    show-sql: false
   profiles:
     active: prod
   mvc:
@@ -14,12 +19,12 @@ spring:
   jackson:
     date-format: yyyy-MM-dd HH:mm:ss
     time-zone: GMT+8
-  # 文件大小限制
+
   servlet:
     multipart:
       max-file-size: 10MB
       max-request-size: 100MB
-  # redis token信息
+  # redis token
   redis:
     key:
       prefix:
@@ -27,15 +32,15 @@ spring:
         passwordError: "user:password:error:"
         permissionRefresh: "user:token:permissionRefresh:"
       expire:
-        userToken: 604800 # 7天 7*24*3600
-        passwordError: 3600 # 一个小时
-        permissionRefresh: 604800 # 7天 7*24*3600
-    allowMultipleLogin: true # 允许多处登陆
+        userToken: 604800 # 7days 7*24*3600
+        passwordError: 3600 # 1 Hours
+        permissionRefresh: 604800 # 7DAYS 7*24*3600
+    allowMultipleLogin: true
 
 
 mybatis-plus:
-  configuration:
-    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+#  configuration:
+#    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
   mapper-locations: classpath:mapper/*.xml
   global-config:
     db-config:
@@ -43,11 +48,9 @@ mybatis-plus:
       logic-not-delete-value: 1
       logic-delete-field: deleted
 
-#使用代码生成模块时 指定要生成的表存在于哪种数据库，可选值有【mysql、oracle、sqlServer】
 project:
   database: mysql
 
-ngrok:
-  enabled=true:
+
 
 
