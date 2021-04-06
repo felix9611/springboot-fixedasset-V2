@@ -1,6 +1,5 @@
 # 端口
-server:
-  port: 9255
+
 
 spring:
   jpa:
