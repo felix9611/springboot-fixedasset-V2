@@ -41,11 +41,11 @@ mybatis-plus:
 #  configuration:
 #    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
   mapper-locations: classpath:mapper/*.xml
-  global-config:
-    db-config:
-      logic-delete-value: 0
-      logic-not-delete-value: 1
-      logic-delete-field: deleted
+  #global-config:
+  #  db-config:
+ #     logic-delete-value: 0
+ #     logic-not-delete-value: 1
+ #     logic-delete-field: deleted
 
 project:
   database: mysql

@@ -184,9 +184,9 @@
 <script src="/js/core.util.js"></script>
 <script>
 
-  //获取token
+
   var token = CoreUtil.getData("access_token");
-  //地址栏转义token中的#号
+
   var tokenQuery = token.replace("#", "%23");
   var tableIns1;
   var table = layui.table;
@@ -204,12 +204,11 @@
 
    var layedit = layui.layedit;
 
-    //加载table
     tableIns1 = table.render({
       elem: '#showTable'
       , contentType: 'application/json'
       , headers: {"authorization": token}
-      , page: true //开启分页
+      , page: true 
       , url: '/assetListview/listByPage' //数据接口
       , method: 'POST'
       , parseData: function (res) { //将原始数据解析成 table 组件所规定的数据
@@ -244,24 +243,12 @@
     });
 
 
-    //表头工具
+
     table.on('toolbar(showTable)', function(obj){
       switch(obj.event){
-        case 'batchDeleted':
-          var checkStatus = table.checkStatus(obj.config.id);
-          var data = checkStatus.data;
-          if(data.length==0){
-            layer.msg("请选择要批量删除的列");
-          }else {
-            var ids = [];
-            $(data).each(function (index,item) {
-              ids.push(item.id);
-            });
-            tipDialog(ids);
-          }
-          break;
+      
         case 'add':
-                    $(".table_div").hide();
+          $(".table_div").hide();
           $(".operation").show();
           $(".title").html("新增");
           $(".operation input[name=id]").val("");
@@ -288,7 +275,8 @@
           break;
       };
     });
-    //列操作
+
+    
     table.on('tool(showTable)',function (obj) {
       var data = obj.data;
       switch (obj.event) {
@@ -339,15 +327,13 @@
       }
     });
 
-    //导出
+
     $('#export').on('click', function () {
-      //原先分页limit
       var exportParams = {
         limit: 10000,
         key: $("#key").val()
       };
       CoreUtil.sendPost("/assetListview/listByPage", exportParams, function (res) {
-        //初始化渲染数据
         if (res.data != null && res.data.records != null) {
           table.exportFile(tableIns1.config.id, res.data.records, 'xls');
         }
@@ -359,7 +345,7 @@
       layer.open({
         content: "確定要删除?",
         yes: function(index, layero){
-          layer.close(index); //如果设定了yes回调，需进行手工关闭
+          layer.close(index); 
           CoreUtil.sendDelete("/assetListview/delete",ids,function (res) {
             layer.msg(res.msg, {time:1000},function () {
               search();
@@ -369,14 +355,14 @@
       });
     };
 
-    //返回
+
     $("#btn_cancel").click(function() {
       $(".table_div").show();
       $(".operation").hide();
       return false;
     });
 
-    //监听保存
+
     form.on('submit(submit)', function(data){
       if(data.field.id===undefined || data.field.id===null || data.field.id===""){
         CoreUtil.sendPost("/assetListview/add",data.field,function (res) {
@@ -396,18 +382,17 @@
     });
   });
 
-  //执行查询
+
   function search() {
-    //这里以搜索为例
     tableIns1.reload({
-      where: { //设定异步数据接口的额外参数，任意设
+      where: { 
         assetCode: $("#assetCode").val(),
         assetName: $("#assetName").val(),
         assetType: $("#typeSel").val(),
         deptId: $("#deptSel").val(),
       }
       , page: {
-        curr: 1 //重新从第 1 页开始
+        curr: 1 
       }
     });
   };

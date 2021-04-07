@@ -57,6 +57,7 @@ public class StocktakelistDetailController {
         boolean test1 = Boolean.parseBoolean(String.valueOf(test.eq(AssetlistEntity::getPlace, stocktakelistDetail.getAssetPlace())));
 
         if(test1 == true){*/
+            System.out.print(stocktakelistDetail);
             stocktakelistDetailService.save(stocktakelistDetail);
         //}
         return DataResult.success();

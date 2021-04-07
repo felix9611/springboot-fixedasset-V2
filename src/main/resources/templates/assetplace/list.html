@@ -92,14 +92,48 @@
           //{field: 'assetId', title: '', sort: true},
           //{field: 'placeId', title: '', sort: true},
           {field: 'assetCode', title: '資產代碼', sort: true, templet: function (item) {
+
+                      /*                list = JSON.parse(assetData);
+                                      var assetCode = "";
+
+
+                                      $.each(list, function(index, dict) {
+                                           if (dict.id == ('' + item.assetId)) {
+                                              assetCode = dict.assetCode;
+                                               return false;
+                                           }
+                                      });
+
+                                      return assetCode;*/
                         return assetMa.idGetAssetCode(item.assetId, assetData);
                         }
                     },
           {field: 'assetName', title: '資產名稱', sort: true, templet: function (item) {
+                             /*         list = JSON.parse(assetData);
+                                      var assetName = "";
+
+
+                                      $.each(list, function(index, dict) {
+                                           if (dict.id == ('' + item.assetId)) {
+                                               assetName = dict.assetName;
+                                               return false;
+                                           }
+                                      });
+
+                                      return assetName;*/
                         return assetMa.idGetAssetName(item.assetId, assetData);
                         }
                     },
           {field: 'assetPlace', title: '地點', sort: true, templet: function (item) {
+                   /*     datas = JSON.parse(placeData);
+                        var placeName = "";
+                        $.each(datas, function(index, dict) {
+                            if (dict.id == ('' + item.placeId)) {
+                                placeName = dict.placeName;
+                                return false;
+                            }
+                        });
+                        return placeName;*/
                         return CoreUtil.selecPlacetId(placeData, item.placeId);
                         }
                     },

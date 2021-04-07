@@ -50,6 +50,7 @@ public class Place2Controller {
     @ResponseBody
     public DataResult add(@RequestBody Place2Entity place2){
         place2Service.save(place2);
+        System.out.print(place2);
         return DataResult.success();
     }
 
@@ -59,6 +60,7 @@ public class Place2Controller {
     @ResponseBody
     public DataResult delete(@RequestBody @ApiParam(value = "id集合") List<String> ids){
         place2Service.removeByIds(ids);
+        System.out.print(ids);
         return DataResult.success();
     }
 
@@ -68,6 +70,7 @@ public class Place2Controller {
     @ResponseBody
     public DataResult update(@RequestBody Place2Entity place2){
         place2Service.updateById(place2);
+        System.out.print(place2);
         return DataResult.success();
     }
 
@@ -86,6 +89,8 @@ public class Place2Controller {
         }
 
         queryWrapper.eq(Place2Entity::getActive, "1");
+
+        System.out.print(place2);
 
         IPage<Place2Entity> iPage = place2Service.page(page, queryWrapper);
         return DataResult.success(iPage);

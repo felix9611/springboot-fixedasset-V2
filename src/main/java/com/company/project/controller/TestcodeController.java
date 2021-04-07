@@ -46,8 +46,9 @@ public class TestcodeController {
     @RequiresPermissions("testcode:add")
     @ResponseBody
     public DataResult add(@RequestBody TestcodeEntity testcode){
-        testcodeService.save(testcode);
-        return DataResult.success();
+        testcodeService.saveTest(testcode);
+        System.out.print(testcode);
+        return DataResult.success(testcode);
     }
 
     @ApiOperation(value = "删除")
@@ -55,6 +56,7 @@ public class TestcodeController {
     @RequiresPermissions("testcode:delete")
     @ResponseBody
     public DataResult delete(@RequestBody @ApiParam(value = "id集合") List<String> ids){
+        System.out.print(ids);
         testcodeService.removeByIds(ids);
         return DataResult.success();
     }
@@ -64,6 +66,7 @@ public class TestcodeController {
     @RequiresPermissions("testcode:update")
     @ResponseBody
     public DataResult update(@RequestBody TestcodeEntity testcode){
+        System.out.print(testcode);
         testcodeService.updateById(testcode);
         return DataResult.success();
     }

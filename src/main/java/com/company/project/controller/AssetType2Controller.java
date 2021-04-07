@@ -57,6 +57,7 @@ public class AssetType2Controller {
     @RequiresPermissions("assetType2:add")
     @ResponseBody
     public DataResult add(@RequestBody AssetType2Entity assetType2){
+        System.out.print(assetType2);
         assetType2Service.save(assetType2);
         return DataResult.success();
     }
@@ -66,6 +67,7 @@ public class AssetType2Controller {
     @RequiresPermissions("assetType2:delete")
     @ResponseBody
     public DataResult delete(@RequestBody AssetType2Entity assetType2){
+        System.out.print(assetType2);
         assetType2Service.updateActive(assetType2);
         return DataResult.success();
     }
@@ -75,6 +77,7 @@ public class AssetType2Controller {
     @RequiresPermissions("assetType2:update")
     @ResponseBody
     public DataResult update(@RequestBody AssetType2Entity assetType2){
+        System.out.print(assetType2);
         assetType2Service.updateById(assetType2);
         return DataResult.success();
     }
@@ -86,8 +89,8 @@ public class AssetType2Controller {
     public DataResult findListByPage(@RequestBody AssetType2Entity assetType2){
         Page page = new Page(assetType2.getPage(), assetType2.getLimit());
         LambdaQueryWrapper<AssetType2Entity> queryWrapper = Wrappers.lambdaQuery();
-        //查询条件示例
-        //queryWrapper.eq(AssetType2Entity::getId, assetType2.getId());
+
+        System.out.print(assetType2);
 
         if(!StringUtils.isEmpty(assetType2.getTypeName())){
             queryWrapper.like(AssetType2Entity::getTypeName, assetType2.getTypeName());

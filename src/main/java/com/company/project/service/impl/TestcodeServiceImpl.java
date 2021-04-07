@@ -12,7 +12,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.util.List;
-import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicReference;
 
 @Transactional
@@ -25,12 +24,13 @@ public class TestcodeServiceImpl extends ServiceImpl<TestcodeMapper, TestcodeEnt
     @Resource
     private  TestcodeMapper testcodeMapper;
 
+
     @Override
-    public boolean save(TestcodeEntity vo){
+    public String saveTest(TestcodeEntity vo){
         String newCode = this.getNewCode();
         vo.setTestCode(newCode);
         testcodeMapper.insert(vo);
-        return true;
+        return String.valueOf(vo);
     }
 
     public String getNewCode(){

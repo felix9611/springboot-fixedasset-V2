@@ -52,6 +52,7 @@ public class DepartmentController {
     @ResponseBody
     public DataResult add(@RequestBody DepartmentEntity department){
         departmentService.save(department);
+        System.out.print(department);
         return DataResult.success();
     }
 
@@ -61,6 +62,7 @@ public class DepartmentController {
     @ResponseBody
     public DataResult delete(@RequestBody DepartmentEntity department){
         departmentService.updateActive(department);
+        System.out.print(department);
         return DataResult.success();
     }
     /*
@@ -76,6 +78,7 @@ public class DepartmentController {
     @ResponseBody
     public DataResult update(@RequestBody DepartmentEntity department){
         departmentService.updateById(department);
+        System.out.print(department);
         return DataResult.success();
     }
 
@@ -93,6 +96,7 @@ public class DepartmentController {
 
         queryWrapper.eq(DepartmentEntity::getActive, "1");
 
+        System.out.print(department);
         //查询条件示例
         //queryWrapper.eq(DepartmentEntity::getId, department.getId());
         IPage<DepartmentEntity> iPage = departmentService.page(page, queryWrapper);

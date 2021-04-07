@@ -61,6 +61,7 @@ public class AssetListviewController {
     @ResponseBody
     public DataResult delete(@RequestBody AssetListviewEntity assetListview){
         assetListviewService.updateActive(assetListview);
+
         return DataResult.success();
     }
     /*
@@ -105,11 +106,8 @@ public class AssetListviewController {
         queryWrapper.orderByDesc(true, AssetListviewEntity::getAssetCode);
         queryWrapper.eq(AssetListviewEntity::getActive, "1");
 
+        System.out.print(queryWrapper);
 
-
-
-        //查询条件示例
-        //queryWrapper.eq(AssetListviewEntity::getId, assetListview.getId());
         IPage<AssetListviewEntity> iPage = assetListviewService.page(page, queryWrapper);
         return DataResult.success(iPage);
     }
@@ -137,6 +135,8 @@ public class AssetListviewController {
 
         queryWrapper.orderByDesc(true, AssetListviewEntity::getAssetCode);
         queryWrapper.eq(AssetListviewEntity::getActive, "1");
+
+        System.out.print(assetListview);
 
         IPage<AssetListviewEntity> iPage = assetListviewService.page(page, queryWrapper);
         return DataResult.success(iPage);

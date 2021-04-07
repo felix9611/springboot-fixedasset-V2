@@ -26,6 +26,11 @@ spring:
         max-idle: 8
         min-idle: 0
     timeout: 3000ms
+  jpa:
+    properties:
+      hibernate:
+        show_sql: false
+    show-sql: false
 
 
 

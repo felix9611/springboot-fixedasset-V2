@@ -42,6 +42,7 @@ public class RoleController {
     @LogAnnotation(title = "角色管理", action = "新增角色")
     @RequiresPermissions("sys:role:add")
     public DataResult addRole(@RequestBody @Valid SysRole vo) {
+        System.out.print(vo);
         roleService.addRole(vo);
         return DataResult.success();
     }
@@ -51,6 +52,7 @@ public class RoleController {
     @LogAnnotation(title = "角色管理", action = "删除角色")
     @RequiresPermissions("sys:role:deleted")
     public DataResult deleted(@PathVariable("id") String id) {
+        System.out.print(id);
         roleService.deletedRole(id);
         return DataResult.success();
     }
@@ -63,6 +65,7 @@ public class RoleController {
         if (StringUtils.isEmpty(vo.getId())) {
             return DataResult.fail("id不能为空");
         }
+        System.out.print(vo);
         roleService.updateRole(vo);
         return DataResult.success();
     }
@@ -78,7 +81,7 @@ public class RoleController {
         if (roleService.getById(vo.getId()) == null) {
             return DataResult.fail("获取角色失败");
         }
-
+        System.out.print(vo);
         //先删除所有绑定
         sysRoleDeptService.remove(Wrappers.<SysRoleDeptEntity>lambdaQuery().eq(SysRoleDeptEntity::getRoleId, vo.getId()));
         //如果不是自定义
@@ -104,6 +107,7 @@ public class RoleController {
     @LogAnnotation(title = "角色管理", action = "查询角色详情")
     @RequiresPermissions("sys:role:detail")
     public DataResult detailInfo(@PathVariable("id") String id) {
+        System.out.print(id);
         return DataResult.success(roleService.detailInfo(id));
     }
 
@@ -114,6 +118,7 @@ public class RoleController {
     @SuppressWarnings("unchecked")
     public DataResult pageInfo(@RequestBody SysRole vo) {
         Page page = new Page(vo.getPage(), vo.getLimit());
+        System.out.print(vo);
         LambdaQueryWrapper<SysRole> queryWrapper = Wrappers.lambdaQuery();
         if (!StringUtils.isEmpty(vo.getName())) {
             queryWrapper.like(SysRole::getName, vo.getName());

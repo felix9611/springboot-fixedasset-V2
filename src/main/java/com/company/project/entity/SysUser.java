@@ -24,12 +24,12 @@ public class SysUser extends BaseEntity implements Serializable {
     @TableId
     private String id;
 
-    @NotBlank(message = "账号不能为空")
+    @NotBlank(message = "帳名不能為空")
     private String username;
 
     private String salt;
 
-    @NotBlank(message = "密码不能为空")
+    @NotBlank(message = "密碼不能為空")
     private String password;
 
     @TableField(exist = false)

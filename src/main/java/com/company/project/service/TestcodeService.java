@@ -12,5 +12,6 @@ import com.company.project.entity.TestcodeEntity;
  */
 public interface TestcodeService extends IService<TestcodeEntity> {
 
+    String saveTest(TestcodeEntity vo);
 }
 

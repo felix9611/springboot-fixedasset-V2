@@ -10,13 +10,13 @@ import java.util.List;
  * @date 2020年3月18日
  */
 public class TableEntity {
-    //表的名称
+    //表的名稱
     private String tableName;
-    //表的备注
+    //表的備註
     private String comments;
-    //表的主键
+    //表的主鍵
     private ColumnEntity pk;
-    //表的列名(不包含主键)
+    //表的列名(不包含主鍵)
     private List<ColumnEntity> columns;
 
     //类名(第一个字母大写)，如：sys_user => SysUser

@@ -54,7 +54,7 @@ public class AssetPlaceController {
         if(!StringUtils.isEmpty(assetPlace.getPlaceId())){
             queryWrapper.eq(AssetPlaceEntity::getPlaceId, assetPlace.getPlaceId());
         }
-
+        System.out.print(assetPlace);
         IPage<AssetPlaceEntity> iPage = assetPlaceService.page(page, queryWrapper);
         return DataResult.success(iPage);
     }

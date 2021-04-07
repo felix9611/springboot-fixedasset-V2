@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
+
     <!-- 这里面定义了 CONSOLE_LOG_PATTERN, FILE_LOG_PATTERN 等日志格式, 还定义了一些日志级别 -->
     <include resource="org/springframework/boot/logging/logback/defaults.xml"/>
 
@@ -38,11 +39,9 @@
         </appender>
     </springProfile>
 
-
-    <!--开发环境:打印控制台-->
-    <springProfile name="dev">
-        <!-- 打印sql -->
-        <logger name="com.company.project" level="DEBUG"/>
+    <!-- 打印sql -->
+   <springProfile name="dev">
+       <!-- <logger name="com.company.project" level="DEBUG"/>-->
         <root level="${LOG_LEVEL}">
             <appender-ref ref="CONSOLE"/>
         </root>

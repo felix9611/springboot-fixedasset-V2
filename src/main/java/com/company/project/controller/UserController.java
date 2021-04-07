@@ -56,6 +56,7 @@ public class UserController {
             CaptchaUtil.clear(request);
             return DataResult.fail("驗證碼錯誤 ！");
         }
+        System.out.print(vo);
         return DataResult.success(userService.login(vo));
     }
 
@@ -89,7 +90,7 @@ public class UserController {
         if (StringUtils.isEmpty(vo.getId())) {
             return DataResult.fail("id不能為空");
         }
-
+        System.out.print(vo);
         userService.updateUserInfo(vo);
         return DataResult.success();
     }
@@ -98,6 +99,7 @@ public class UserController {
     @ApiOperation(value = "更新用戶資料接口")
     @LogAnnotation(title = "用戶管理", action = "更新用戶資料")
     public DataResult updateUserInfoById(@RequestBody SysUser vo) {
+        System.out.print(vo);
         userService.updateUserInfoMy(vo);
         return DataResult.success();
     }
@@ -107,6 +109,7 @@ public class UserController {
     @LogAnnotation(title = "用戶管理", action = "查詢用戶詳情")
     @RequiresPermissions("sys:user:detail")
     public DataResult detailInfo(@PathVariable("id") String id) {
+        System.out.print(id);
         return DataResult.success(userService.getById(id));
     }
 
@@ -115,6 +118,7 @@ public class UserController {
     @LogAnnotation(title = "用戶管理", action = "查詢用戶詳情")
     public DataResult youSelfInfo() {
         String userId = httpSessionService.getCurrentUserId();
+        System.out.print(userId);
         return DataResult.success(userService.getById(userId));
     }
 
@@ -123,6 +127,7 @@ public class UserController {
     @RequiresPermissions("sys:user:list")
     @LogAnnotation(title = "用戶管理", action = "分頁獲取用戶列表")
     public DataResult pageInfo(@RequestBody SysUser vo) {
+        System.out.print(vo);
         return DataResult.success(userService.pageInfo(vo));
     }
 
@@ -132,6 +137,7 @@ public class UserController {
     @LogAnnotation(title = "用戶管理", action = "新增用戶")
     public DataResult addUser(@RequestBody @Valid SysUser vo) {
         userService.addUser(vo);
+        System.out.print(vo);
         return DataResult.success();
     }
 
@@ -155,6 +161,7 @@ public class UserController {
         String userId = httpSessionService.getCurrentUserId();
         vo.setId(userId);
         userService.updatePwd(vo);
+        System.out.print(vo);
         return DataResult.success();
     }
 
@@ -164,6 +171,7 @@ public class UserController {
     @RequiresPermissions("sys:user:deleted")
     public DataResult deletedUser(@RequestBody @ApiParam(value = "用戶id集合") List<String> userIds) {
         //删除用户， 删除redis的绑定的角色跟权限
+        System.out.print(userIds);
         httpSessionService.abortUserByUserIds(userIds);
         LambdaQueryWrapper<SysUser> queryWrapper = Wrappers.lambdaQuery();
         queryWrapper.in(SysUser::getId, userIds);
@@ -176,6 +184,7 @@ public class UserController {
     @LogAnnotation(title = "用戶管理", action = "賦予角色-獲取所有角色接口")
     @RequiresPermissions("sys:user:role:detail")
     public DataResult getUserOwnRole(@PathVariable("userId") String userId) {
+        System.out.print(userId);
         DataResult result = DataResult.success();
         result.setData(userService.getUserOwnRole(userId));
         return result;
@@ -186,7 +195,7 @@ public class UserController {
     @LogAnnotation(title = "用戶管理", action = "賦予角色-獲取所有角色接口")
     @RequiresPermissions("sys:user:update:role")
     public DataResult setUserOwnRole(@PathVariable("userId") String userId, @RequestBody List<String> roleIds) {
-
+        System.out.print(roleIds);
         LambdaQueryWrapper<SysUserRole> queryWrapper = Wrappers.lambdaQuery();
         queryWrapper.eq(SysUserRole::getUserId, userId);
         userRoleService.remove(queryWrapper);

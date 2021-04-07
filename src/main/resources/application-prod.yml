@@ -13,7 +13,7 @@ spring:
           username: admin
           password: GB2444JC3103
           driver-class-name: com.mysql.cj.jdbc.Driver
-          url: jdbc:mysql://localhost:3306/company_project?useUnicode=true&useSSL=false&characterEncoding=utf8&serverTimezone=GMT%2b8
+          url: jdbc:mysql://localhost:3306/fixedasset_springboot?useUnicode=true&useSSL=false&characterEncoding=utf8&serverTimezone=GMT%2b8
 
   redis:
     host: localhost
@@ -28,6 +28,9 @@ spring:
         min-idle: 0
     timeout: 3000ms
   jpa:
+    properties:
+      hibernate:
+        show_sql: false
     show-sql: false
 
 file:
@@ -37,4 +40,4 @@ file:
   url: http://localhost:8080/files
 
 knife4j:
-  production: true
+  production: false
