@@ -32,10 +32,6 @@ public class ${className}Controller {
     @Autowired
     private ${className}Service ${classname}Service;
 
-
-    /**
-    * 跳转到页面
-    */
     @GetMapping("/index/${classname}")
     public String ${classname}() {
         return "${classNameLower}/list";
@@ -50,7 +46,7 @@ public class ${className}Controller {
         return DataResult.success();
     }
 
-    @ApiOperation(value = "删除")
+    @ApiOperation(value = "刪除")
     @DeleteMapping("${classname}/delete")
     @RequiresPermissions("${classname}:delete")
     @ResponseBody
@@ -68,7 +64,7 @@ public class ${className}Controller {
         return DataResult.success();
     }
 
-    @ApiOperation(value = "查询分页数据")
+    @ApiOperation(value = "查詢分頁數據")
     @PostMapping("${classname}/listByPage")
     @RequiresPermissions("${classname}:list")
     @ResponseBody

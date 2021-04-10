@@ -6,23 +6,18 @@ import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.stereotype.Controller;
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiParam;
-import java.util.List;
 import com.company.project.common.utils.DataResult;
 
 import com.company.project.entity.LocationEntity;
 import com.company.project.service.LocationService;
 
-
-
 /**
  * 
  *
- * @author wenbin
+ * @author felix
  * @email *****@mail.com
  * @date 2020-11-21 10:28:41
  */

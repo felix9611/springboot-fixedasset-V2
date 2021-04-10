@@ -5,6 +5,8 @@ import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.company.project.common.aop.annotation.LogAnnotation;
 import com.company.project.mapper.AssetType2Mapper;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import io.netty.util.internal.StringUtil;
 import io.swagger.annotations.Api;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
@@ -76,7 +78,7 @@ public class AssetType2Controller {
     @PutMapping("assetType2/update")
     @RequiresPermissions("assetType2:update")
     @ResponseBody
-    public DataResult update(@RequestBody AssetType2Entity assetType2){
+    public DataResult update(@RequestBody AssetType2Entity assetType2) throws JsonProcessingException {
         System.out.print(assetType2);
         assetType2Service.updateById(assetType2);
         return DataResult.success();
