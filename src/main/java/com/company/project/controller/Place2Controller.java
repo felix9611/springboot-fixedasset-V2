@@ -58,9 +58,9 @@ public class Place2Controller {
     @DeleteMapping("place2/delete")
     @RequiresPermissions("place2:delete")
     @ResponseBody
-    public DataResult delete(@RequestBody @ApiParam(value = "id集合") List<String> ids){
-        place2Service.removeByIds(ids);
-        System.out.print(ids);
+    public DataResult delete(@RequestBody Place2Entity place2){
+        place2Service.updateActive(place2);
+        System.out.print(place2);
         return DataResult.success();
     }
 

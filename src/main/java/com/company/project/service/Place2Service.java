@@ -14,5 +14,6 @@ import org.springframework.stereotype.Service;
 @Service
 public interface Place2Service extends IService<Place2Entity> {
 
+    void updateActive(Place2Entity entity);
 }
 

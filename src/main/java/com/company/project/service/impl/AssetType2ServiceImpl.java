@@ -2,14 +2,9 @@ package com.company.project.service.impl;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
-import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
-import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
-import com.baomidou.mybatisplus.core.injector.methods.Update;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
-import com.company.project.common.exception.BusinessException;
-import com.company.project.common.exception.code.BaseResponseCode;
-import com.company.project.common.job.utils.ScheduleUtils;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.company.project.entity.ActionRecordEntity;
+import com.company.project.mapper.ActionRecordMapper;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
@@ -21,8 +16,6 @@ import org.springframework.transaction.annotation.Transactional;
 //import sun.invoke.util.Wrapper;
 
 import javax.annotation.Resource;
-import java.sql.Wrapper;
-import java.util.Iterator;
 import java.util.List;
 
 @Component
@@ -30,14 +23,43 @@ import java.util.List;
 @Service("assetType2Service")
 public class AssetType2ServiceImpl extends ServiceImpl<AssetType2Mapper, AssetType2Entity> implements AssetType2Service {
 
-    @Resource
-    private AssetType2Mapper Atm1;
+    @Resource private AssetType2Mapper Atm1;
 
-    @Resource
-    private AssetType2Entity assetType2Entity;
+    @Resource private AssetType2Entity assetType2Entity;
 
-    @Resource
-    private AssetType2Mapper assetType2Mapper;
+    @Resource private AssetType2Mapper assetType2Mapper;
+
+    @Resource private ActionRecordMapper actionRecordMapper;
+
+    @Resource private ActionRecordEntity actionRecordEntity;
+
+    @Override
+    public boolean save(AssetType2Entity entity) {
+
+        actionRecordEntity.setActionName("INSERT");
+        actionRecordEntity.setActionMethod("POST");
+        actionRecordEntity.setActionFrom("種類管理");
+        actionRecordEntity.setActionData("新增資料: " + entity.toString());
+        actionRecordEntity.setActionSuccess("Success");
+        actionRecordMapper.insert(actionRecordEntity);
+
+        assetType2Mapper.insert(entity);
+        return true;
+    }
+
+    @Override
+    public boolean updateById(AssetType2Entity entity) {
+        actionRecordEntity.setActionName("UPDATE");
+        actionRecordEntity.setActionMethod("PUT");
+        actionRecordEntity.setActionFrom("種類管理");
+        actionRecordEntity.setActionData("更新資料: " + entity.toString());
+        actionRecordEntity.setActionSuccess("Success");
+        actionRecordMapper.insert(actionRecordEntity);
+
+        assetType2Mapper.updateById(entity);
+        return true;
+    }
+
     /**
      * @return
      **/
@@ -51,6 +73,13 @@ public class AssetType2ServiceImpl extends ServiceImpl<AssetType2Mapper, AssetTy
     public void updateActive(AssetType2Entity assetType2) {
         assetType2.setActive("0");
         assetType2Mapper.updateById(assetType2);
+
+        actionRecordEntity.setActionName("DELETE");
+        actionRecordEntity.setActionMethod("PUT");
+        actionRecordEntity.setActionFrom("種類管理");
+        actionRecordEntity.setActionData("已被設為無效: " + assetType2.toString());
+        actionRecordEntity.setActionSuccess("Success");
+        actionRecordMapper.insert(actionRecordEntity);
     }
 
 }

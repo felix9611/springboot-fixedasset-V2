@@ -65,12 +65,6 @@ public class DepartmentController {
         System.out.print(department);
         return DataResult.success();
     }
-    /*
-    public DataResult delete(@RequestBody @ApiParam(value = "id集合") List<String> ids){
-        departmentService.removeByIds(ids);
-        return DataResult.success();
-    }
-    */
 
     @ApiOperation(value = "更新")
     @PutMapping("department/update")

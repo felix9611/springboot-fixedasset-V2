@@ -8,9 +8,8 @@ import com.company.project.common.config.FileUploadProperties;
 import com.company.project.common.exception.BusinessException;
 import com.company.project.common.utils.DataResult;
 import com.company.project.common.utils.DateUtils;
-import com.company.project.entity.AssetPhotoEntity;
-import com.company.project.entity.AssetPlaceEntity;
-import com.company.project.entity.SysFilesEntity;
+import com.company.project.entity.*;
+import com.company.project.mapper.ActionRecordMapper;
 import com.company.project.mapper.AssetPhotoMapper;
 import com.company.project.mapper.AssetPlaceMapper;
 import com.company.project.service.AssetPhotoService;
@@ -21,7 +20,6 @@ import org.springframework.stereotype.Service;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 
 import com.company.project.mapper.AssetListviewMapper;
-import com.company.project.entity.AssetListviewEntity;
 import com.company.project.service.AssetListviewService;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
@@ -52,6 +50,10 @@ public class AssetListviewServiceImpl extends ServiceImpl<AssetListviewMapper, A
 
     @Resource private AssetPhotoMapper assetPhotoMapper;
 
+    @Resource private ActionRecordMapper actionRecordMapper;
+
+    @Resource private ActionRecordEntity actionRecordEntity;
+
     @Override
     public void newAsset(AssetListviewEntity vo){
         String newCode = this.getNewAssetCode();
@@ -59,6 +61,14 @@ public class AssetListviewServiceImpl extends ServiceImpl<AssetListviewMapper, A
         vo.setActive("1");
         System.out.print(vo);
         assetListviewMapper.insert(vo);
+
+        actionRecordEntity.setActionName("INSERT");
+        actionRecordEntity.setActionMethod("POST");
+        actionRecordEntity.setActionFrom("資產管理");
+        actionRecordEntity.setActionData("新增資料: " + vo.toString());
+        actionRecordEntity.setActionSuccess("Success");
+        actionRecordMapper.insert(actionRecordEntity);
+
         if(vo.getPlace()!= null){
             setAssetToPlace(vo.getId(), vo.getPlace());
         }
@@ -71,11 +81,26 @@ public class AssetListviewServiceImpl extends ServiceImpl<AssetListviewMapper, A
         System.out.print(assetListview);
         this.removeAssetToPlace(assetListview.getId());
         assetListviewMapper.updateById(assetListview);
+
+        actionRecordEntity.setActionName("DELETE");
+        actionRecordEntity.setActionMethod("PUT");
+        actionRecordEntity.setActionFrom("資產管理");
+        actionRecordEntity.setActionData("已被設為無效: " + assetListview.toString());
+        actionRecordEntity.setActionSuccess("Success");
+        actionRecordMapper.insert(actionRecordEntity);
     }
 
     @Override
     public void updateAsset(AssetListviewEntity assetListview) {
         this.setAssetToPlace(assetListview.getId(), assetListview.getPlace());
+
+        actionRecordEntity.setActionName("UPDATE");
+        actionRecordEntity.setActionMethod("PUT");
+        actionRecordEntity.setActionFrom("資產管理");
+        actionRecordEntity.setActionData("更新資料: " + assetListview.toString());
+        actionRecordEntity.setActionSuccess("Success");
+        actionRecordMapper.insert(actionRecordEntity);
+
         System.out.print(assetListview);
         assetListviewMapper.updateById(assetListview);
     }
@@ -88,8 +113,23 @@ public class AssetListviewServiceImpl extends ServiceImpl<AssetListviewMapper, A
             String selectData = assetPlaceMapper.selectAssetId(assetPlaceEntity);
             if (selectData == null) {
                 assetPlaceMapper.insert(assetPlaceEntity);
+
+                actionRecordEntity.setActionName("INSERT");
+                actionRecordEntity.setActionMethod("POST");
+                actionRecordEntity.setActionFrom("被分配地點");
+                actionRecordEntity.setActionData("新增資料: " + assetPlaceEntity.toString());
+                actionRecordEntity.setActionSuccess("Success");
+                actionRecordMapper.insert(actionRecordEntity);
+
             } else {
                 assetPlaceMapper.updateAssetAtPlace(assetPlaceEntity);
+
+                actionRecordEntity.setActionName("UPDATE");
+                actionRecordEntity.setActionMethod("PUT");
+                actionRecordEntity.setActionFrom("被分配地點");
+                actionRecordEntity.setActionData("更新資料: " + assetPlaceEntity.toString());
+                actionRecordEntity.setActionSuccess("Success");
+                actionRecordMapper.insert(actionRecordEntity);
             }
         }
     }
@@ -141,7 +181,6 @@ public class AssetListviewServiceImpl extends ServiceImpl<AssetListviewMapper, A
         str.append(oriStr);
         return str.toString();
     }
-
 
     /**
      * @return
@@ -203,6 +242,4 @@ public class AssetListviewServiceImpl extends ServiceImpl<AssetListviewMapper, A
         }
         return "";
     }
-
-
 }

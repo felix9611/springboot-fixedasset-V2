@@ -122,4 +122,6 @@ public class AssetlistEntity extends BaseEntity implements Serializable {
 	private String active;
 
 
+
+
 }
