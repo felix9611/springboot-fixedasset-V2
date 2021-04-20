@@ -137,9 +137,9 @@
       var data = obj.data;
       switch (obj.event) {
         case 'del':
-          var ids=[];
-          ids.push(data.id);
-          tipDialog(ids);
+         // var ids=[];
+         // ids.push(data.id);
+          tipDialog(data);
           break;
         case 'edit':
           $(".table_div").hide();
@@ -169,12 +169,12 @@
     });
 
     //删除
-    var tipDialog=function (ids) {
+    var tipDialog=function (data) {
       layer.open({
         content: "確定要删除?",
         yes: function(index, layero){
           layer.close(index); //如果设定了yes回调，需进行手工关闭
-          CoreUtil.sendDelete("/place2/delete",ids,function (res) {
+          CoreUtil.sendDelete("/place2/delete",data,function (res) {
             layer.msg(res.msg, {time:1000},function () {
               search();
             });

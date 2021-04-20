@@ -2,12 +2,15 @@ package com.company.project.service.impl;
 
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.company.project.entity.ActionRecordEntity;
 import com.company.project.entity.SysRolePermission;
+import com.company.project.mapper.ActionRecordMapper;
 import com.company.project.mapper.SysRolePermissionMapper;
 import com.company.project.service.RolePermissionService;
 import com.company.project.vo.req.RolePermissionOperationReqVO;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,6 +23,11 @@ import java.util.List;
  */
 @Service
 public class RolePermissionServiceImpl extends ServiceImpl<SysRolePermissionMapper, SysRolePermission> implements RolePermissionService {
+
+    @Resource private ActionRecordMapper actionRecordMapper;
+
+    @Resource private ActionRecordEntity actionRecordEntity;
+
     @Override
     public void addRolePermission(RolePermissionOperationReqVO vo) {
         List<SysRolePermission> list = new ArrayList<>();
@@ -31,6 +39,13 @@ public class RolePermissionServiceImpl extends ServiceImpl<SysRolePermissionMapp
         }
         this.remove(Wrappers.<SysRolePermission>lambdaQuery().eq(SysRolePermission::getRoleId, vo.getRoleId()));
         this.saveBatch(list);
+
+        actionRecordEntity.setActionName("INSERT");
+        actionRecordEntity.setActionMethod("POST");
+        actionRecordEntity.setActionFrom("角色權限管理");
+        actionRecordEntity.setActionData("新增角色權限: " + vo.toString());
+        actionRecordEntity.setActionSuccess("Success");
+        actionRecordMapper.insert(actionRecordEntity);
     }
 
 }

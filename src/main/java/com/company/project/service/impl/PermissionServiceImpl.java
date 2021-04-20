@@ -5,9 +5,11 @@ import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.company.project.common.exception.BusinessException;
 import com.company.project.common.exception.code.BaseResponseCode;
+import com.company.project.entity.ActionRecordEntity;
 import com.company.project.entity.SysPermission;
 import com.company.project.entity.SysRolePermission;
 import com.company.project.entity.SysUserRole;
+import com.company.project.mapper.ActionRecordMapper;
 import com.company.project.mapper.SysPermissionMapper;
 import com.company.project.service.HttpSessionService;
 import com.company.project.service.PermissionService;
@@ -37,21 +39,19 @@ import java.util.Set;
 @Service
 @Slf4j
 public class PermissionServiceImpl extends ServiceImpl<SysPermissionMapper, SysPermission> implements PermissionService {
-    @Resource
-    private UserRoleService userRoleService;
-    @Resource
-    private RolePermissionService rolePermissionService;
-    @Resource
-    private SysPermissionMapper sysPermissionMapper;
-    @Resource
-    private HttpSessionService httpSessionService;
 
-    /**
-     * 根据用户查询拥有的权限
-     * 先查出用户拥有的角色
-     * 再去差用户拥有的权限
-     * 也可以多表关联查询
-     */
+    @Resource private UserRoleService userRoleService;
+
+    @Resource private RolePermissionService rolePermissionService;
+
+    @Resource private SysPermissionMapper sysPermissionMapper;
+
+    @Resource private HttpSessionService httpSessionService;
+
+    @Resource private ActionRecordMapper actionRecordMapper;
+
+    @Resource private ActionRecordEntity actionRecordEntity;
+
     @Override
     public List<SysPermission> getPermission(String userId) {
         List<String> roleIds = userRoleService.getRoleIdsByUserId(userId);
@@ -67,11 +67,6 @@ public class PermissionServiceImpl extends ServiceImpl<SysPermissionMapper, SysP
         return sysPermissionMapper.selectList(queryWrapper);
     }
 
-    /**
-     * 删除菜单权限
-     * 判断是否 有角色关联
-     * 判断是否有子集
-     */
     @Transactional(rollbackFor = Exception.class)
     @Override
     public void deleted(String permissionId) {
@@ -79,7 +74,7 @@ public class PermissionServiceImpl extends ServiceImpl<SysPermissionMapper, SysP
         List<String> userIds = getUserIdsById(permissionId);
         SysPermission sysPermission = sysPermissionMapper.selectById(permissionId);
         if (null == sysPermission) {
-            log.error("传入 的 id:{}不合法", permissionId);
+            log.error("傳入 的 id:{}不合法", permissionId);
             throw new BusinessException(BaseResponseCode.DATA_ERROR);
         }
         //获取下一级
@@ -96,17 +91,28 @@ public class PermissionServiceImpl extends ServiceImpl<SysPermissionMapper, SysP
             userIds.parallelStream().forEach(httpSessionService::refreshUerId);
         }
 
+        actionRecordEntity.setActionName("DELETE");
+        actionRecordEntity.setActionMethod("DELETE");
+        actionRecordEntity.setActionFrom("權限管理");
+        actionRecordEntity.setActionData("刪除: " + permissionId);
+        actionRecordEntity.setActionSuccess("Success");
+        actionRecordMapper.insert(actionRecordEntity);
+
     }
 
     @Override
     public void updatePermission(SysPermission vo) {
         sysPermissionMapper.updateById(vo);
         httpSessionService.refreshPermission(vo.getId());
+
+        actionRecordEntity.setActionName("UPDATE");
+        actionRecordEntity.setActionMethod("PUT");
+        actionRecordEntity.setActionFrom("權限管理");
+        actionRecordEntity.setActionData("更新權限: " + vo.toString());
+        actionRecordEntity.setActionSuccess("Success");
+        actionRecordMapper.insert(actionRecordEntity);
     }
 
-    /**
-     * 获取所有菜单权限
-     */
     @Override
     public List<SysPermission> selectAll() {
         List<SysPermission> result = sysPermissionMapper.selectList(Wrappers.<SysPermission>lambdaQuery().orderByAsc(SysPermission::getOrderNum));
@@ -121,9 +127,6 @@ public class PermissionServiceImpl extends ServiceImpl<SysPermissionMapper, SysP
         return result;
     }
 
-    /**
-     * 获取权限标识
-     */
     @Override
     public Set<String> getPermissionsByUserId(String userId) {
 
@@ -141,18 +144,12 @@ public class PermissionServiceImpl extends ServiceImpl<SysPermissionMapper, SysP
         return permissions;
     }
 
-    /**
-     * 以树型的形式把用户拥有的菜单权限返回给客户端
-     */
     @Override
     public List<PermissionRespNode> permissionTreeList(String userId) {
         List<SysPermission> list = getPermission(userId);
         return getTree(list, true);
     }
 
-    /**
-     * 递归获取菜单树
-     */
     private List<PermissionRespNode> getTree(List<SysPermission> all, boolean type) {
 
         List<PermissionRespNode> list = new ArrayList<>();
@@ -176,9 +173,6 @@ public class PermissionServiceImpl extends ServiceImpl<SysPermissionMapper, SysP
         return list;
     }
 
-    /**
-     * 递归遍历所有
-     */
     private List<PermissionRespNode> getChildAll(String id, List<SysPermission> all) {
 
         List<PermissionRespNode> list = new ArrayList<>();
@@ -194,9 +188,6 @@ public class PermissionServiceImpl extends ServiceImpl<SysPermissionMapper, SysP
         return list;
     }
 
-    /**
-     * 只递归获取目录和菜单
-     */
     private List<PermissionRespNode> getChildExcBtn(String id, List<SysPermission> all) {
 
         List<PermissionRespNode> list = new ArrayList<>();
@@ -212,9 +203,6 @@ public class PermissionServiceImpl extends ServiceImpl<SysPermissionMapper, SysP
         return list;
     }
 
-    /**
-     * 获取所有菜单权限按钮
-     */
     @Override
     public List<PermissionRespNode> selectAllByTree() {
 
@@ -222,14 +210,6 @@ public class PermissionServiceImpl extends ServiceImpl<SysPermissionMapper, SysP
         return getTree(list, false);
     }
 
-    /**
-     * 获取所有的目录菜单树排除按钮
-     * 因为不管是新增或者修改
-     * 选择所属菜单目录的时候
-     * 都不可能选择到按钮
-     * 而且编辑的时候 所属目录不能
-     * 选择自己和它的子类
-     */
     @Override
     public List<PermissionRespNode> selectAllMenuByTree(String permissionId) {
 

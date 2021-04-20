@@ -347,7 +347,7 @@ $('body').on('click', '[data-page-close]', function () {
 
             console.log($(".layui-tab-title li").length)
             console.log($(".layui-tab-title li.layui-this span").text())
-            if ($(".layui-tab-title li").length == 2 && $(".layui-tab-title li.layui-this span").text()!="主页"){
+            if ($(".layui-tab-title li").length == 2 && $(".layui-tab-title li.layui-this span").text()!="主頁"){
                 layer.msg("没有可以关闭的窗口了@_@");
             } else {
                 $(".layui-tab-title li").each(function(){

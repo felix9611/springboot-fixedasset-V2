@@ -11,9 +11,11 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.company.project.common.exception.BusinessException;
 import com.company.project.common.exception.code.BaseResponseCode;
 import com.company.project.common.utils.PasswordUtils;
+import com.company.project.entity.ActionRecordEntity;
 import com.company.project.entity.SysDept;
 import com.company.project.entity.SysRole;
 import com.company.project.entity.SysUser;
+import com.company.project.mapper.ActionRecordMapper;
 import com.company.project.mapper.SysDeptMapper;
 import com.company.project.mapper.SysUserMapper;
 import com.company.project.service.*;
@@ -55,6 +57,10 @@ public class UserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impleme
     @Resource
     private HttpSessionService httpSessionService;
 
+    @Resource private ActionRecordMapper actionRecordMapper;
+
+    @Resource private ActionRecordEntity actionRecordEntity;
+
     @Value("${spring.redis.allowMultipleLogin}")
     private Boolean allowMultipleLogin;
     @Value("${spring.profiles.active}")
@@ -64,12 +70,19 @@ public class UserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impleme
     public void register(SysUser sysUser) {
         SysUser sysUserOne = sysUserMapper.selectOne(Wrappers.<SysUser>lambdaQuery().eq(SysUser::getUsername, sysUser.getUsername()));
         if (sysUserOne != null) {
-            throw new BusinessException("用户名已存在！");
+            throw new BusinessException("用戶名已存在！");
         }
         sysUser.setSalt(PasswordUtils.getSalt());
         String encode = PasswordUtils.encode(sysUser.getPassword(), sysUser.getSalt());
         sysUser.setPassword(encode);
         sysUserMapper.insert(sysUser);
+
+        actionRecordEntity.setActionName("INSERT");
+        actionRecordEntity.setActionMethod("POST");
+        actionRecordEntity.setActionFrom("用戶管理");
+        actionRecordEntity.setActionData("新增用戶: " + sysUser.getUsername());
+        actionRecordEntity.setActionSuccess("Success");
+        actionRecordMapper.insert(actionRecordEntity);
     }
 
     @Override
@@ -138,6 +151,12 @@ public class UserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impleme
         vo.setUpdateId(httpSessionService.getCurrentUserId());
         sysUserMapper.updateById(vo);
 
+        actionRecordEntity.setActionName("UPDATE");
+        actionRecordEntity.setActionMethod("PUT");
+        actionRecordEntity.setActionFrom("用戶管理");
+        actionRecordEntity.setActionData("更新用戶資料: " + sysUser.getUsername());
+        actionRecordEntity.setActionSuccess("Success");
+        actionRecordMapper.insert(actionRecordEntity);
     }
 
     @Override
@@ -156,6 +175,13 @@ public class UserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impleme
         }
         vo.setUpdateId(httpSessionService.getCurrentUserId());
         sysUserMapper.updateById(vo);
+
+        actionRecordEntity.setActionName("UPDATE");
+        actionRecordEntity.setActionMethod("PUT");
+        actionRecordEntity.setActionFrom("用戶管理");
+        actionRecordEntity.setActionData("更新用戶資料: " + vo.getUsername());
+        actionRecordEntity.setActionSuccess("Success");
+        actionRecordMapper.insert(actionRecordEntity);
 
     }
 
@@ -210,6 +236,14 @@ public class UserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impleme
         vo.setStatus(1);
         vo.setCreateWhere(1);
         sysUserMapper.insert(vo);
+
+        actionRecordEntity.setActionName("INSERT");
+        actionRecordEntity.setActionMethod("POST");
+        actionRecordEntity.setActionFrom("用戶管理");
+        actionRecordEntity.setActionData("新增用戶: " + vo.getUsername());
+        actionRecordEntity.setActionSuccess("Success");
+        actionRecordMapper.insert(actionRecordEntity);
+
         if (!CollectionUtils.isEmpty(vo.getRoleIds())) {
             UserRoleOperationReqVO reqVO = new UserRoleOperationReqVO();
             reqVO.setUserId(vo.getId());
@@ -233,7 +267,7 @@ public class UserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impleme
             throw new BusinessException(BaseResponseCode.OLD_PASSWORD_ERROR);
         }
         if (sysUser.getPassword().equals(PasswordUtils.encode(vo.getNewPwd(), sysUser.getSalt()))) {
-            throw new BusinessException("新密码不能与旧密码相同");
+            throw new BusinessException("新密碼不能與舊密碼相同");
         }
         sysUser.setPassword(PasswordUtils.encode(vo.getNewPwd(), sysUser.getSalt()));
         sysUserMapper.updateById(sysUser);

@@ -3,7 +3,9 @@ package com.company.project.service.impl;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
+import com.company.project.entity.ActionRecordEntity;
 import com.company.project.entity.StocktakelistDetailEntity;
+import com.company.project.mapper.ActionRecordMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
@@ -24,8 +26,11 @@ import java.util.List;
 @Slf4j
 public class StocktakelistServiceImpl extends ServiceImpl<StocktakelistMapper, StocktakelistEntity> implements StocktakelistService {
 
-    @Resource
-    private StocktakelistMapper stocktakelistMapper;
+    @Resource private StocktakelistMapper stocktakelistMapper;
+
+    @Resource private ActionRecordMapper actionRecordMapper;
+
+    @Resource private ActionRecordEntity actionRecordEntity;
 
     @Override
     public void newActivity(StocktakelistEntity vo){
@@ -34,6 +39,13 @@ public class StocktakelistServiceImpl extends ServiceImpl<StocktakelistMapper, S
         vo.setCreateTime(formatter.format(date));
         vo.setStartTime(formatter.format(date));
         stocktakelistMapper.insert(vo);
+
+        actionRecordEntity.setActionName("INSERT");
+        actionRecordEntity.setActionMethod("POST");
+        actionRecordEntity.setActionFrom("盤點管理");
+        actionRecordEntity.setActionData("新增盤點活動: " + vo.getActivityName());
+        actionRecordEntity.setActionSuccess("Success");
+        actionRecordMapper.insert(actionRecordEntity);
     }
 
     /**

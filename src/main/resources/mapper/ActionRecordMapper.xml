@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.company.project.mapper.ActionRecordMapper">
+
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="com.company.project.entity.ActionRecordEntity" id="actionRecordMap">
+        <result property="id" column="id"/>
+        <result property="actionName" column="action_name"/>
+        <result property="actionMethod" column="action_method"/>
+        <result property="actionFrom" column="action_from"/>
+        <result property="actionData" column="action_data"/>
+        <result property="actionSuccess" column="action_success"/>
+        <result property="createTime" column="create_time"/>
+    </resultMap>
+
+
+</mapper>

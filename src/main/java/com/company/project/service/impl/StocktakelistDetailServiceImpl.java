@@ -3,7 +3,9 @@ package com.company.project.service.impl;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.company.project.common.exception.BusinessException;
+import com.company.project.entity.ActionRecordEntity;
 import com.company.project.entity.StocktakelistEntity;
+import com.company.project.mapper.ActionRecordMapper;
 import com.company.project.mapper.StocktakelistMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -24,12 +26,13 @@ import javax.annotation.Resource;
 @Slf4j
 public class StocktakelistDetailServiceImpl extends ServiceImpl<StocktakelistDetailMapper, StocktakelistDetailEntity> implements StocktakelistDetailService {
 
-    @Resource
-    private StocktakelistDetailMapper stocktakelistDetailMapper;
+    @Resource private StocktakelistDetailMapper stocktakelistDetailMapper;
 
-    @Resource
-    private StocktakelistMapper stocktakelistMapper;
+    @Resource private StocktakelistMapper stocktakelistMapper;
 
+    @Resource private ActionRecordMapper actionRecordMapper;
+
+    @Resource private ActionRecordEntity actionRecordEntity;
 
     @Resource
     private StocktakelistDetailEntity stocktakelistDetailEntity;
@@ -56,8 +59,14 @@ public class StocktakelistDetailServiceImpl extends ServiceImpl<StocktakelistDet
 
     @Override
     public boolean save(StocktakelistDetailEntity entity) {
-        //String Code = this.getOldAssetCode();
-        //entity.setAssetCode(Code);
+
+        actionRecordEntity.setActionName("INSERT");
+        actionRecordEntity.setActionMethod("POST");
+        actionRecordEntity.setActionFrom("盤點管理");
+        actionRecordEntity.setActionData("盤點: " + entity.getAssetCode());
+        actionRecordEntity.setActionSuccess("Success");
+        actionRecordMapper.insert(actionRecordEntity);
+
         return super.save(entity);
     }
 
