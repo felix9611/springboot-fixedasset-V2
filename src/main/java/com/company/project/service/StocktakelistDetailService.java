@@ -20,5 +20,6 @@ public interface StocktakelistDetailService extends IService<StocktakelistDetail
      */
     IPage<StocktakelistDetailEntity> listByPage(Page<StocktakelistDetailEntity> page, String listId);
 
+    void saveDetail(StocktakelistDetailEntity entity);
 }
 

@@ -13,34 +13,15 @@ import org.apache.ibatis.annotations.*;
  */
 public interface AssetPlaceMapper extends BaseMapper<AssetPlaceEntity> {
 
-    /**
-     * @param assetPlaceEntity
-     */
+    @Select("SELECT place_id FROM asset_place WHERE asset_id = #{assetId}")
+    String selectAssetPlace(@Param("assetId") String assetId);
+
+    @Select("SELECT asset_id FROM asset_place WHERE asset_id = #{assetId}")
+    String selectAssetId(@Param("assetId") String assetId);
+
+    @Select("DELETE FROM asset_place WHERE asset_id = #{assetId}")
+    String removeRecord(@Param("assetId") String assetId);
+
     @Update("UPDATE asset_place SET place_id = #{assetPlaceEntity.placeId} WHERE asset_id = #{assetPlaceEntity.assetId}")
     void updateAssetAtPlace(@Param("assetPlaceEntity") AssetPlaceEntity assetPlaceEntity);
-
-    /**
-     * @param assetPlaceEntity
-     */
-    @Select("SELECT asset_id FROM asset_place WHERE asset_id = #{assetPlaceEntity.assetId}")
-    String selectAssetId(@Param("assetPlaceEntity") AssetPlaceEntity assetPlaceEntity);
-
-    /**
-     * @param assetPlaceEntity
-     */
-    @Delete("DELETE FROM asset_place WHERE asset_id = #{assetPlaceEntity.assetId}")
-    void removeRecord(@Param("assetPlaceEntity") AssetPlaceEntity assetPlaceEntity);
-
-    /**
-     * @param assetPlaceEntity
-     */
-    @Select("SELECT \n" +
-            "ap.* ,\n" +
-            "al.asset_code AS assetCode,\n" +
-            "al.asset_name AS assetName,\n" +
-            "p2.place_name AS placeName\n" +
-            "FROM asset_place AS ap\n" +
-            "LEFT JOIN asset_listview AS al ON ap.asset_id = al.id\n" +
-            "LEFT JOIN place2 AS p2 ON ap.place_id = p2.id")
-    String selectAll(@Param("assetPlaceEntity") AssetPlaceEntity assetPlaceEntity);
 }

@@ -374,21 +374,21 @@
                 if(data.field.assetCode != "" && data.field.assetPlace != "" && data.field.status != ""){
                     var checkData = assetMa.getAssetData(data.field.assetCode, assetdatas);
                     console.log(checkData);
-                    if(checkData.assetCode != null){
-                        if(checkData.place == data.field.assetPlace){
+                   /* if(checkData.assetCode != null){
+                        if(checkData.place == data.field.assetPlace){ */
                             CoreUtil.sendPost("/stocktakelistDetail/add", data.field, function (res) {
                                 $(".table_div").show();
                                 layer.closeAll();
                                 searchDetail();
                             });
-                        }else{
+                   /*    }else{
                             //layer.msg("地點錯誤!");
                             alert("警告 : 紀錄或有異, 請檢查清楚紀錄!");
                         }
-                    }else{
+                     }else{
                         //layer.msg("此記錄不存在!");
                         alert("此記錄不存在!");
-                    }
+                    }*/
                 }else{
                     //layer.msg("請輸入所有欄位!");
                     alert("請輸入所有欄位!");

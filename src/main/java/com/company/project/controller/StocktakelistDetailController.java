@@ -58,7 +58,7 @@ public class StocktakelistDetailController {
 
         if(test1 == true){*/
             System.out.print(stocktakelistDetail);
-            stocktakelistDetailService.save(stocktakelistDetail);
+            stocktakelistDetailService.saveDetail(stocktakelistDetail);
         //}
         return DataResult.success();
     }

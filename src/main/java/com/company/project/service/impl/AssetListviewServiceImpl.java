@@ -110,7 +110,7 @@ public class AssetListviewServiceImpl extends ServiceImpl<AssetListviewMapper, A
             assetPlaceEntity.setAssetId(assetId);
             assetPlaceEntity.setPlaceId(placeId);
             System.out.print(assetPlaceEntity);
-            String selectData = assetPlaceMapper.selectAssetId(assetPlaceEntity);
+            String selectData = assetPlaceMapper.selectAssetId(assetId);
             if (selectData == null) {
                 assetPlaceMapper.insert(assetPlaceEntity);
 
@@ -137,9 +137,16 @@ public class AssetListviewServiceImpl extends ServiceImpl<AssetListviewMapper, A
     private void removeAssetToPlace(final String assetId){
         assetPlaceEntity.setAssetId(assetId);
         System.out.print(assetPlaceEntity);
-        String selectData = assetPlaceMapper.selectAssetId(assetPlaceEntity);
+        String selectData = assetPlaceMapper.selectAssetId(assetId);
         if(selectData != null) {
-            assetPlaceMapper.removeRecord(assetPlaceEntity);
+            assetPlaceMapper.removeRecord(assetId);
+
+            actionRecordEntity.setActionName("DELETE");
+            actionRecordEntity.setActionMethod("DELETE");
+            actionRecordEntity.setActionFrom("已分配地點: 被移出");
+            actionRecordEntity.setActionData("編號: " + assetId);
+            actionRecordEntity.setActionSuccess("Success");
+            actionRecordMapper.insert(actionRecordEntity);
         }
     }
 

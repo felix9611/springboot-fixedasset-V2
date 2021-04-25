@@ -5,13 +5,11 @@ import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.company.project.common.exception.BusinessException;
 import com.company.project.entity.ActionRecordEntity;
 import com.company.project.entity.StocktakelistEntity;
-import com.company.project.mapper.ActionRecordMapper;
-import com.company.project.mapper.StocktakelistMapper;
+import com.company.project.mapper.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.company.project.mapper.StocktakelistDetailMapper;
 import com.company.project.entity.StocktakelistDetailEntity;
 import com.company.project.service.StocktakelistDetailService;
 import org.springframework.transaction.annotation.Transactional;
@@ -34,8 +32,11 @@ public class StocktakelistDetailServiceImpl extends ServiceImpl<StocktakelistDet
 
     @Resource private ActionRecordEntity actionRecordEntity;
 
-    @Resource
-    private StocktakelistDetailEntity stocktakelistDetailEntity;
+    @Resource private StocktakelistDetailEntity stocktakelistDetailEntity;
+
+    @Resource private AssetListviewMapper assetListviewMapper;
+
+    @Resource private AssetPlaceMapper assetPlaceMapper;
 
     @Override
     public IPage<StocktakelistDetailEntity> listByPage(Page<StocktakelistDetailEntity> page, String listId){
@@ -58,18 +59,45 @@ public class StocktakelistDetailServiceImpl extends ServiceImpl<StocktakelistDet
     }
 
     @Override
-    public boolean save(StocktakelistDetailEntity entity) {
+    public void saveDetail(StocktakelistDetailEntity entity) {
 
-        actionRecordEntity.setActionName("INSERT");
-        actionRecordEntity.setActionMethod("POST");
-        actionRecordEntity.setActionFrom("盤點管理");
-        actionRecordEntity.setActionData("盤點: " + entity.getAssetCode());
-        actionRecordEntity.setActionSuccess("Success");
-        actionRecordMapper.insert(actionRecordEntity);
+        String assetCodeStr = assetListviewMapper.selectAssetCode(entity.getAssetCode());
+        String assetPlace = assetPlaceMapper.selectAssetPlace(entity.getAssetCode());
+        String assetPlaceStr = entity.getAssetPlace();
 
-        return super.save(entity);
+        System.out.println(assetCodeStr);
+        if(assetCodeStr != null){
+            if(assetPlaceStr !=  assetPlace){
+                entity.setAssetPlace("地點錯誤");
+                stocktakelistDetailMapper.insert(entity);
+
+                log.error("地點錯誤", entity.getAssetCode());
+
+                actionRecordEntity.setActionName("INSERT");
+                actionRecordEntity.setActionMethod("POST");
+                actionRecordEntity.setActionFrom("盤點管理");
+                actionRecordEntity.setActionData("盤點: " + entity.toString());
+                actionRecordEntity.setActionSuccess("Success");
+                actionRecordMapper.insert(actionRecordEntity);
+
+              //  throw new BusinessException("地點錯誤");
+            }else if(assetPlaceStr ==  assetPlace){
+                stocktakelistDetailMapper.insert(entity);
+
+                actionRecordEntity.setActionName("INSERT");
+                actionRecordEntity.setActionMethod("POST");
+                actionRecordEntity.setActionFrom("盤點管理");
+                actionRecordEntity.setActionData("盤點: " + entity.getAssetCode());
+                actionRecordEntity.setActionSuccess("Success");
+                actionRecordMapper.insert(actionRecordEntity);
+            }else {
+                log.error("此編號不存在", entity.getAssetCode());
+                throw new BusinessException("此編號不存在");
+            }
+        }else {
+            log.error("此編號不存在", entity.getAssetCode());
+            throw new BusinessException("此編號不存在");
+        }
     }
-
-
 
 }

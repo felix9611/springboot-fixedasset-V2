@@ -130,7 +130,7 @@ var CoreUtil = (function () {
                     });
                     //匹配不到，返回未知
                     if (CoreUtil.isEmpty(placeName)) {
-                        return "未知";
+                        return id;
                     }
                     return placeName;
                 }

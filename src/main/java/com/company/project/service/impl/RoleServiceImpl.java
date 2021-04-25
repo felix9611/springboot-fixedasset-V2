@@ -69,7 +69,7 @@ public class RoleServiceImpl extends ServiceImpl<SysRoleMapper, SysRole> impleme
     public void updateRole(SysRole vo) {
         SysRole sysRole = sysRoleMapper.selectById(vo.getId());
         if (null == sysRole) {
-            log.error("传入 的 id:{}不合法", vo.getId());
+            log.error("傳入 的 id:{}不合法", vo.getId());
             throw new BusinessException(BaseResponseCode.DATA_ERROR);
         }
         sysRoleMapper.updateById(vo);
@@ -89,7 +89,7 @@ public class RoleServiceImpl extends ServiceImpl<SysRoleMapper, SysRole> impleme
     public SysRole detailInfo(String id) {
         SysRole sysRole = sysRoleMapper.selectById(id);
         if (sysRole == null) {
-            log.error("传入 的 id:{}不合法", id);
+            log.error("傳入 的 id:{}不合法", id);
             throw new BusinessException(BaseResponseCode.DATA_ERROR);
         }
         List<PermissionRespNode> permissionRespNodes = permissionService.selectAllByTree();
