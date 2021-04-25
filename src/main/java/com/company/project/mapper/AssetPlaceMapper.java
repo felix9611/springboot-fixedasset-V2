@@ -19,7 +19,7 @@ public interface AssetPlaceMapper extends BaseMapper<AssetPlaceEntity> {
     @Select("SELECT asset_id FROM asset_place WHERE asset_id = #{assetId}")
     String selectAssetId(@Param("assetId") String assetId);
 
-    @Select("DELETE FROM asset_place WHERE asset_id = #{assetId}")
+    @Delete("DELETE FROM asset_place WHERE asset_id = #{assetId}")
     String removeRecord(@Param("assetId") String assetId);
 
     @Update("UPDATE asset_place SET place_id = #{assetPlaceEntity.placeId} WHERE asset_id = #{assetPlaceEntity.assetId}")
