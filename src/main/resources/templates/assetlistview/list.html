@@ -228,10 +228,6 @@
                         }
                     },
           {width: 160, field: 'buydate', title: '購入日期'},
-          {width: 130, field: 'place', title: '地點', templet: function (item) {
-                        return CoreUtil.selecPlacetId(placedatas, item.place);
-                        }
-          },
           {width: 210, field: 'deptId', title: '所屬部門', templet: function (item) {
                         return CoreUtil.selectDeptId(departdatas, item.deptId);
                         }

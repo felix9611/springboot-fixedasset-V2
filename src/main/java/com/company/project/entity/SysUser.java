@@ -85,6 +85,6 @@ public class SysUser extends BaseEntity implements Serializable {
     @TableField(exist = false)
     private List<String> roleIds;
 
-    @TableField(exist = false)
-    private String Captcha;
+  /*  @TableField(exist = false)
+    private String Captcha; */
 }

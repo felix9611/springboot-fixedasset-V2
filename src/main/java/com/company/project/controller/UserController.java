@@ -51,11 +51,11 @@ public class UserController {
     @ApiOperation(value = "用戶登入接口")
     public DataResult login(@RequestBody @Valid SysUser vo, HttpServletRequest request) {
         //判断验证码
-        if (!CaptchaUtil.ver(vo.getCaptcha(), request)) {
+      /*  if (!CaptchaUtil.ver(vo.getCaptcha(), request)) {
             // 清除session中的验证码
             CaptchaUtil.clear(request);
             return DataResult.fail("驗證碼錯誤 ！");
-        }
+        } */
         System.out.print(vo);
         return DataResult.success(userService.login(vo));
     }

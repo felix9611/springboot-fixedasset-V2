@@ -34,12 +34,12 @@
                 <input type="password" name="password" placeholder="密碼" autocomplete="off"
                        class="layui-input admin-input" value="123456">
             </div>
-            <div>
+          <!--  <div>
                 <input type="text" name="captcha" id="captcha" placeholder="驗證碼" autocomplete="off"
                        class="layui-input admin-input admin-input-verify">
                 <img class="admin-captcha" width="90" height="40" src="/sys/getVerify">
                 <img  onClick="this.src=this.src+'?'+Math.random();" id="img" class="admin-captcha" width="90" height="40" src="/sys/getVerify">
-            </div>
+            </div>-->
             <button class="layui-btn admin-button" lay-submit="" lay-filter="login">登入</button>
         </form>
     </div>
@@ -56,10 +56,10 @@
         // 进行登录操作
         form.on('submit(login)', function (data) {
             data = data.field;
-            if (data.captcha == '') {
+        /*    if (data.captcha == '') {
                 layer.msg('請輸入驗證碼');
                 return false;
-            }
+            } */
             if (data.username == '') {
                 layer.msg('用戶名不能為空');
                 return false;
