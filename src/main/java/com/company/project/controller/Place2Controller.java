@@ -35,10 +35,6 @@ public class Place2Controller {
     @Autowired
     private Place2Service place2Service;
 
-
-    /**
-    * 跳转到页面
-    */
     @GetMapping("/index/place2")
     public String place2() {
         return "place2/list";
@@ -55,7 +51,7 @@ public class Place2Controller {
     }
 
     @ApiOperation(value = "删除")
-    @DeleteMapping("place2/delete")
+    @PutMapping("place2/delete")
     @RequiresPermissions("place2:delete")
     @ResponseBody
     public DataResult delete(@RequestBody Place2Entity place2){

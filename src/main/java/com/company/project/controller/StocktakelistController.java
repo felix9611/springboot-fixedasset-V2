@@ -37,10 +37,6 @@ public class StocktakelistController {
     @Resource
     private StocktakelistService stocktakelistService;
 
-
-    /**
-    * 跳转到页面
-    */
     @GetMapping("/index/stocktakelist")
     public String stocktakelist() {
         return "stocktakelist/list";

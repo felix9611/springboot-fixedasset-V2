@@ -45,10 +45,6 @@ public class AssetType2Controller {
     @Resource
     private AssetType2Entity assetType2Entity;
 
-
-    /**
-    * 跳转到页面
-    */
     @GetMapping("/index/assetType2")
     public String assetType2() {
         return "assettype2/list";
@@ -65,7 +61,7 @@ public class AssetType2Controller {
     }
 
     @ApiOperation(value = "删除")
-    @DeleteMapping("/assetType2/delete")
+    @PutMapping("/assetType2/delete")
     @RequiresPermissions("assetType2:delete")
     @ResponseBody
     public DataResult delete(@RequestBody AssetType2Entity assetType2){

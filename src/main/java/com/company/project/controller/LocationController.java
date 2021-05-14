@@ -46,7 +46,7 @@ public class LocationController {
     }
 
     @ApiOperation(value = "删除")
-    @DeleteMapping("location/delete")
+    @PutMapping("location/delete")
     @RequiresPermissions("location:delete")
     @ResponseBody
     public DataResult delete(@RequestBody LocationEntity location){

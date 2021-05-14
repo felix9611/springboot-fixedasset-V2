@@ -47,7 +47,7 @@ public class ActionRecordController {
     }
 
     @ApiOperation(value = "刪除")
-    @DeleteMapping("actionRecord/delete")
+    @PutMapping("actionRecord/delete")
     @RequiresPermissions("actionRecord:delete")
     @ResponseBody
     public DataResult delete(@RequestBody @ApiParam(value = "id集合") List<String> ids){

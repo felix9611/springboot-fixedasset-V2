@@ -33,10 +33,6 @@ public class Vendor2Controller {
     @Autowired
     private Vendor2Service vendor2Service;
 
-
-    /**
-    * 跳转到页面
-    */
     @GetMapping("/index/vendor2")
     public String vendor2() {
         return "vendor2/list";

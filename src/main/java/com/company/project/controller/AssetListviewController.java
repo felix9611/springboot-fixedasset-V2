@@ -35,9 +35,6 @@ public class AssetListviewController {
     @Autowired
     private AssetListviewService assetListviewService;
 
-
-
-
     /**
     * 跳转到页面
     */
@@ -56,7 +53,7 @@ public class AssetListviewController {
     }
 
     @ApiOperation(value = "删除")
-    @DeleteMapping("assetListview/delete")
+    @PutMapping("assetListview/delete")
     @RequiresPermissions("assetListview:delete")
     @ResponseBody
     public DataResult delete(@RequestBody AssetListviewEntity assetListview){
@@ -80,10 +77,10 @@ public class AssetListviewController {
     }
 
     @ApiOperation(value = "查詢分頁數據(新)")
-    @PostMapping("assetListview/listPage")
+    @PostMapping("assetListview/listByPage")
     @RequiresPermissions("assetListview:list")
     @ResponseBody
-    public DataResult findListPage(@RequestBody AssetListviewEntity assetListview){
+    public DataResult listByPage(@RequestBody AssetListviewEntity assetListview){
         Page page = new Page(assetListview.getPage(), assetListview.getLimit());
         LambdaQueryWrapper<AssetListviewEntity> queryWrapper = Wrappers.lambdaQuery();
 
@@ -103,40 +100,11 @@ public class AssetListviewController {
             queryWrapper.eq(AssetListviewEntity::getDeptId, assetListview.getDeptId());
 
         }
+
         queryWrapper.orderByDesc(true, AssetListviewEntity::getAssetCode);
         queryWrapper.eq(AssetListviewEntity::getActive, "1");
 
         System.out.print(queryWrapper);
-
-        IPage<AssetListviewEntity> iPage = assetListviewService.page(page, queryWrapper);
-        return DataResult.success(iPage);
-    }
-
-    @ApiOperation(value = "查詢分頁數據")
-    @PostMapping("assetListview/listByPage")
-    @RequiresPermissions("assetListview:list")
-    @ResponseBody
-    public DataResult findListByPage(@RequestBody AssetListviewEntity assetListview){
-        Page page = new Page(assetListview.getPage(), assetListview.getLimit());
-        LambdaQueryWrapper<AssetListviewEntity> queryWrapper = Wrappers.lambdaQuery();
-
-        if(!StringUtils.isEmpty(assetListview.getAssetCode())){
-            queryWrapper.like(AssetListviewEntity::getAssetCode, assetListview.getAssetCode());
-        }
-        if(!StringUtils.isEmpty(assetListview.getAssetName())){
-            queryWrapper.like(AssetListviewEntity::getAssetName, assetListview.getAssetName());
-        }
-        if(!StringUtils.isEmpty(assetListview.getAssetType())){
-            queryWrapper.eq(AssetListviewEntity::getAssetType, assetListview.getAssetType());
-        }
-        if(!StringUtils.isEmpty(assetListview.getDeptId())){
-            queryWrapper.eq(AssetListviewEntity::getDeptId, assetListview.getDeptId());
-        }
-
-        queryWrapper.orderByDesc(true, AssetListviewEntity::getAssetCode);
-        queryWrapper.eq(AssetListviewEntity::getActive, "1");
-
-        System.out.print(assetListview);
 
         IPage<AssetListviewEntity> iPage = assetListviewService.page(page, queryWrapper);
         return DataResult.success(iPage);

@@ -37,10 +37,6 @@ public class DepartmentController {
     @Resource
     private DepartmentService departmentService;
 
-
-    /**
-    * 跳转到页面
-    */
     @GetMapping("/index/department")
     public String department() {
         return "department/list";

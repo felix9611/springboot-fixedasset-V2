@@ -45,6 +45,41 @@ public class IndexController {
         return "users/user_edit";
     }
 
+    @GetMapping("/index/assetPlace")
+    public String assetPlace() {
+        return "assetplace/list";
+    }
+
+    @GetMapping("/index/assetListview")
+    public String assetListview() {
+        return "assetlistview/list";
+    }
+
+    @GetMapping("/index/department")
+    public String department() {
+        return "department/list";
+    }
+
+    @GetMapping("/index/place2")
+    public String place2() {
+        return "place2/list";
+    }
+
+    @GetMapping("/index/stocktakelist")
+    public String stocktakelist() {
+        return "stocktakelist/list";
+    }
+
+    @GetMapping("/index/vendor2")
+    public String vendor2() {
+        return "vendor2/list";
+    }
+
+    @GetMapping("/index/assetType2")
+    public String assetType2() {
+        return "assettype2/list";
+    }
+
     @GetMapping("/menus")
     public String menusList() {
 

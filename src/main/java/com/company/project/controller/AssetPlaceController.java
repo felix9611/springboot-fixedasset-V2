@@ -34,9 +34,6 @@ public class AssetPlaceController {
     @Autowired
     private AssetPlaceService assetPlaceService;
 
-    /**
-    * 跳转到页面
-    */
     @GetMapping("/index/assetPlace")
     public String assetPlace() {
         return "assetplace/list";
