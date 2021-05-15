@@ -79,4 +79,9 @@ public class DepartmentServiceImpl extends ServiceImpl<DepartmentMapper, Departm
         actionRecordEntity.setActionSuccess("Success");
         actionRecordMapper.insert(actionRecordEntity);
     }
+
+    @Override
+    public  List<DepartmentEntity> selectNameAndCode(DepartmentEntity departmentEntity){
+        return departmentMapper.selectTypeId(departmentEntity);
+    }
 }

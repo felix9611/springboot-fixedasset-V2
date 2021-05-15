@@ -104,4 +104,14 @@ public class AssetType2Controller {
         return DataResult.success(iPage);
     }
 
+    @ApiOperation(value = "取編號與名稱")
+    @GetMapping("assetType2/codeAndName")
+    @RequiresPermissions("assetType2:listCodeAndName")
+    @ResponseBody
+    public DataResult getCodeAndName(@RequestParam String id) {
+        assetType2Entity.setId(id);
+        List<AssetType2Entity>  listdata = assetType2Service.selectNameAndCode(assetType2Entity);
+        return DataResult.success(listdata);
+    }
+
 }

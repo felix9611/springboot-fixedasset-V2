@@ -21,5 +21,7 @@ public interface AssetType2Service extends IService<AssetType2Entity> {
 
 
     void updateActive(AssetType2Entity assetType2);
+
+    List<AssetType2Entity> selectNameAndCode(AssetType2Entity assetType2);
 }
 

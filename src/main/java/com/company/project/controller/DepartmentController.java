@@ -34,8 +34,10 @@ import javax.annotation.Resource;
 @Controller
 @RequestMapping("/")
 public class DepartmentController {
-    @Resource
-    private DepartmentService departmentService;
+
+    @Resource private DepartmentService departmentService;
+
+    @Resource private DepartmentEntity departmentEntity;
 
     @GetMapping("/index/department")
     public String department() {
@@ -91,6 +93,16 @@ public class DepartmentController {
         //queryWrapper.eq(DepartmentEntity::getId, department.getId());
         IPage<DepartmentEntity> iPage = departmentService.page(page, queryWrapper);
         return DataResult.success(iPage);
+    }
+
+    @ApiOperation(value = "取編號與名稱")
+    @GetMapping("department/codeAndName")
+    @RequiresPermissions("department:listCodeAndName")
+    @ResponseBody
+    public DataResult getCodeAndName(@RequestParam String id) {
+        departmentEntity.setId(id);
+        List<DepartmentEntity> listData = departmentService.selectNameAndCode(departmentEntity);
+        return DataResult.success(listData);
     }
 
 }

@@ -82,4 +82,9 @@ public class AssetType2ServiceImpl extends ServiceImpl<AssetType2Mapper, AssetTy
         actionRecordMapper.insert(actionRecordEntity);
     }
 
+    @Override
+    public List<AssetType2Entity> selectNameAndCode(AssetType2Entity assetType2){
+       return assetType2Mapper.selectTypeId(assetType2);
+    }
+
 }

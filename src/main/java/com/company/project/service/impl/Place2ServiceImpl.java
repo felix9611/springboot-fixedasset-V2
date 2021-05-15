@@ -81,5 +81,17 @@ public class Place2ServiceImpl extends ServiceImpl<Place2Mapper, Place2Entity> i
         return JSONArray.parseArray(JSON.toJSONString(list));
     }
 
+    /*
+    @Override
+    public List<AssetType2Entity> selectNameAndCode(AssetType2Entity assetType2){
+       return assetType2Mapper.selectTypeId(assetType2);
+    }
+     */
+
+    @Override
+    public List<Place2Entity>  selectNameAndCode(Place2Entity place2Entity){
+        return place2Mapper.selectTypeId(place2Entity);
+    }
+
 
 }

@@ -10,6 +10,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 import lombok.Data;
+import org.springframework.stereotype.Component;
 
 /**
  * 
@@ -18,6 +19,7 @@ import lombok.Data;
  * @email *****@mail.com
  * @date 2020-11-15 18:53:25
  */
+@Component
 @Data
 @TableName("place2")
 public class Place2Entity extends BaseEntity implements Serializable {

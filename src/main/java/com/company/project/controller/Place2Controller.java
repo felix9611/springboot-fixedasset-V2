@@ -19,6 +19,7 @@ import com.company.project.common.utils.DataResult;
 import com.company.project.entity.Place2Entity;
 import com.company.project.service.Place2Service;
 
+import javax.annotation.Resource;
 
 
 /**
@@ -32,8 +33,9 @@ import com.company.project.service.Place2Service;
 @Controller
 @RequestMapping("/")
 public class Place2Controller {
-    @Autowired
-    private Place2Service place2Service;
+    @Resource private Place2Service place2Service;
+
+    @Resource private Place2Entity place2Entity;
 
     @GetMapping("/index/place2")
     public String place2() {
@@ -70,7 +72,7 @@ public class Place2Controller {
         return DataResult.success();
     }
 
-    @ApiOperation(value = "查询分页数据")
+    @ApiOperation(value = "查詢分頁數據")
     @PostMapping("place2/listByPage")
     @RequiresPermissions("place2:list")
     @ResponseBody
@@ -92,4 +94,24 @@ public class Place2Controller {
         return DataResult.success(iPage);
     }
 
+    /*
+    @ApiOperation(value = "取編號與名稱")
+    @GetMapping("assetType2/codeAndName")
+    @RequiresPermissions("assetType2:listCodeAndName")
+    @ResponseBody
+    public DataResult getCodeAndName(@RequestParam String id) {
+        assetType2Entity.setId(id);
+        List<AssetType2Entity>  listdata = assetType2Service.selectNameAndCode(assetType2Entity);
+        return DataResult.success(listdata);
+    }
+     */
+    @ApiOperation(value = "取編號與名稱")
+    @GetMapping("place2/codeAndName")
+    @RequiresPermissions("place2:listCodeAndName")
+    @ResponseBody
+    public DataResult getCodeAndName(@RequestParam String id) {
+        place2Entity.setId(id);
+        List<Place2Entity> listdata = place2Service.selectNameAndCode(place2Entity);
+        return DataResult.success(listdata);
+    }
 }

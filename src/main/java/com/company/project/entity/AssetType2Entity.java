@@ -3,11 +3,9 @@ package com.company.project.entity;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.annotation.TableField;
-import com.company.project.entity.BaseEntity;
 
 
 import java.io.Serializable;
-import java.util.Date;
 
 import lombok.Data;
 import org.springframework.stereotype.Component;
@@ -53,9 +51,6 @@ public class AssetType2Entity extends BaseEntity implements Serializable {
 		return id;
 	}
 
-	public void setId(String id) {
-		this.id = id;
-	}
 
 	
 }
