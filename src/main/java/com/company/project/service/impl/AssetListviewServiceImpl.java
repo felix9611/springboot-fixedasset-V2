@@ -8,6 +8,7 @@ import com.company.project.common.config.FileUploadProperties;
 import com.company.project.common.exception.BusinessException;
 import com.company.project.common.utils.DataResult;
 import com.company.project.common.utils.DateUtils;
+import com.company.project.dto.AssetListviewDTO;
 import com.company.project.entity.*;
 import com.company.project.mapper.ActionRecordMapper;
 import com.company.project.mapper.AssetPhotoMapper;
@@ -103,6 +104,11 @@ public class AssetListviewServiceImpl extends ServiceImpl<AssetListviewMapper, A
 
         System.out.print(assetListview);
         assetListviewMapper.updateById(assetListview);
+    }
+
+    @Override
+    public List<AssetListviewDTO> assetDetailInfo(AssetListviewEntity assetListviewEntity){
+        return assetListviewMapper.selectAssetInfo(assetListviewEntity);
     }
 
     private void setAssetToPlace(final String assetId, String placeId){

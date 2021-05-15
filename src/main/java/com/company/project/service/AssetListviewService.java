@@ -1,7 +1,10 @@
 package com.company.project.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.company.project.dto.AssetListviewDTO;
 import com.company.project.entity.AssetListviewEntity;
+
+import java.util.List;
 
 /**
  * 
@@ -17,5 +20,7 @@ public interface AssetListviewService extends IService<AssetListviewEntity> {
     void updateActive(AssetListviewEntity assetListview);
 
     void updateAsset(AssetListviewEntity assetListview);
+
+    List<AssetListviewDTO> assetDetailInfo(AssetListviewEntity assetListviewEntity);
 }
 

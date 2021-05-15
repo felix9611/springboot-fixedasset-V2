@@ -1,6 +1,7 @@
 package com.company.project.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.company.project.dto.AssetListviewDTO;
 import com.company.project.entity.Place2Entity;
 import io.swagger.annotations.Api;
 import org.springframework.util.StringUtils;
@@ -32,8 +33,10 @@ import javax.annotation.Resource;
 @Controller
 @RequestMapping("/")
 public class AssetListviewController {
-    @Autowired
-    private AssetListviewService assetListviewService;
+
+    @Resource private AssetListviewService assetListviewService;
+
+    @Resource private AssetListviewEntity assetListviewEntity;
 
     /**
     * 跳转到页面
@@ -110,4 +113,13 @@ public class AssetListviewController {
         return DataResult.success(iPage);
     }
 
+    @ApiOperation(value = "資產詳細資料")
+    @GetMapping("assetListview/getInfo")
+    @RequiresPermissions("assetListview:getInfo")
+    @ResponseBody
+    public DataResult getInfo(@RequestParam String assetCode) {
+        assetListviewEntity.setAssetCode(assetCode);
+        List<AssetListviewDTO> listData = assetListviewService.assetDetailInfo(assetListviewEntity);
+        return DataResult.success(listData);
+    }
 }
