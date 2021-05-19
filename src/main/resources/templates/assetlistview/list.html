@@ -90,7 +90,7 @@
     <div class="layui-form-item">
         <label class="layui-form-label">地點</label>
         <div class="layui-input-block">
-            <select id="place" name="place" lay-filter="select-type" th:with="place=${@place2Service.getPlacetSel()}">
+            <select id="place" name="place" lay-filter="select-place" th:with="place=${@place2Service.getPlacetSel()}">
                 <option value="">請選擇</option>
                 <option th:each="dict : ${place}" th:text="${dict.placeName}" th:value="${dict.id}"></option>
             </select>
@@ -99,7 +99,7 @@
     <div class="layui-form-item">
         <label class="layui-form-label">負責職員</label>
         <div class="layui-input-block">
-            <select id="responStaff" name="responStaff" lay-filter="select-type" th:with="staffId=${@UserService.getUserS()}">
+            <select id="responStaff" name="responStaff" lay-filter="select-staff" th:with="staffId=${@UserService.getUserS()}">
                 <option value="">請選擇</option>
                 <option th:each="dict : ${staffId}" th:text="${dict.realName}" th:value="${dict.id}"></option>
             </select>
@@ -108,7 +108,7 @@
     <div class="layui-form-item">
         <label class="layui-form-label">所屬部門</label>
         <div class="layui-input-block">
-            <select id="deptId" name="deptId" lay-filter="select-type" th:with="deptId=${@departmentService.getDeptId()}">
+            <select id="deptId" name="deptId" lay-filter="select-dept" th:with="deptId=${@departmentService.getDeptId()}">
                 <option value="">請選擇</option>
                 <option th:each="dict : ${deptId}" th:text="${dict.deptName}" th:value="${dict.id}"></option>
             </select>
@@ -167,6 +167,61 @@
   </div>
   <table class="layui-table" id="showTable" lay-filter="showTable" ></table>
 </div>
+<div class="operation1" hidden>
+        <div id="detail"  shiro:hasPermission="assetListview:getInfo">
+                <div class="layui-form-item">
+                    <label class="layui-form-label">資產編號</label>
+                    <span id="assetCodeStr" />
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">資產名稱</label>
+                    <span id="assetNameStr" />
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">資產種類</label>
+                    <span id="typeNameStr" />
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">單位</label>
+                    <span id="unitStr" />
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">內容</label>
+                    <span id="descriptionStr" />
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">Serial Number</label>
+                    <span id="serialNumStr" />
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">購買日期</label>
+                    <span  id="buyDateStr" />
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">購買成本</label>
+                    <span  id="buyCostStr" />
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">發票編號</label>
+                    <span id="invoiceNoStr" />
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">發票日期</label>
+                    <span id="invoiceDateStr" />
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">所屬部門</label>
+                    <span id="deptNameStr" />
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">備註</label>
+                    <span id="remarkStr" />
+                </div>
+                <div class="layui-input-block">
+                    <button  class="layui-btn layui-btn-primary" id="btn_back">返回</button>
+                </div>
+    </div>
+</div>
 <script type="text/html" id="toolbar">
   <div class="layui-btn-container">
     <button class="layui-btn layui-btn-sm" lay-event="add"  shiro:hasPermission="assetListview:add">新增</button>
@@ -174,8 +229,9 @@
   </div>
 </script>
 <script type="text/html" id="tool">
-  <a class="layui-btn layui-btn-xs" lay-event="edit" shiro:hasPermission="assetListview:update">編輯</a>
-  <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del" shiro:hasPermission="assetListview:delete">删除</a>
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="detail" shiro:hasPermission="assetListview:getInfo">詳細</a>
+    <a class="layui-btn layui-btn-xs" lay-event="edit" shiro:hasPermission="assetListview:update">編輯</a>
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del" shiro:hasPermission="assetListview:delete">删除</a>
 </script>
 
 </body>
@@ -272,13 +328,10 @@
       };
     });
 
-    
+
     table.on('tool(showTable)',function (obj) {
       var data = obj.data;
       switch (obj.event) {
-        case 'del':
-          tipDialog(data);
-          break;
         case 'edit':
           $(".table_div").hide();
           $(".operation").show();
@@ -286,37 +339,57 @@
           $(".operation input[name=id]").val(data.id);
           $(".operation input[name=assetCode]").val(data.assetCode);
           $(".operation input[name=assetName]").val(data.assetName);
-           //$(".operation date[name=buydate]").val(data.buydate);
-         // $("#buydate").find('date[value="'+data.buydate.substring(0, 10)+'"]').prop('selected',true);
-         console.log(data.buydate.substring(0, 10));
           var buydateStr = data.buydate.substring(0, 10);
           laydate.render({ elem: '#buydate' ,value: buydateStr});
           $(".operation input[name=unit]").val(data.unit);
           $(".operation input[name=cost]").val(data.cost);
           $(".operation input[name=serialnum]").val(data.serialnum);
           $(".operation input[name=invoiceno]").val(data.invoiceno);
-          //$(".operation date[name=invoicenodate]").val(data.invoicenodate);
           var invoicenodateStr = data.invoicenodate.substring(0, 10);
           laydate.render({  elem: '#invoicenodate',value: invoicenodateStr });
           if (!CoreUtil.isEmpty(data.assetType)) {
-                        $("#assetType").find('option[value="'+data.assetType+'"]').prop('selected',true);
+                        $("#assetType").find('option[value="'+data.assetType+'"]').prop('selected','disabled').attr('disabled', 'disabled');
                         form.render();
                     }
 
           if (!CoreUtil.isEmpty(data.place)) {
-                        $("#place").find('option[value="'+data.place+'"]').prop('selected',true);
+                        $("#place").find('option[value="'+data.place+'"]').prop('selected','disabled').attr('disabled', 'disabled');
                         form.render();
                     }
           if (!CoreUtil.isEmpty(data.deptId)) {
-                        $("#deptId").find('option[value="'+data.deptId+'"]').prop('selected',true);
+                        $("#deptId").find('option[value="'+data.deptId+'"]').prop('selected','disabled').attr('disabled', 'disabled');
                         form.render();
                     }
           if (!CoreUtil.isEmpty(data.responStaff)) {
-                        $("#responStaff").find('option[value="'+data.responStaff+'"]').prop('selected',true);
+                        $("#responStaff").find('option[value="'+data.responStaff+'"]').prop('selected','disabled').attr('disabled', 'disabled');
                         form.render();
                     }
            $('#remark').html(data.remark);
            $('#descriptio').html(data.description);
+
+          break;
+        case 'del':
+          tipDialog(data);
+          break;
+        case 'detail':
+          $(".table_div").hide();
+          $(".operation1").show();
+
+           CoreUtil.sendGet("/assetListview/getInfo/"+data.assetCode , null, function (res) {
+                 console.log(res.data[0]);
+                 document.getElementById("assetCodeStr").innerHTML = res.data[0].assetCode;
+                 document.getElementById("assetNameStr").innerHTML = res.data[0].assetName;
+                 document.getElementById("typeNameStr").innerHTML = res.data[0].typeName;
+                 document.getElementById("unitStr").innerHTML = res.data[0].unit;
+                 document.getElementById("descriptionStr").innerHTML = res.data[0].description? res.data[0].description:"";
+                 document.getElementById("buyCostStr").innerHTML = res.data[0].cost;
+                 document.getElementById("serialNumStr").innerHTML = res.data[0].serialnum;
+                 document.getElementById("buyDateStr").innerHTML = res.data[0].buydate.substring(0, 10);
+                 document.getElementById("invoiceNoStr").innerHTML = res.data[0].invoiceno;
+                 document.getElementById("invoiceDateStr").innerHTML = res.data[0].invoicenodate.substring(0, 10);
+                 document.getElementById("deptNameStr").innerHTML = res.data[0].deptName;
+                 document.getElementById("remarkStr").innerHTML = res.data[0].remark? res.data[0].remark:"" ;
+           });
 
           break;
       }
@@ -354,6 +427,12 @@
     $("#btn_cancel").click(function() {
       $(".table_div").show();
       $(".operation").hide();
+      return false;
+    });
+
+    $("#btn_back").click(function() {
+      $(".table_div").show();
+      $(".operation1").hide();
       return false;
     });
 

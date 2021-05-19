@@ -114,10 +114,10 @@ public class AssetListviewController {
     }
 
     @ApiOperation(value = "資產詳細資料")
-    @GetMapping("assetListview/getInfo")
+    @GetMapping("assetListview/getInfo/{id}")
     @RequiresPermissions("assetListview:getInfo")
     @ResponseBody
-    public DataResult getInfo(@RequestParam String assetCode) {
+    public DataResult getInfo(@PathVariable("id") String assetCode) {
         assetListviewEntity.setAssetCode(assetCode);
         List<AssetListviewDTO> listData = assetListviewService.assetDetailInfo(assetListviewEntity);
         return DataResult.success(listData);
