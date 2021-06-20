@@ -75,13 +75,17 @@ public class UserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impleme
         sysUser.setSalt(PasswordUtils.getSalt());
         String encode = PasswordUtils.encode(sysUser.getPassword(), sysUser.getSalt());
         sysUser.setPassword(encode);
-        sysUserMapper.insert(sysUser);
-
+        int set = sysUserMapper.insert(sysUser);
         actionRecordEntity.setActionName("INSERT");
         actionRecordEntity.setActionMethod("POST");
         actionRecordEntity.setActionFrom("用戶管理");
-        actionRecordEntity.setActionData("新增用戶: " + sysUser.getUsername());
-        actionRecordEntity.setActionSuccess("Success");
+        if(set == 1){
+            actionRecordEntity.setActionData("新增用戶: " + sysUser.getUsername());
+            actionRecordEntity.setActionSuccess("Success");
+        } else {
+            actionRecordEntity.setActionData("(失敗)新增用戶: " + sysUser.getUsername());
+            actionRecordEntity.setActionSuccess("Failure");
+        }
         actionRecordMapper.insert(actionRecordEntity);
     }
 
@@ -149,13 +153,18 @@ public class UserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impleme
             vo.setPassword(null);
         }
         vo.setUpdateId(httpSessionService.getCurrentUserId());
-        sysUserMapper.updateById(vo);
+        int set = sysUserMapper.updateById(vo);
 
         actionRecordEntity.setActionName("UPDATE");
         actionRecordEntity.setActionMethod("PUT");
         actionRecordEntity.setActionFrom("用戶管理");
-        actionRecordEntity.setActionData("更新用戶資料: " + sysUser.getUsername());
-        actionRecordEntity.setActionSuccess("Success");
+        if(set == 1){
+            actionRecordEntity.setActionData("更新用戶: " + sysUser.getUsername());
+            actionRecordEntity.setActionSuccess("Success");
+        } else {
+            actionRecordEntity.setActionData("(失敗)更新用戶: " + sysUser.getUsername());
+            actionRecordEntity.setActionSuccess("Failure");
+        }
         actionRecordMapper.insert(actionRecordEntity);
     }
 

@@ -18,16 +18,16 @@ public class DataResult {
     /**
      * 请求响应code，0为成功 其他为失败
      */
-    @ApiModelProperty(value = "请求响应code，0为成功 其他为失败", name = "code")
+    @ApiModelProperty(value = "請求響應code，0為成功 其他為失敗", name = "code")
     private int code;
 
     /**
-     * 响应异常码详细信息
+     * 響應異常碼詳細信息
      */
-    @ApiModelProperty(value = "响应异常码详细信息", name = "msg")
+    @ApiModelProperty(value = "響應異常碼詳細信息", name = "msg")
     private String msg;
 
-    @ApiModelProperty(value = "需要返回的数据", name = "data")
+    @ApiModelProperty(value = "需要返回的數據", name = "data")
     private Object data;
 
     public DataResult(int code, Object data) {

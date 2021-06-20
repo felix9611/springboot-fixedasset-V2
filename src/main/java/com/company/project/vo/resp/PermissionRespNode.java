@@ -16,10 +16,10 @@ import java.util.List;
 public class PermissionRespNode {
     @ApiModelProperty(value = "id")
     private String id;
-    @ApiModelProperty(value = "菜单权限名称")
+    @ApiModelProperty(value = "菜單權限名稱")
     private String title;
 
-    @ApiModelProperty(value = "菜单权限标识，shiro 适配restful")
+    @ApiModelProperty(value = "菜單權限標識，shiro 適配restful")
     private String perms;
 
     @ApiModelProperty(value = "接口地址")
@@ -30,22 +30,22 @@ public class PermissionRespNode {
 
     private String target;
 
-    @ApiModelProperty(value = "父级id")
+    @ApiModelProperty(value = "父級id")
     private String pid;
 
-    @ApiModelProperty(value = "父级名称")
+    @ApiModelProperty(value = "父級名稱")
     private String pidName;
 
-    @ApiModelProperty(value = "菜单权限类型(1:目录;2:菜单;3:按钮)")
+    @ApiModelProperty(value = "菜單權限類型(1:目錄;2:菜單;3:按鈕)")
     private Integer type;
 
-    @ApiModelProperty(value = "排序码")
+    @ApiModelProperty(value = "排序碼")
     private Integer orderNum;
 
-    @ApiModelProperty(value = "是否展开 默认不展开(false)")
+    @ApiModelProperty(value = "是否展開 默認不展開(false)")
     private boolean spread = true;
 
-    @ApiModelProperty(value = "是否选中 默认false")
+    @ApiModelProperty(value = "是否選中 默認false")
     private boolean checked;
     private List<?> children;
 

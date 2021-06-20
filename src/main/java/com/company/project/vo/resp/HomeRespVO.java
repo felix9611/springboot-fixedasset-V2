@@ -14,9 +14,9 @@ import java.util.List;
  */
 @Data
 public class HomeRespVO {
-    @ApiModelProperty(value = "用户信息")
+    @ApiModelProperty(value = "用戶信息")
     private UserInfoRespVO userInfo;
-    @ApiModelProperty(value = "目录菜单")
+    @ApiModelProperty(value = "目錄菜單")
     private List<PermissionRespNode> menus;
 
 }

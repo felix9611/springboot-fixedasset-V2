@@ -24,8 +24,6 @@ import java.util.List;
 import java.util.concurrent.atomic.AtomicReference;
 
 /**
- * 部门
- *
  * @author wenbin
  * @version V1.0
  * @date 2020年3月18日

@@ -16,10 +16,10 @@ import java.util.List;
  */
 @Data
 public class UserRoleOperationReqVO {
-    @ApiModelProperty(value = "用户id")
-    @NotBlank(message = "用户id不能为空")
+    @ApiModelProperty(value = "用戶id")
+    @NotBlank(message = "用戶id不能為空")
     private String userId;
     @ApiModelProperty(value = "角色id集合")
-    @NotEmpty(message = "角色id集合不能为空")
+    @NotEmpty(message = "角色id集合不能為空")
     private List<String> roleIds;
 }

@@ -16,12 +16,12 @@ import java.util.List;
 public class LoginRespVO {
     @ApiModelProperty(value = "token")
     private String accessToken;
-    @ApiModelProperty(value = "用户名")
+    @ApiModelProperty(value = "用戶名")
     private String username;
-    @ApiModelProperty(value = "用户id")
+    @ApiModelProperty(value = "用戶id")
     private String id;
-    @ApiModelProperty(value = "电话")
+    @ApiModelProperty(value = "電話")
     private String phone;
-    @ApiModelProperty(value = "用户所拥有的菜单权限(前后端分离返回给前端控制菜单和按钮的显示和隐藏)")
+    @ApiModelProperty(value = "用戶所擁有的菜單權限(前後端分離返回給前端控制菜單和按鈕的顯示和隱藏)")
     private List<PermissionRespNode> list;
 }

@@ -12,19 +12,19 @@ import lombok.Data;
  */
 @Data
 public class UserInfoRespVO {
-    @ApiModelProperty(value = "用户id")
+    @ApiModelProperty(value = "用戶id")
     private String id;
-    @ApiModelProperty(value = "账号")
+    @ApiModelProperty(value = "賬號")
     private String username;
-    @ApiModelProperty(value = "手机号")
+    @ApiModelProperty(value = "手機號")
     private String phone;
-    @ApiModelProperty(value = "昵称")
+    @ApiModelProperty(value = "暱稱")
     private String nickName;
-    @ApiModelProperty(value = "真实姓名")
+    @ApiModelProperty(value = "真實姓名")
     private String realName;
-    @ApiModelProperty(value = "所属机构id")
+    @ApiModelProperty(value = "所屬機構id")
     private String deptId;
-    @ApiModelProperty(value = "所属机构名称")
+    @ApiModelProperty(value = "所屬機構名稱")
     private String deptName;
 
 }

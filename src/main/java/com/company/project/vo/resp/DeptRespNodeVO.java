@@ -14,31 +14,31 @@ import java.util.List;
  */
 @Data
 public class DeptRespNodeVO {
-    @ApiModelProperty(value = "组织id")
+    @ApiModelProperty(value = "組織id")
     private String id;
 
-    @ApiModelProperty(value = "组织编码")
+    @ApiModelProperty(value = "組織編碼")
     private String deptNo;
 
-    @ApiModelProperty(value = "组织名称")
+    @ApiModelProperty(value = "組織名稱")
     private String title;
 
-    @ApiModelProperty(value = "组织名称")
+    @ApiModelProperty(value = "組織名稱")
     private String label;
 
-    @ApiModelProperty(value = "组织父级id")
+    @ApiModelProperty(value = "組織父級id")
     private String pid;
 
-    @ApiModelProperty(value = "组织状态")
+    @ApiModelProperty(value = "組織狀態")
     private Integer status;
 
-    @ApiModelProperty(value = "组织关系id")
+    @ApiModelProperty(value = "組織關係id")
     private String relationCode;
 
-    @ApiModelProperty(value = "是否展开 默认不展开(false)")
+    @ApiModelProperty(value = "是否展開 默認不展開(false)")
     private boolean spread = true;
 
-    @ApiModelProperty(value = "是否选中")
+    @ApiModelProperty(value = "是否選中")
     private boolean checked = false;
 
     private boolean disabled = false;

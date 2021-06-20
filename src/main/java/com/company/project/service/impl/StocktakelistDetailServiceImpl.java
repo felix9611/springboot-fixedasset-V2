@@ -61,43 +61,23 @@ public class StocktakelistDetailServiceImpl extends ServiceImpl<StocktakelistDet
     @Override
     public void saveDetail(StocktakelistDetailEntity entity) {
 
-        String assetCodeStr = assetListviewMapper.selectAssetCode(entity.getAssetCode());
-        String assetPlace = assetPlaceMapper.selectAssetPlace(entity.getAssetCode());
-        String assetPlaceStr = entity.getAssetPlace();
-
-        System.out.println(assetCodeStr);
-        if(assetCodeStr != null){
-            if(assetPlaceStr !=  assetPlace){
-                entity.setAssetPlace("地點錯誤");
-                stocktakelistDetailMapper.insert(entity);
-
-                log.error("地點錯誤", entity.getAssetCode());
-
-                actionRecordEntity.setActionName("INSERT");
-                actionRecordEntity.setActionMethod("POST");
-                actionRecordEntity.setActionFrom("盤點管理");
-                actionRecordEntity.setActionData("盤點: " + entity.toString());
-                actionRecordEntity.setActionSuccess("Success");
-                actionRecordMapper.insert(actionRecordEntity);
-
-              //  throw new BusinessException("地點錯誤");
-            }else if(assetPlaceStr ==  assetPlace){
-                stocktakelistDetailMapper.insert(entity);
-
+         int set = stocktakelistDetailMapper.insert(entity);
+            if(set == 1){
+              actionRecordEntity.setActionName("INSERT");
+              actionRecordEntity.setActionMethod("POST");
+              actionRecordEntity.setActionFrom("盤點管理");
+              actionRecordEntity.setActionData("盤點: " + entity.getAssetCode());
+              actionRecordEntity.setActionSuccess("Success");
+              actionRecordMapper.insert(actionRecordEntity);
+            } else {
                 actionRecordEntity.setActionName("INSERT");
                 actionRecordEntity.setActionMethod("POST");
                 actionRecordEntity.setActionFrom("盤點管理");
                 actionRecordEntity.setActionData("盤點: " + entity.getAssetCode());
-                actionRecordEntity.setActionSuccess("Success");
+                actionRecordEntity.setActionSuccess("Failure");
                 actionRecordMapper.insert(actionRecordEntity);
-            }else {
-                log.error("此編號不存在", entity.getAssetCode());
-                throw new BusinessException("此編號不存在");
             }
-        }else {
-            log.error("此編號不存在", entity.getAssetCode());
-            throw new BusinessException("此編號不存在");
-        }
     }
+
 
 }

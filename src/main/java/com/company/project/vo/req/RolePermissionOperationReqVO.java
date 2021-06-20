@@ -17,9 +17,9 @@ import java.util.List;
 @Data
 public class RolePermissionOperationReqVO {
     @ApiModelProperty(value = "角色id")
-    @NotBlank(message = "角色id不能为空")
+    @NotBlank(message = "角色id不能為空")
     private String roleId;
-    @ApiModelProperty(value = "菜单权限集合")
-    @NotEmpty(message = "菜单权限集合不能为空")
+    @ApiModelProperty(value = "菜單權限集合")
+    @NotEmpty(message = "菜單權限集合不能為空")
     private List<String> permissionIds;
 }
