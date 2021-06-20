@@ -16,6 +16,7 @@ import com.company.project.mapper.AssetPlaceMapper;
 import com.company.project.service.AssetPhotoService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.FileUtils;
+import org.apache.shiro.authz.annotation.RequiresAuthentication;
 import org.springframework.stereotype.Service;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 
@@ -60,24 +61,22 @@ public class AssetListviewServiceImpl extends ServiceImpl<AssetListviewMapper, A
         vo.setAssetCode(newCode);
         vo.setActive("1");
         System.out.print(vo);
-        int set = assetListviewMapper.insert(vo);
-        actionRecordEntity.setActionName("INSERT");
-        actionRecordEntity.setActionMethod("POST");
-        actionRecordEntity.setActionFrom("資產管理");
-        if(set == 1){
-            actionRecordEntity.setActionData("新增資料: " + vo.toString());
-            actionRecordEntity.setActionSuccess("Success");
+        int set = this.assetListviewMapper.insert(vo);
+        this.actionRecordEntity.setActionName("INSERT");
+        this.actionRecordEntity.setActionMethod("POST");
+        this.actionRecordEntity.setActionFrom("資產管理");
+        if (set == 1) {
+            this.actionRecordEntity.setActionData("新增資料: " + vo.toString());
+            this.actionRecordEntity.setActionSuccess("Success");
         } else {
-            actionRecordEntity.setActionData("(失敗)新增資料: " + vo.toString());
-            actionRecordEntity.setActionSuccess("Failure");
+            this.actionRecordEntity.setActionData("(失敗)新增資料: " + vo.toString());
+            this.actionRecordEntity.setActionSuccess("Failure");
         }
-        actionRecordMapper.insert(actionRecordEntity);
 
-
-        if(vo.getPlace()!= null){
-            setAssetToPlace(vo.getId(), vo.getPlace());
+        this.actionRecordMapper.insert(this.actionRecordEntity);
+        if (vo.getPlace() != null) {
+            this.setAssetToPlace(vo.getId(), vo.getPlace());
         }
-        //uploadSaveHelper(file, vo.getId(), vo.getAssetCode());
     }
 
     @Override
@@ -85,19 +84,19 @@ public class AssetListviewServiceImpl extends ServiceImpl<AssetListviewMapper, A
         assetListview.setActive("0");
         System.out.print(assetListview);
         this.removeAssetToPlace(assetListview.getId());
-        int set = assetListviewMapper.updateById(assetListview);
-
-        actionRecordEntity.setActionName("DELETE");
-        actionRecordEntity.setActionMethod("PUT");
-        actionRecordEntity.setActionFrom("資產管理");
-        if(set == 1){
-            actionRecordEntity.setActionData("已被設為無效: " + assetListview.toString());
-            actionRecordEntity.setActionSuccess("Success");
+        int set = this.assetListviewMapper.updateById(assetListview);
+        this.actionRecordEntity.setActionName("DELETE");
+        this.actionRecordEntity.setActionMethod("PUT");
+        this.actionRecordEntity.setActionFrom("資產管理");
+        if (set == 1) {
+            this.actionRecordEntity.setActionData("已被設為無效: " + assetListview.toString());
+            this.actionRecordEntity.setActionSuccess("Success");
         } else {
-            actionRecordEntity.setActionData("(失敗)已被設為無效: " + assetListview.toString());
-            actionRecordEntity.setActionSuccess("Failure");
+            this.actionRecordEntity.setActionData("(失敗)已被設為無效: " + assetListview.toString());
+            this.actionRecordEntity.setActionSuccess("Failure");
         }
-        actionRecordMapper.insert(actionRecordEntity);
+
+        this.actionRecordMapper.insert(this.actionRecordEntity);
     }
 
     @Override
@@ -120,35 +119,35 @@ public class AssetListviewServiceImpl extends ServiceImpl<AssetListviewMapper, A
         return assetListviewMapper.selectAssetInfo(assetListviewEntity);
     }
 
-    private void setAssetToPlace(final String assetId, String placeId){
-        if(placeId != null && assetId != null) {
-            assetPlaceEntity.setAssetId(assetId);
-            assetPlaceEntity.setPlaceId(placeId);
-            System.out.print(assetPlaceEntity);
-            String selectData = assetPlaceMapper.selectAssetId(assetId);
+    private void setAssetToPlace(final String assetId, String placeId) {
+        if (placeId != null && assetId != null) {
+            this.assetPlaceEntity.setAssetId(assetId);
+            this.assetPlaceEntity.setPlaceId(placeId);
+            System.out.print(this.assetPlaceEntity);
+            String selectData = this.assetPlaceMapper.selectAssetId(assetId);
             if (selectData == null) {
-                int set = assetPlaceMapper.insert(assetPlaceEntity);
-                actionRecordEntity.setActionName("INSERT");
-                actionRecordEntity.setActionMethod("POST");
-                actionRecordEntity.setActionFrom("被分配地點");
-                if(set == 1){
-                    actionRecordEntity.setActionData("新增資料: " + assetPlaceEntity.toString());
-                    actionRecordEntity.setActionSuccess("Success");
+                int set = this.assetPlaceMapper.insert(this.assetPlaceEntity);
+                this.actionRecordEntity.setActionName("INSERT");
+                this.actionRecordEntity.setActionMethod("POST");
+                this.actionRecordEntity.setActionFrom("被分配地點");
+                if (set == 1) {
+                    this.actionRecordEntity.setActionData("新增資料: " + this.assetPlaceEntity.toString());
+                    this.actionRecordEntity.setActionSuccess("Success");
                 } else {
-                    actionRecordEntity.setActionData("(失敗)新增資料: " + assetPlaceEntity.toString());
-                    actionRecordEntity.setActionSuccess("Failure");
+                    this.actionRecordEntity.setActionData("(失敗)新增資料: " + this.assetPlaceEntity.toString());
+                    this.actionRecordEntity.setActionSuccess("Failure");
                 }
             } else {
-                assetPlaceMapper.updateAssetAtPlace(assetPlaceEntity);
-
-                actionRecordEntity.setActionName("UPDATE");
-                actionRecordEntity.setActionMethod("PUT");
-                actionRecordEntity.setActionFrom("被分配地點");
-                actionRecordEntity.setActionData("更新資料: " + assetPlaceEntity.toString());
+                this.assetPlaceMapper.updateAssetAtPlace(this.assetPlaceEntity);
+                this.actionRecordEntity.setActionName("UPDATE");
+                this.actionRecordEntity.setActionMethod("PUT");
+                this.actionRecordEntity.setActionFrom("被分配地點");
+                this.actionRecordEntity.setActionData("更新資料: " + this.assetPlaceEntity.toString());
             }
 
-            actionRecordMapper.insert(actionRecordEntity);
+            this.actionRecordMapper.insert(this.actionRecordEntity);
         }
+
     }
 
     private void removeAssetToPlace(final String assetId){

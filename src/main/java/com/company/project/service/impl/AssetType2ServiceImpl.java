@@ -35,28 +35,39 @@ public class AssetType2ServiceImpl extends ServiceImpl<AssetType2Mapper, AssetTy
 
     @Override
     public boolean save(AssetType2Entity entity) {
+        int set = assetType2Mapper.insert(entity);
 
-        actionRecordEntity.setActionName("INSERT");
-        actionRecordEntity.setActionMethod("POST");
-        actionRecordEntity.setActionFrom("種類管理");
-        actionRecordEntity.setActionData("新增資料: " + entity.toString());
-        actionRecordEntity.setActionSuccess("Success");
-        actionRecordMapper.insert(actionRecordEntity);
+        if(set == 1){
+            actionRecordEntity.setActionName("INSERT");
+            actionRecordEntity.setActionMethod("POST");
+            actionRecordEntity.setActionFrom("種類管理");
+            actionRecordEntity.setActionData("新增資料: " + entity.toString());
+            actionRecordEntity.setActionSuccess("Success");
+            actionRecordMapper.insert(actionRecordEntity);
+        }
 
-        assetType2Mapper.insert(entity);
         return true;
     }
 
     @Override
     public boolean updateById(AssetType2Entity entity) {
+
+        int set = assetType2Mapper.updateById(entity);
+
+        if(set == 1){
+            actionRecordEntity.setActionData("更新資料: " + entity.toString());
+            actionRecordEntity.setActionSuccess("Success");
+        } else {
+            actionRecordEntity.setActionData("(失敗)更新資料: " + entity.toString());
+            actionRecordEntity.setActionSuccess("Failure");
+        }
+
         actionRecordEntity.setActionName("UPDATE");
         actionRecordEntity.setActionMethod("PUT");
         actionRecordEntity.setActionFrom("種類管理");
-        actionRecordEntity.setActionData("更新資料: " + entity.toString());
-        actionRecordEntity.setActionSuccess("Success");
         actionRecordMapper.insert(actionRecordEntity);
 
-        assetType2Mapper.updateById(entity);
+
         return true;
     }
 
@@ -72,14 +83,16 @@ public class AssetType2ServiceImpl extends ServiceImpl<AssetType2Mapper, AssetTy
     @Override
     public void updateActive(AssetType2Entity assetType2) {
         assetType2.setActive("0");
-        assetType2Mapper.updateById(assetType2);
+        int set = assetType2Mapper.updateById(assetType2);
 
-        actionRecordEntity.setActionName("DELETE");
-        actionRecordEntity.setActionMethod("PUT");
-        actionRecordEntity.setActionFrom("種類管理");
-        actionRecordEntity.setActionData("已被設為無效: " + assetType2.toString());
-        actionRecordEntity.setActionSuccess("Success");
-        actionRecordMapper.insert(actionRecordEntity);
+        if(set == 1){
+            actionRecordEntity.setActionName("DELETE");
+            actionRecordEntity.setActionMethod("PUT");
+            actionRecordEntity.setActionFrom("種類管理");
+            actionRecordEntity.setActionData("已被設為無效: " + assetType2.toString());
+            actionRecordEntity.setActionSuccess("Success");
+            actionRecordMapper.insert(actionRecordEntity);
+        }
     }
 
     @Override

@@ -42,41 +42,61 @@ public class DepartmentServiceImpl extends ServiceImpl<DepartmentMapper, Departm
     @Override
     public boolean save(DepartmentEntity entity) {
 
+        int set = departmentMapper.insert(entity);
+
+        if(set == 1){
+            actionRecordEntity.setActionData("新增資料: " + entity.toString());
+            actionRecordEntity.setActionSuccess("Success");
+        } else {
+            actionRecordEntity.setActionData("(失敗)新增資料: " + entity.toString());
+            actionRecordEntity.setActionSuccess("Failure");
+        }
+
         actionRecordEntity.setActionName("INSERT");
         actionRecordEntity.setActionMethod("POST");
         actionRecordEntity.setActionFrom("部門管理");
-        actionRecordEntity.setActionData("新增資料: " + entity.toString());
-        actionRecordEntity.setActionSuccess("Success");
         actionRecordMapper.insert(actionRecordEntity);
 
-        departmentMapper.insert(entity);
         return true;
     }
 
     @Override
     public boolean updateById(DepartmentEntity entity) {
 
+        int set = departmentMapper.updateById(entity);
+
+
+        if(set == 1){
+            actionRecordEntity.setActionData("更新資料: " + entity.toString());
+            actionRecordEntity.setActionSuccess("Success");
+        } else {
+            actionRecordEntity.setActionData("(失敗)更新資料: " + entity.toString());
+            actionRecordEntity.setActionSuccess("Failure");
+        }
+
         actionRecordEntity.setActionName("UPDATE");
         actionRecordEntity.setActionMethod("PUT");
         actionRecordEntity.setActionFrom("部門管理");
-        actionRecordEntity.setActionData("更新資料: " + entity.toString());
-        actionRecordEntity.setActionSuccess("Success");
         actionRecordMapper.insert(actionRecordEntity);
-
-        departmentMapper.updateById(entity);
         return true;
     }
 
     @Override
     public void updateActive(DepartmentEntity department) {
         department.setActive("0");
-        departmentMapper.updateById(department);
+        int set = departmentMapper.updateById(department);
+
+        if(set == 1){
+            actionRecordEntity.setActionData("已被設為無效: " + department.toString());
+            actionRecordEntity.setActionSuccess("Success");
+        } else {
+            actionRecordEntity.setActionData("(失敗)已被設為無效: " + department.toString());
+            actionRecordEntity.setActionSuccess("Failure");
+        }
 
         actionRecordEntity.setActionName("DELETE");
         actionRecordEntity.setActionMethod("PUT");
         actionRecordEntity.setActionFrom("部門管理");
-        actionRecordEntity.setActionData("已被設為無效: " + department.toString());
-        actionRecordEntity.setActionSuccess("Success");
         actionRecordMapper.insert(actionRecordEntity);
     }
 

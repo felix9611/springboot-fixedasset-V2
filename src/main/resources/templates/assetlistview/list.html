@@ -169,52 +169,52 @@
 </div>
 <div class="operation1" hidden>
         <div id="detail"  shiro:hasPermission="assetListview:getInfo">
-                <div class="layui-form-item">
-                    <label class="layui-form-label">資產編號</label>
-                    <span id="assetCodeStr" />
+                <div class="detail-row">
+                    <label class="left-itme">資產編號</label>
+                    <label id="assetCodeStr" />
                 </div>
-                <div class="layui-form-item">
-                    <label class="layui-form-label">資產名稱</label>
+                <div class="detail-row">
+                    <label class="left-itme">資產名稱</label>
                     <span id="assetNameStr" />
                 </div>
-                <div class="layui-form-item">
-                    <label class="layui-form-label">資產種類</label>
+                <div class="detail-row">
+                    <label class="left-itme">資產種類</label>
                     <span id="typeNameStr" />
                 </div>
-                <div class="layui-form-item">
-                    <label class="layui-form-label">單位</label>
+                <div class="detail-row">
+                    <label class="left-itme">單位</label>
                     <span id="unitStr" />
                 </div>
-                <div class="layui-form-item">
-                    <label class="layui-form-label">內容</label>
+                <div class="detail-row">
+                    <label class="left-itme">內容</label>
                     <span id="descriptionStr" />
                 </div>
                 <div class="layui-form-item">
-                    <label class="layui-form-label">Serial Number</label>
+                    <label class="detail-left">Serial Number</label>
                     <span id="serialNumStr" />
                 </div>
                 <div class="layui-form-item">
-                    <label class="layui-form-label">購買日期</label>
+                    <label class="detail-left">購買日期</label>
                     <span  id="buyDateStr" />
                 </div>
                 <div class="layui-form-item">
-                    <label class="layui-form-label">購買成本</label>
+                    <label class="detail-left">購買成本</label>
                     <span  id="buyCostStr" />
                 </div>
                 <div class="layui-form-item">
-                    <label class="layui-form-label">發票編號</label>
+                    <label class="detail-left">發票編號</label>
                     <span id="invoiceNoStr" />
                 </div>
                 <div class="layui-form-item">
-                    <label class="layui-form-label">發票日期</label>
+                    <label class="detail-left">發票日期</label>
                     <span id="invoiceDateStr" />
                 </div>
                 <div class="layui-form-item">
-                    <label class="layui-form-label">所屬部門</label>
+                    <label class="detail-left">所屬部門</label>
                     <span id="deptNameStr" />
                 </div>
                 <div class="layui-form-item">
-                    <label class="layui-form-label">備註</label>
+                    <label class="detail-left">備註</label>
                     <span id="remarkStr" />
                 </div>
                 <div class="layui-input-block">
@@ -471,3 +471,32 @@
     });
   };
 </script>
+<style>
+.detail-left{
+  width: 180px;
+  max-width: 180px;
+  min-width: 180px;
+  font-size: 16px;
+  color: grey;
+  padding: 8px 15px;
+  height: 38px;
+  line-height: 20px;
+  text-align: center;
+  background-color: #FBFBFB;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+.detail-row{
+  grid-template-columns: 200px 200px;
+  grid-gap: 20px;
+  font-size: 18px;
+  padding: 8px 15px;
+}
+
+.left-itme{
+  color: gray;
+  min-width: 200px;
+  max-width: 200px;
+}
+</style>
