@@ -38,17 +38,9 @@ public class AssetListviewController {
 
     @Resource private AssetListviewEntity assetListviewEntity;
 
-    /**
-    * 跳转到页面
-    */
-    @GetMapping("/index/assetListview")
-    public String assetListview() {
-        return "assetlistview/list";
-        }
-
     @ApiOperation(value = "新增")
     @PostMapping("assetListview/add")
-    @RequiresPermissions("assetListview:add")
+  //  @RequiresPermissions("assetListview:add")
     @ResponseBody
     public DataResult add(@RequestBody AssetListviewEntity assetListview){
         assetListviewService.newAsset(assetListview);
@@ -57,7 +49,7 @@ public class AssetListviewController {
 
     @ApiOperation(value = "删除")
     @PutMapping("assetListview/delete")
-    @RequiresPermissions("assetListview:delete")
+  //  @RequiresPermissions("assetListview:delete")
     @ResponseBody
     public DataResult delete(@RequestBody AssetListviewEntity assetListview){
         assetListviewService.updateActive(assetListview);
@@ -72,7 +64,7 @@ public class AssetListviewController {
     */
     @ApiOperation(value = "更新")
     @PutMapping("assetListview/update")
-    @RequiresPermissions("assetListview:update")
+ //   @RequiresPermissions("assetListview:update")
     @ResponseBody
     public DataResult update(@RequestBody AssetListviewEntity assetListview){
         assetListviewService.updateAsset(assetListview);
@@ -81,7 +73,7 @@ public class AssetListviewController {
 
     @ApiOperation(value = "查詢分頁數據(新)")
     @PostMapping("assetListview/listByPage")
-    @RequiresPermissions("assetListview:list")
+   // @RequiresPermissions("assetListview:list")
     @ResponseBody
     public DataResult listByPage(@RequestBody AssetListviewEntity assetListview){
         Page page = new Page(assetListview.getPage(), assetListview.getLimit());
@@ -115,7 +107,7 @@ public class AssetListviewController {
 
     @ApiOperation(value = "資產詳細資料")
     @GetMapping("assetListview/getInfo/{id}")
-    @RequiresPermissions("assetListview:getInfo")
+  //  @RequiresPermissions("assetListview:getInfo")
     @ResponseBody
     public DataResult getInfo(@PathVariable("id") String assetCode) {
         assetListviewEntity.setAssetCode(assetCode);

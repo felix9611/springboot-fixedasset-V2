@@ -29,5 +29,7 @@ public interface AssetListviewMapper extends BaseMapper<AssetListviewEntity> {
             "LEFT JOIN department AS d ON ale.dept_id = d.id " +
             "WHERE ale.asset_code = #{assetListviewEntity.assetCode}")
     List<AssetListviewDTO> selectAssetInfo(@Param("assetListviewEntity") AssetListviewEntity assetListviewEntity);
+
+
 	
 }

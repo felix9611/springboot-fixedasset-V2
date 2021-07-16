@@ -30,17 +30,12 @@ import com.company.project.service.Vendor2Service;
 @Controller
 @RequestMapping("/")
 public class Vendor2Controller {
-    @Autowired
-    private Vendor2Service vendor2Service;
+    @Autowired private Vendor2Service vendor2Service;
 
-    @GetMapping("/index/vendor2")
-    public String vendor2() {
-        return "vendor2/list";
-        }
 
     @ApiOperation(value = "新增")
     @PostMapping("vendor2/add")
-    @RequiresPermissions("vendor2:add")
+ //   @RequiresPermissions("vendor2:add")
     @ResponseBody
     public DataResult add(@RequestBody Vendor2Entity vendor2){
         vendor2Service.save(vendor2);
@@ -49,7 +44,7 @@ public class Vendor2Controller {
 
     @ApiOperation(value = "删除")
     @DeleteMapping("vendor2/delete")
-    @RequiresPermissions("vendor2:delete")
+ //   @RequiresPermissions("vendor2:delete")
     @ResponseBody
     public DataResult delete(@RequestBody @ApiParam(value = "id集合") List<String> ids){
         vendor2Service.removeByIds(ids);
@@ -58,7 +53,7 @@ public class Vendor2Controller {
 
     @ApiOperation(value = "更新")
     @PutMapping("vendor2/update")
-    @RequiresPermissions("vendor2:update")
+ //   @RequiresPermissions("vendor2:update")
     @ResponseBody
     public DataResult update(@RequestBody Vendor2Entity vendor2){
         vendor2Service.updateById(vendor2);
@@ -67,7 +62,7 @@ public class Vendor2Controller {
 
     @ApiOperation(value = "查询分页数据")
     @PostMapping("vendor2/listByPage")
-    @RequiresPermissions("vendor2:list")
+ //   @RequiresPermissions("vendor2:list")
     @ResponseBody
     public DataResult findListByPage(@RequestBody Vendor2Entity vendor2){
         Page page = new Page(vendor2.getPage(), vendor2.getLimit());

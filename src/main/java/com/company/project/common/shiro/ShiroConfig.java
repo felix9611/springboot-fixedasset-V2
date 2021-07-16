@@ -59,7 +59,7 @@ public class ShiroConfig {
     }
 
 
-    @Bean
+   /* @Bean
     public ShiroFilterFactoryBean shiroFilterFactoryBean(SecurityManager securityManager) {
 
         //整个shiro执行过程： 过滤器、认证、授权
@@ -100,7 +100,7 @@ public class ShiroConfig {
         shiroFilterFactoryBean.setLoginUrl("/index/login");
         shiroFilterFactoryBean.setFilterChainDefinitionMap(filterChainDefinitionMap);
         return shiroFilterFactoryBean;
-    }
+    } */
 
     /**
      * 开启shiro aop注解支持.

@@ -29,17 +29,12 @@ import com.company.project.service.ActionRecordService;
 @Controller
 @RequestMapping("/")
 public class ActionRecordController {
-    @Autowired
-    private ActionRecordService actionRecordService;
 
-    @GetMapping("/index/actionRecord")
-    public String actionRecord() {
-        return "actionrecord/list";
-        }
+    @Autowired private ActionRecordService actionRecordService;
 
     @ApiOperation(value = "新增")
     @PostMapping("actionRecord/add")
-    @RequiresPermissions("actionRecord:add")
+//    @RequiresPermissions("actionRecord:add")
     @ResponseBody
     public DataResult add(@RequestBody ActionRecordEntity actionRecord){
         actionRecordService.save(actionRecord);
@@ -48,7 +43,7 @@ public class ActionRecordController {
 
     @ApiOperation(value = "刪除")
     @PutMapping("actionRecord/delete")
-    @RequiresPermissions("actionRecord:delete")
+  //  @RequiresPermissions("actionRecord:delete")
     @ResponseBody
     public DataResult delete(@RequestBody @ApiParam(value = "id集合") List<String> ids){
         actionRecordService.removeByIds(ids);
@@ -57,7 +52,7 @@ public class ActionRecordController {
 
     @ApiOperation(value = "更新")
     @PutMapping("actionRecord/update")
-    @RequiresPermissions("actionRecord:update")
+  //  @RequiresPermissions("actionRecord:update")
     @ResponseBody
     public DataResult update(@RequestBody ActionRecordEntity actionRecord){
         actionRecordService.updateById(actionRecord);
@@ -66,7 +61,7 @@ public class ActionRecordController {
 
     @ApiOperation(value = "查詢分頁數據")
     @PostMapping("actionRecord/listByPage")
-    @RequiresPermissions("actionRecord:list")
+   // @RequiresPermissions("actionRecord:list")
     @ResponseBody
     public DataResult findListByPage(@RequestBody ActionRecordEntity actionRecord){
         Page page = new Page(actionRecord.getPage(), actionRecord.getLimit());

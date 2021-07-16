@@ -37,7 +37,7 @@ import javax.annotation.Resource;
  */
 @Api(tags = "類別管理")
 @Controller
-@RequestMapping("/")
+@RequestMapping("/assetType2")
 public class AssetType2Controller {
     @Resource
     private AssetType2Service assetType2Service;
@@ -45,14 +45,10 @@ public class AssetType2Controller {
     @Resource
     private AssetType2Entity assetType2Entity;
 
-    @GetMapping("/index/assetType2")
-    public String assetType2() {
-        return "assettype2/list";
-        }
 
-    @ApiOperation(value = "新增")
-    @PostMapping("assetType2/add")
-    @RequiresPermissions("assetType2:add")
+  //  @ApiOperation(value = "新增")
+    @PostMapping("/add")
+  //  @RequiresPermissions("assetType2:add")
     @ResponseBody
     public DataResult add(@RequestBody AssetType2Entity assetType2){
         System.out.print(assetType2);
@@ -60,9 +56,9 @@ public class AssetType2Controller {
         return DataResult.success();
     }
 
-    @ApiOperation(value = "删除")
-    @PutMapping("/assetType2/delete")
-    @RequiresPermissions("assetType2:delete")
+ //   @ApiOperation(value = "删除")
+    @PutMapping("/delete")
+ //   @RequiresPermissions("assetType2:delete")
     @ResponseBody
     public DataResult delete(@RequestBody AssetType2Entity assetType2){
         System.out.print(assetType2);
@@ -70,9 +66,9 @@ public class AssetType2Controller {
         return DataResult.success();
     }
 
-    @ApiOperation(value = "更新")
-    @PutMapping("assetType2/update")
-    @RequiresPermissions("assetType2:update")
+ //   @ApiOperation(value = "更新")
+    @PutMapping("/update")
+  //  @RequiresPermissions("assetType2:update")
     @ResponseBody
     public DataResult update(@RequestBody AssetType2Entity assetType2) throws JsonProcessingException {
         System.out.print(assetType2);
@@ -80,9 +76,9 @@ public class AssetType2Controller {
         return DataResult.success();
     }
 
-    @ApiOperation(value = "查詢分頁數據")
-    @PostMapping("assetType2/listByPage")
-    @RequiresPermissions("assetType2:list")
+ //   @ApiOperation(value = "查詢分頁數據")
+    @PostMapping("/listByPage")
+ //   @RequiresPermissions("assetType2:list")
     @ResponseBody
     public DataResult findListByPage(@RequestBody AssetType2Entity assetType2){
         Page page = new Page(assetType2.getPage(), assetType2.getLimit());
@@ -93,25 +89,20 @@ public class AssetType2Controller {
         if(!StringUtils.isEmpty(assetType2.getTypeName())){
             queryWrapper.like(AssetType2Entity::getTypeName, assetType2.getTypeName());
         }
-        /*
 
-        if(!StringUtils.isEmpty(assetlist.getBuydate())){
-            queryWrapper.like(AssetlistEntity::getBuydate, assetlist.getBuydate());
-        }
-         */
         queryWrapper.eq(AssetType2Entity::getActive, "1");
         IPage<AssetType2Entity> iPage = assetType2Service.page(page, queryWrapper);
         return DataResult.success(iPage);
     }
 
-    @ApiOperation(value = "取編號與名稱")
-    @GetMapping("assetType2/codeAndName")
-    @RequiresPermissions("assetType2:listCodeAndName")
+  //  @ApiOperation(value = "取編號與名稱")
+    @GetMapping("/codeAndName/{id}")
+  //  @RequiresPermissions("assetType2:listCodeAndName")
     @ResponseBody
-    public DataResult getCodeAndName(@RequestParam String id) {
+    public List<AssetType2Entity> getCodeAndName(@PathVariable("id") String id) {
         assetType2Entity.setId(id);
-        List<AssetType2Entity>  listdata = assetType2Service.selectNameAndCode(assetType2Entity);
-        return DataResult.success(listdata);
+        return assetType2Service.selectNameAndCode(assetType2Entity);
+       // return DataResult.success(listdata);
     }
 
 }
