@@ -93,12 +93,7 @@ public class AssetType2Controller {
         if(!StringUtils.isEmpty(assetType2.getTypeName())){
             queryWrapper.like(AssetType2Entity::getTypeName, assetType2.getTypeName());
         }
-        /*
 
-        if(!StringUtils.isEmpty(assetlist.getBuydate())){
-            queryWrapper.like(AssetlistEntity::getBuydate, assetlist.getBuydate());
-        }
-         */
         queryWrapper.eq(AssetType2Entity::getActive, "1");
         IPage<AssetType2Entity> iPage = assetType2Service.page(page, queryWrapper);
         return DataResult.success(iPage);
