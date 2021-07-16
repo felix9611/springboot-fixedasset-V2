@@ -39,7 +39,7 @@ public class SysDictController {
 
     @ApiOperation(value = "新增")
     @PostMapping("/add")
-    @RequiresPermissions("sysDict:add")
+  //  @RequiresPermissions("sysDict:add")
     public DataResult add(@RequestBody SysDictEntity sysDict) {
         if (StringUtils.isEmpty(sysDict.getName())) {
             return DataResult.fail("字典名称不能为空");
@@ -54,7 +54,7 @@ public class SysDictController {
 
     @ApiOperation(value = "删除")
     @DeleteMapping("/delete")
-    @RequiresPermissions("sysDict:delete")
+  //  @RequiresPermissions("sysDict:delete")
     public DataResult delete(@RequestBody @ApiParam(value = "id集合") List<String> ids) {
         sysDictService.removeByIds(ids);
         //删除detail
@@ -64,7 +64,7 @@ public class SysDictController {
 
     @ApiOperation(value = "更新")
     @PutMapping("/update")
-    @RequiresPermissions("sysDict:update")
+ //   @RequiresPermissions("sysDict:update")
     public DataResult update(@RequestBody SysDictEntity sysDict) {
         if (StringUtils.isEmpty(sysDict.getName())) {
             return DataResult.fail("字典名称不能为空");
@@ -81,7 +81,7 @@ public class SysDictController {
 
     @ApiOperation(value = "查询分页数据")
     @PostMapping("/listByPage")
-    @RequiresPermissions("sysDict:list")
+   // @RequiresPermissions("sysDict:list")
     public DataResult findListByPage(@RequestBody SysDictEntity sysDict) {
         Page page = new Page(sysDict.getPage(), sysDict.getLimit());
         LambdaQueryWrapper<SysDictEntity> queryWrapper = Wrappers.lambdaQuery();

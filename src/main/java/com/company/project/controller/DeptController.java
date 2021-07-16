@@ -32,7 +32,7 @@ public class DeptController {
     @PostMapping("/dept")
     @ApiOperation(value = "新增组织接口")
     @LogAnnotation(title = "机构管理", action = "新增组织")
-    @RequiresPermissions("sys:dept:add")
+  //  @RequiresPermissions("sys:dept:add")
     public DataResult addDept(@RequestBody @Valid SysDept vo) {
         deptService.addDept(vo);
         return DataResult.success();
@@ -41,7 +41,7 @@ public class DeptController {
     @DeleteMapping("/dept/{id}")
     @ApiOperation(value = "删除组织接口")
     @LogAnnotation(title = "机构管理", action = "删除组织")
-    @RequiresPermissions("sys:dept:deleted")
+   // @RequiresPermissions("sys:dept:deleted")
     public DataResult deleted(@PathVariable("id") String id) {
         deptService.deleted(id);
         return DataResult.success();
@@ -50,7 +50,7 @@ public class DeptController {
     @PutMapping("/dept")
     @ApiOperation(value = "更新组织信息接口")
     @LogAnnotation(title = "机构管理", action = "更新组织信息")
-    @RequiresPermissions("sys:dept:update")
+ //   @RequiresPermissions("sys:dept:update")
     public DataResult updateDept(@RequestBody SysDept vo) {
         if (StringUtils.isEmpty(vo.getId())) {
             return DataResult.fail("id不能为空");
@@ -62,7 +62,7 @@ public class DeptController {
     @GetMapping("/dept/{id}")
     @ApiOperation(value = "查询组织详情接口")
     @LogAnnotation(title = "机构管理", action = "查询组织详情")
-    @RequiresPermissions("sys:dept:detail")
+ //   @RequiresPermissions("sys:dept:detail")
     public DataResult detailInfo(@PathVariable("id") String id) {
         return DataResult.success(deptService.getById(id));
     }
@@ -78,7 +78,7 @@ public class DeptController {
     @GetMapping("/depts")
     @ApiOperation(value = "获取机构列表接口")
     @LogAnnotation(title = "机构管理", action = "获取所有组织机构")
-    @RequiresPermissions("sys:dept:list")
+  //  @RequiresPermissions("sys:dept:list")
     public DataResult getDeptAll() {
         List<SysDept> deptList = deptService.list();
         deptList.parallelStream().forEach(entity -> {

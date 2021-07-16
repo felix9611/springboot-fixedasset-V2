@@ -34,7 +34,7 @@ public class SysDictDetailController {
 
     @ApiOperation(value = "新增")
     @PostMapping("/add")
-    @RequiresPermissions("sysDict:add")
+  //  @RequiresPermissions("sysDict:add")
     public DataResult add(@RequestBody SysDictDetailEntity sysDictDetail) {
         if (StringUtils.isEmpty(sysDictDetail.getValue())) {
             return DataResult.fail("字典值不能为空");
@@ -52,7 +52,7 @@ public class SysDictDetailController {
 
     @ApiOperation(value = "删除")
     @DeleteMapping("/delete")
-    @RequiresPermissions("sysDict:delete")
+ //   @RequiresPermissions("sysDict:delete")
     public DataResult delete(@RequestBody @ApiParam(value = "id集合") List<String> ids) {
         sysDictDetailService.removeByIds(ids);
         return DataResult.success();
@@ -60,7 +60,7 @@ public class SysDictDetailController {
 
     @ApiOperation(value = "更新")
     @PutMapping("/update")
-    @RequiresPermissions("sysDict:update")
+//    @RequiresPermissions("sysDict:update")
     public DataResult update(@RequestBody SysDictDetailEntity sysDictDetail) {
         if (StringUtils.isEmpty(sysDictDetail.getValue())) {
             return DataResult.fail("字典值不能为空");
@@ -80,7 +80,7 @@ public class SysDictDetailController {
 
     @ApiOperation(value = "查询列表数据")
     @PostMapping("/listByPage")
-    @RequiresPermissions("sysDict:list")
+//    @RequiresPermissions("sysDict:list")
     public DataResult findListByPage(@RequestBody SysDictDetailEntity sysDictDetail) {
         Page page = new Page(sysDictDetail.getPage(), sysDictDetail.getLimit());
         if (StringUtils.isEmpty(sysDictDetail.getDictId())) {

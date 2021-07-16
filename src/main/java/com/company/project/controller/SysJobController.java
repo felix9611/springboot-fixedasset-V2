@@ -44,7 +44,7 @@ public class SysJobController {
     @ApiOperation(value = "新增")
     @LogAnnotation(title = "新增")
     @PostMapping("/add")
-    @RequiresPermissions("sysJob:add")
+  //  @RequiresPermissions("sysJob:add")
     public DataResult add(@RequestBody SysJobEntity sysJob) {
         if (isValidExpression(sysJob.getCronExpression())) {
             return DataResult.fail("cron表达式有误");
@@ -60,7 +60,7 @@ public class SysJobController {
 
     @ApiOperation(value = "删除")
     @DeleteMapping("/delete")
-    @RequiresPermissions("sysJob:delete")
+ //   @RequiresPermissions("sysJob:delete")
     @LogAnnotation(title = "删除")
     public DataResult delete(@RequestBody @ApiParam(value = "id集合") List<String> ids) {
         sysJobService.delete(ids);
@@ -69,7 +69,7 @@ public class SysJobController {
 
     @ApiOperation(value = "更新")
     @PutMapping("/update")
-    @RequiresPermissions("sysJob:update")
+  //  @RequiresPermissions("sysJob:update")
     @LogAnnotation(title = "更新")
     public DataResult update(@RequestBody SysJobEntity sysJob) {
         if (isValidExpression(sysJob.getCronExpression())) {
@@ -86,7 +86,7 @@ public class SysJobController {
 
     @ApiOperation(value = "查询分页数据")
     @PostMapping("/listByPage")
-    @RequiresPermissions("sysJob:list")
+  //  @RequiresPermissions("sysJob:list")
     public DataResult findListByPage(@RequestBody SysJobEntity sysJob) {
         Page page = new Page(sysJob.getPage(), sysJob.getLimit());
         LambdaQueryWrapper<SysJobEntity> queryWrapper = Wrappers.lambdaQuery();
@@ -105,7 +105,7 @@ public class SysJobController {
     @ApiOperation(value = "立即执行任务")
     @LogAnnotation(title = "立即执行任务")
     @PostMapping("/run")
-    @RequiresPermissions("sysJob:run")
+  //  @RequiresPermissions("sysJob:run")
     public DataResult run(@RequestBody List<String> ids) {
         sysJobService.run(ids);
 
@@ -118,7 +118,7 @@ public class SysJobController {
     @ApiOperation(value = "暂停定时任务")
     @LogAnnotation(title = "暂停定时任务")
     @PostMapping("/pause")
-    @RequiresPermissions("sysJob:pause")
+  //  @RequiresPermissions("sysJob:pause")
     public DataResult pause(@RequestBody List<String> ids) {
         sysJobService.pause(ids);
 
@@ -131,7 +131,7 @@ public class SysJobController {
     @ApiOperation(value = "恢复定时任务")
     @LogAnnotation(title = "恢复定时任务")
     @PostMapping("/resume")
-    @RequiresPermissions("sysJob:resume")
+  //  @RequiresPermissions("sysJob:resume")
     public DataResult resume(@RequestBody List<String> ids) {
         sysJobService.resume(ids);
         return DataResult.success();

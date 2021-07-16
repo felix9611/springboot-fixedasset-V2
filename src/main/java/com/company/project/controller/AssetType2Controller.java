@@ -39,12 +39,10 @@ import javax.annotation.Resource;
 @Controller
 @RequestMapping("/assetType2")
 public class AssetType2Controller {
-    @Resource
-    private AssetType2Service assetType2Service;
 
-    @Resource
-    private AssetType2Entity assetType2Entity;
+    @Resource private AssetType2Service assetType2Service;
 
+    @Resource private AssetType2Entity assetType2Entity;
 
   //  @ApiOperation(value = "新增")
     @PostMapping("/add")
@@ -96,12 +94,11 @@ public class AssetType2Controller {
     }
 
   //  @ApiOperation(value = "取編號與名稱")
-    @GetMapping("/codeAndName/{id}")
+    @GetMapping("/codeAndName")
   //  @RequiresPermissions("assetType2:listCodeAndName")
     @ResponseBody
-    public List<AssetType2Entity> getCodeAndName(@PathVariable("id") String id) {
-        assetType2Entity.setId(id);
-        return assetType2Service.selectNameAndCode(assetType2Entity);
+    public List<AssetType2Entity> getCodeAndName() {
+        return assetType2Service.list();
        // return DataResult.success(listdata);
     }
 

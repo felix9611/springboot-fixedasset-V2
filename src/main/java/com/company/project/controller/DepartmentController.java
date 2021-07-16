@@ -39,14 +39,9 @@ public class DepartmentController {
 
     @Resource private DepartmentEntity departmentEntity;
 
-    @GetMapping("/index/department")
-    public String department() {
-        return "department/list";
-        }
-
     @ApiOperation(value = "新增")
     @PostMapping("department/add")
-    @RequiresPermissions("department:add")
+ //   @RequiresPermissions("department:add")
     @ResponseBody
     public DataResult add(@RequestBody DepartmentEntity department){
         departmentService.save(department);
@@ -56,7 +51,7 @@ public class DepartmentController {
 
     @ApiOperation(value = "删除")
     @DeleteMapping("department/delete")
-    @RequiresPermissions("department:delete")
+  //  @RequiresPermissions("department:delete")
     @ResponseBody
     public DataResult delete(@RequestBody DepartmentEntity department){
         departmentService.updateActive(department);
@@ -66,7 +61,7 @@ public class DepartmentController {
 
     @ApiOperation(value = "更新")
     @PutMapping("department/update")
-    @RequiresPermissions("department:update")
+ //   @RequiresPermissions("department:update")
     @ResponseBody
     public DataResult update(@RequestBody DepartmentEntity department){
         departmentService.updateById(department);
@@ -76,7 +71,7 @@ public class DepartmentController {
 
     @ApiOperation(value = "查询分页数据")
     @PostMapping("department/listByPage")
-    @RequiresPermissions("department:list")
+ //   @RequiresPermissions("department:list")
     @ResponseBody
     public DataResult findListByPage(@RequestBody DepartmentEntity department){
         Page page = new Page(department.getPage(), department.getLimit());
@@ -97,7 +92,7 @@ public class DepartmentController {
 
     @ApiOperation(value = "取編號與名稱")
     @GetMapping("department/codeAndName")
-    @RequiresPermissions("department:listCodeAndName")
+ //   @RequiresPermissions("department:listCodeAndName")
     @ResponseBody
     public DataResult getCodeAndName(@RequestParam String id) {
         departmentEntity.setId(id);

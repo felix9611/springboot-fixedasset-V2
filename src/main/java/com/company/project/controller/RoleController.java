@@ -32,15 +32,15 @@ import java.util.List;
 @RestController
 @Api(tags = "组织模块-角色管理")
 public class RoleController {
-    @Resource
-    private RoleService roleService;
-    @Resource
-    private SysRoleDeptService sysRoleDeptService;
+
+    @Resource private RoleService roleService;
+
+    @Resource private SysRoleDeptService sysRoleDeptService;
 
     @PostMapping("/role")
     @ApiOperation(value = "新增角色接口")
     @LogAnnotation(title = "角色管理", action = "新增角色")
-    @RequiresPermissions("sys:role:add")
+//    @RequiresPermissions("sys:role:add")
     public DataResult addRole(@RequestBody @Valid SysRole vo) {
         System.out.print(vo);
         roleService.addRole(vo);
@@ -50,7 +50,7 @@ public class RoleController {
     @DeleteMapping("/role/{id}")
     @ApiOperation(value = "删除角色接口")
     @LogAnnotation(title = "角色管理", action = "删除角色")
-    @RequiresPermissions("sys:role:deleted")
+  //  @RequiresPermissions("sys:role:deleted")
     public DataResult deleted(@PathVariable("id") String id) {
         System.out.print(id);
         roleService.deletedRole(id);
@@ -60,7 +60,7 @@ public class RoleController {
     @PutMapping("/role")
     @ApiOperation(value = "更新角色信息接口")
     @LogAnnotation(title = "角色管理", action = "更新角色信息")
-    @RequiresPermissions("sys:role:update")
+  //  @RequiresPermissions("sys:role:update")
     public DataResult updateDept(@RequestBody SysRole vo) {
         if (StringUtils.isEmpty(vo.getId())) {
             return DataResult.fail("id不能为空");
@@ -73,7 +73,7 @@ public class RoleController {
     @PostMapping("/role/bindDept")
     @ApiOperation(value = "绑定角色部门接口")
     @LogAnnotation(title = "角色管理", action = "绑定角色部门信息")
-    @RequiresPermissions("sys:role:bindDept")
+ //   @RequiresPermissions("sys:role:bindDept")
     public DataResult bindDept(@RequestBody SysRole vo) {
         if (StringUtils.isEmpty(vo.getId())) {
             return DataResult.fail("id不能为空");
@@ -105,7 +105,7 @@ public class RoleController {
     @GetMapping("/role/{id}")
     @ApiOperation(value = "查询角色详情接口")
     @LogAnnotation(title = "角色管理", action = "查询角色详情")
-    @RequiresPermissions("sys:role:detail")
+  //  @RequiresPermissions("sys:role:detail")
     public DataResult detailInfo(@PathVariable("id") String id) {
         System.out.print(id);
         return DataResult.success(roleService.detailInfo(id));

@@ -37,7 +37,7 @@ public class SysContentController {
 
     @ApiOperation(value = "新增")
     @PostMapping("/add")
-    @RequiresPermissions("sysContent:add")
+ //   @RequiresPermissions("sysContent:add")
     public DataResult add(@RequestBody SysContentEntity sysContent) {
         sysContentService.save(sysContent);
         return DataResult.success();
@@ -45,7 +45,7 @@ public class SysContentController {
 
     @ApiOperation(value = "删除")
     @DeleteMapping("/delete")
-    @RequiresPermissions("sysContent:delete")
+  //  @RequiresPermissions("sysContent:delete")
     public DataResult delete(@RequestBody @ApiParam(value = "id集合") List<String> ids) {
         sysContentService.removeByIds(ids);
         return DataResult.success();
@@ -53,7 +53,7 @@ public class SysContentController {
 
     @ApiOperation(value = "更新")
     @PutMapping("/update")
-    @RequiresPermissions("sysContent:update")
+//    @RequiresPermissions("sysContent:update")
     public DataResult update(@RequestBody SysContentEntity sysContent) {
         sysContentService.updateById(sysContent);
         return DataResult.success();
@@ -61,7 +61,7 @@ public class SysContentController {
 
     @ApiOperation(value = "查询分页数据")
     @PostMapping("/listByPage")
-    @RequiresPermissions("sysContent:list")
+ //   @RequiresPermissions("sysContent:list")
     @DataScope
     public DataResult findListByPage(@RequestBody SysContentEntity sysContent) {
         Page page = new Page(sysContent.getPage(), sysContent.getLimit());

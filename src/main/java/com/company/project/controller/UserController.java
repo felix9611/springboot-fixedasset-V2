@@ -85,7 +85,7 @@ public class UserController {
     @PutMapping("/user")
     @ApiOperation(value = "更新用戶資料接口")
     @LogAnnotation(title = "用户管理", action = "更新用戶資料")
-    @RequiresPermissions("sys:user:update")
+  //  @RequiresPermissions("sys:user:update")
     public DataResult updateUserInfo(@RequestBody SysUser vo) {
         if (StringUtils.isEmpty(vo.getId())) {
             return DataResult.fail("id不能為空");
@@ -107,7 +107,7 @@ public class UserController {
     @GetMapping("/user/{id}")
     @ApiOperation(value = "查詢用戶詳情接口")
     @LogAnnotation(title = "用戶管理", action = "查詢用戶詳情")
-    @RequiresPermissions("sys:user:detail")
+ //   @RequiresPermissions("sys:user:detail")
     public DataResult detailInfo(@PathVariable("id") String id) {
         System.out.print(id);
         return DataResult.success(userService.getById(id));
@@ -124,7 +124,7 @@ public class UserController {
 
     @PostMapping("/users")
     @ApiOperation(value = "分頁獲取用戶列表接口")
-    @RequiresPermissions("sys:user:list")
+  //  @RequiresPermissions("sys:user:list")
     @LogAnnotation(title = "用戶管理", action = "分頁獲取用戶列表")
     public DataResult pageInfo(@RequestBody SysUser vo) {
         System.out.print(vo);
@@ -133,7 +133,7 @@ public class UserController {
 
     @PostMapping("/user")
     @ApiOperation(value = "新增用戶接口")
-    @RequiresPermissions("sys:user:add")
+  //  @RequiresPermissions("sys:user:add")
     @LogAnnotation(title = "用戶管理", action = "新增用戶")
     public DataResult addUser(@RequestBody @Valid SysUser vo) {
         userService.addUser(vo);
@@ -168,7 +168,7 @@ public class UserController {
     @DeleteMapping("/user")
     @ApiOperation(value = "刪除用戶接口")
     @LogAnnotation(title = "用戶管理", action = "刪除用戶")
-    @RequiresPermissions("sys:user:deleted")
+   // @RequiresPermissions("sys:user:deleted")
     public DataResult deletedUser(@RequestBody @ApiParam(value = "用戶id集合") List<String> userIds) {
         //删除用户， 删除redis的绑定的角色跟权限
         System.out.print(userIds);
@@ -182,7 +182,7 @@ public class UserController {
     @GetMapping("/user/roles/{userId}")
     @ApiOperation(value = "賦予角色-獲取所有角色接口")
     @LogAnnotation(title = "用戶管理", action = "賦予角色-獲取所有角色接口")
-    @RequiresPermissions("sys:user:role:detail")
+ //   @RequiresPermissions("sys:user:role:detail")
     public DataResult getUserOwnRole(@PathVariable("userId") String userId) {
         System.out.print(userId);
         DataResult result = DataResult.success();
@@ -193,7 +193,7 @@ public class UserController {
     @PutMapping("/user/roles/{userId}")
     @ApiOperation(value = "賦予角色-獲取所有角色接口")
     @LogAnnotation(title = "用戶管理", action = "賦予角色-獲取所有角色接口")
-    @RequiresPermissions("sys:user:update:role")
+   // @RequiresPermissions("sys:user:update:role")
     public DataResult setUserOwnRole(@PathVariable("userId") String userId, @RequestBody List<String> roleIds) {
         System.out.print(roleIds);
         LambdaQueryWrapper<SysUserRole> queryWrapper = Wrappers.lambdaQuery();

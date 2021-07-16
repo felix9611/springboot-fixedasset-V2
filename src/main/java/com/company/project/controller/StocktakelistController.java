@@ -34,17 +34,11 @@ import javax.annotation.Resource;
 @RequestMapping("/")
 public class StocktakelistController {
 
-    @Resource
-    private StocktakelistService stocktakelistService;
-
-    @GetMapping("/index/stocktakelist")
-    public String stocktakelist() {
-        return "stocktakelist/list";
-        }
+    @Resource private StocktakelistService stocktakelistService;
 
     @ApiOperation(value = "新增")
     @PostMapping("stocktakelist/add")
-    @RequiresPermissions("stocktakelist:add")
+  //  @RequiresPermissions("stocktakelist:add")
     @ResponseBody
     public DataResult add(@RequestBody StocktakelistEntity stocktakelist){
         stocktakelistService.newActivity(stocktakelist);
@@ -53,25 +47,16 @@ public class StocktakelistController {
 
     @ApiOperation(value = "删除")
     @DeleteMapping("stocktakelist/delete")
-    @RequiresPermissions("stocktakelist:delete")
+  //  @RequiresPermissions("stocktakelist:delete")
     @ResponseBody
     public DataResult delete(@RequestBody @ApiParam(value = "id集合") List<String> ids){
         stocktakelistService.removeByIds(ids);
         return DataResult.success();
     }
 
-  /*  @ApiOperation(value = "更新")
-    @PutMapping("stocktakelist/update")
-    @RequiresPermissions("stocktakelist:update")
-    @ResponseBody
-    public DataResult update(@RequestBody StocktakelistEntity stocktakelist){
-        stocktakelistService.updateById(stocktakelist);
-        return DataResult.success();
-    }*/
-
     @ApiOperation(value = "查詢分頁數據")
     @PostMapping("stocktakelist/listByPage")
-    @RequiresPermissions("stocktakelist:list")
+  //  @RequiresPermissions("stocktakelist:list")
     @ResponseBody
     public DataResult findListByPage(@RequestBody StocktakelistEntity stocktakelist){
         Page page = new Page(stocktakelist.getPage(), stocktakelist.getLimit());

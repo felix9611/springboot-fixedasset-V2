@@ -35,20 +35,9 @@ public class StocktakelistDetailController {
     @Resource
     private StocktakelistDetailService stocktakelistDetailService;
 
-
-
-
-    /**
-    * 跳转到页面
-    */
-    @GetMapping("/index/stocktakelistDetail")
-    public String stocktakelistDetail() {
-        return "stocktakelistdetail/list";
-        }
-
     @ApiOperation(value = "新增")
     @PostMapping("stocktakelistDetail/add")
-    @RequiresPermissions("stocktakelistDetail:add")
+   // @RequiresPermissions("stocktakelistDetail:add")
     @ResponseBody
     public DataResult add(@RequestBody StocktakelistDetailEntity stocktakelistDetail){
 
@@ -63,19 +52,9 @@ public class StocktakelistDetailController {
         return DataResult.success();
     }
 
- /*   @ApiOperation(value = "删除")
-    @DeleteMapping("stocktakelistDetail/delete")
-    @RequiresPermissions("stocktakelistDetail:delete")
-    @ResponseBody
-    public DataResult delete(@RequestBody @ApiParam(value = "id集合") List<String> ids){
-        stocktakelistDetailService.removeByIds(ids);
-        return DataResult.success();
-    }*/
-
-
     @ApiOperation(value = "查詢分頁數據")
     @PostMapping("stocktakelistDetail/listByPage")
-    @RequiresPermissions("stocktakelistDetail:list")
+  //  @RequiresPermissions("stocktakelistDetail:list")
     @ResponseBody
     public DataResult findListByPage(@RequestBody StocktakelistDetailEntity stocktakelistDetail){
         Page page = new Page(stocktakelistDetail.getPage(), stocktakelistDetail.getLimit());

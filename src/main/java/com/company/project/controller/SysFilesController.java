@@ -34,7 +34,7 @@ public class SysFilesController {
 
     @ApiOperation(value = "新增")
     @PostMapping("/upload")
-    @RequiresPermissions(value = {"sysFiles:add", "sysContent:update", "sysContent:add"}, logical = Logical.OR)
+  //  @RequiresPermissions(value = {"sysFiles:add", "sysContent:update", "sysContent:add"}, logical = Logical.OR)
     public DataResult add(@RequestParam(value = "file") MultipartFile file) {
         //判断文件是否空
         if (file == null || file.getOriginalFilename() == null || "".equalsIgnoreCase(file.getOriginalFilename().trim())) {
@@ -45,7 +45,7 @@ public class SysFilesController {
 
     @ApiOperation(value = "删除")
     @DeleteMapping("/delete")
-    @RequiresPermissions("sysFiles:delete")
+  //  @RequiresPermissions("sysFiles:delete")
     public DataResult delete(@RequestBody @ApiParam(value = "id集合") List<String> ids) {
         sysFilesService.removeByIdsAndFiles(ids);
         return DataResult.success();
@@ -53,7 +53,7 @@ public class SysFilesController {
 
     @ApiOperation(value = "查询分页数据")
     @PostMapping("/listByPage")
-    @RequiresPermissions("sysFiles:list")
+  //  @RequiresPermissions("sysFiles:list")
     public DataResult findListByPage(@RequestBody SysFilesEntity sysFiles) {
         Page page = new Page(sysFiles.getPage(), sysFiles.getLimit());
         IPage<SysFilesEntity> iPage = sysFilesService.page(page, Wrappers.<SysFilesEntity>lambdaQuery().orderByDesc(SysFilesEntity::getCreateDate));

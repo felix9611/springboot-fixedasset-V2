@@ -31,18 +31,12 @@ import com.company.project.service.AssetPlaceService;
 @Controller
 @RequestMapping("/")
 public class AssetPlaceController {
-    @Autowired
-    private AssetPlaceService assetPlaceService;
 
-    @GetMapping("/index/assetPlace")
-    public String assetPlace() {
-        return "assetplace/list";
-        }
-
+    @Autowired private AssetPlaceService assetPlaceService;
 
     @ApiOperation(value = "查詢分頁數據")
     @PostMapping("assetPlace/listByPage")
-    @RequiresPermissions("assetPlace:list")
+ //   @RequiresPermissions("assetPlace:list")
     @ResponseBody
     public DataResult findListByPage(@RequestBody AssetPlaceEntity assetPlace){
         Page page = new Page(assetPlace.getPage(), assetPlace.getLimit());

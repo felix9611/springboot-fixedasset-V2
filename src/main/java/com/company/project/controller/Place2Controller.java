@@ -37,14 +37,9 @@ public class Place2Controller {
 
     @Resource private Place2Entity place2Entity;
 
-    @GetMapping("/index/place2")
-    public String place2() {
-        return "place2/list";
-        }
-
     @ApiOperation(value = "新增")
     @PostMapping("place2/add")
-    @RequiresPermissions("place2:add")
+ //   @RequiresPermissions("place2:add")
     @ResponseBody
     public DataResult add(@RequestBody Place2Entity place2){
         place2Service.save(place2);
@@ -54,7 +49,7 @@ public class Place2Controller {
 
     @ApiOperation(value = "删除")
     @PutMapping("place2/delete")
-    @RequiresPermissions("place2:delete")
+ //   @RequiresPermissions("place2:delete")
     @ResponseBody
     public DataResult delete(@RequestBody Place2Entity place2){
         place2Service.updateActive(place2);
@@ -64,7 +59,7 @@ public class Place2Controller {
 
     @ApiOperation(value = "更新")
     @PutMapping("place2/update")
-    @RequiresPermissions("place2:update")
+ //   @RequiresPermissions("place2:update")
     @ResponseBody
     public DataResult update(@RequestBody Place2Entity place2){
         place2Service.updateById(place2);
@@ -74,7 +69,7 @@ public class Place2Controller {
 
     @ApiOperation(value = "查詢分頁數據")
     @PostMapping("place2/listByPage")
-    @RequiresPermissions("place2:list")
+ //   @RequiresPermissions("place2:list")
     @ResponseBody
     public DataResult findListByPage(@RequestBody Place2Entity place2){
         Page page = new Page(place2.getPage(), place2.getLimit());
@@ -94,24 +89,12 @@ public class Place2Controller {
         return DataResult.success(iPage);
     }
 
-    /*
-    @ApiOperation(value = "取編號與名稱")
-    @GetMapping("assetType2/codeAndName")
-    @RequiresPermissions("assetType2:listCodeAndName")
-    @ResponseBody
-    public DataResult getCodeAndName(@RequestParam String id) {
-        assetType2Entity.setId(id);
-        List<AssetType2Entity>  listdata = assetType2Service.selectNameAndCode(assetType2Entity);
-        return DataResult.success(listdata);
-    }
-     */
     @ApiOperation(value = "取編號與名稱")
     @GetMapping("place2/codeAndName")
-    @RequiresPermissions("place2:listCodeAndName")
+  //  @RequiresPermissions("place2:listCodeAndName")
     @ResponseBody
-    public DataResult getCodeAndName(@RequestParam String id) {
-        place2Entity.setId(id);
-        List<Place2Entity> listdata = place2Service.selectNameAndCode(place2Entity);
+    public DataResult getCodeAndName() {
+        List<Place2Entity> listdata = place2Service.list();
         return DataResult.success(listdata);
     }
 }

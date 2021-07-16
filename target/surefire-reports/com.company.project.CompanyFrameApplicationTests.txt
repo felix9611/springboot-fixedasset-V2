@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: com.company.project.CompanyFrameApplicationTests
+-------------------------------------------------------------------------------
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 13.529 s - in com.company.project.CompanyFrameApplicationTests
