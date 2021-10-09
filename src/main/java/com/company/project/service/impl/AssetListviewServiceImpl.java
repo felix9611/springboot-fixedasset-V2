@@ -93,13 +93,13 @@ public class AssetListviewServiceImpl extends ServiceImpl<AssetListviewMapper, A
         this.actionRecordEntity.setActionName("DELETE");
         this.actionRecordEntity.setActionMethod("PUT");
         this.actionRecordEntity.setActionFrom("資產管理");
-        if (set == 1) {
+        // if (set == 1) {
             this.actionRecordEntity.setActionData("已被設為無效: " + assetListview.toString());
             this.actionRecordEntity.setActionSuccess("Success");
-        } else {
-            this.actionRecordEntity.setActionData("(失敗)已被設為無效: " + assetListview.toString());
-            this.actionRecordEntity.setActionSuccess("Failure");
-        }
+        // } else {
+        //     this.actionRecordEntity.setActionData("(失敗)已被設為無效: " + assetListview.toString());
+        //     this.actionRecordEntity.setActionSuccess("Failure");
+        // }
 
         this.actionRecordMapper.insert(this.actionRecordEntity);
     }
@@ -147,6 +147,7 @@ public class AssetListviewServiceImpl extends ServiceImpl<AssetListviewMapper, A
                 this.actionRecordEntity.setActionName("UPDATE");
                 this.actionRecordEntity.setActionMethod("PUT");
                 this.actionRecordEntity.setActionFrom("被分配地點");
+                this.actionRecordEntity.setActionSuccess("Success");
                 this.actionRecordEntity.setActionData("更新資料: " + this.assetPlaceEntity.toString());
             }
 
