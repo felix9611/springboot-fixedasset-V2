@@ -39,17 +39,17 @@ public class ScheduleJob extends QuartzJobBean {
        // SysJobLogService scheduleJobLogService = (SysJobLogService) SpringContextUtils.getBean("sysJobLogService");
 
         //数据库保存执行记录
-        SysJobLogEntity log = new SysJobLogEntity();
+      /*  SysJobLogEntity log = new SysJobLogEntity();
         log.setJobId(scheduleJob.getId());
         log.setBeanName(scheduleJob.getBeanName());
-        log.setParams(scheduleJob.getParams());
+        log.setParams(scheduleJob.getParams()); */
 
         //任务开始时间
-        long startTime = System.currentTimeMillis();
+        // long startTime = System.currentTimeMillis();
 
         try {
             //执行任务
-            logger.debug("任务准备执行，任务ID：" + scheduleJob.getId());
+           /* logger.debug("任务准备执行，任务ID：" + scheduleJob.getId());
 
             Object target = SpringContextUtils.getBean(scheduleJob.getBeanName());
             assert target != null;
@@ -62,9 +62,9 @@ public class ScheduleJob extends QuartzJobBean {
             //任务状态    0：成功    1：失败
             log.setStatus(0);
 
-            logger.debug("任务执行完毕，任务ID：" + scheduleJob.getId() + "  总共耗时：" + times + "毫秒");
+            logger.debug("任务执行完毕，任务ID：" + scheduleJob.getId() + "  总共耗时：" + times + "毫秒"); */
         } catch (Exception e) {
-            logger.error("任务执行失败，任务ID：" + scheduleJob.getId(), e);
+            /* logger.error("任务执行失败，任务ID：" + scheduleJob.getId(), e);
 
             //任务执行总时长
             long times = System.currentTimeMillis() - startTime;
@@ -72,7 +72,7 @@ public class ScheduleJob extends QuartzJobBean {
 
             //任务状态    0：成功    1：失败
             log.setStatus(1);
-            log.setError(StringUtils.substring(e.toString(), 0, 2000));
+            log.setError(StringUtils.substring(e.toString(), 0, 2000)); */
         } finally {
            // assert scheduleJobLogService != null;
             //scheduleJobLogService.save(log);
