@@ -160,30 +160,13 @@
       });
     });
 
-    //删除
-    /*var deletedActive = function (Id) {
-            layer.open({
-                content: '確定要刪除?',
-                yes: function (index, layero) {
-                    layer.close(index); //如果设定了yes回调，需进行手工关闭
-                    CoreUtil.sendDelete("/assetType2/" + Id, null,function (res) {
-                        //layer.msg(res.msg);
-                        //reloadTreeTable();
-                        layer.msg(res.msg, {time:1000},function () {
-                          search();
-                        });
-                    });
-                }
-            });
-        };*/
     var tipDialog=function (id) {
       layer.open({
         content: "確定要删除?",
         yes: function(index, layero){
           layer.close(index);
           console.log(id);
-          CoreUtil.sendDelete("/assetType2/delete", id,function (res) {
-         // CoreUtil.sendDelete("/assetType2/delete",ids,function (res) {
+          CoreUtil.sendPut("/assetType2/delete", id,function (res) {
             layer.msg(res.msg, {time:1000},function () {
               search();
             });

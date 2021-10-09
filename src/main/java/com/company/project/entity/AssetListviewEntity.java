@@ -10,9 +10,11 @@ import java.io.Serializable;
 import java.util.Date;
 
 import lombok.Data;
+import org.hibernate.annotations.ManyToAny;
 import org.springframework.stereotype.Component;
 
 import javax.persistence.GeneratedValue;
+import javax.persistence.ManyToOne;
 
 /**
  * 
@@ -50,6 +52,9 @@ public class AssetListviewEntity extends BaseEntity implements Serializable {
 	 */
 	@TableField("asset_type")
 	private String assetType;
+
+	@ManyToOne
+	private AssetType2Entity assetType2Entity;
 
 	/**
 	 * 單位

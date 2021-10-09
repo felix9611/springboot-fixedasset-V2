@@ -10,7 +10,7 @@ spring:
       primary: master
       datasource:
         master:
-          username: root
+          username: admin
           password: GB2444JC3103
           driver-class-name: com.mysql.cj.jdbc.Driver
           url: jdbc:mysql://localhost:3506/fixedasset_springboot?useUnicode=true&useSSL=false&characterEncoding=utf8&serverTimezone=GMT%2b8

@@ -82,7 +82,7 @@ public class StocktakelistDetailController {
         if (StringUtils.isEmpty(stocktakelistDetail.getListId())) {
             return DataResult.success();
         }
-        IPage<StocktakelistDetailEntity> iPage = stocktakelistDetailService.listByPage(page, stocktakelistDetail.getListId());
+        Page<StocktakelistDetailEntity> iPage = stocktakelistDetailService.listByPage(page, stocktakelistDetail.getListId());
         return DataResult.success(iPage);
     }
 

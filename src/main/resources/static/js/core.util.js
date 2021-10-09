@@ -2,27 +2,32 @@
 var CoreUtil = (function () {
     var coreUtil = {};
 
+    
+    coreUtil.send = function(url, params, method, ft){
+        this.sendAJAX(url, params, ft, method)
+    }
+
     /*GET*/
     coreUtil.sendGet = function(url, params, ft){
-        this.sendAJAX(url, params, ft, "GET")
+        this.sendAJAX(url, params, "GET", ft)
     }
 
     /*POST*/
     coreUtil.sendPost = function(url, params, ft){
-        this.sendAJAX(url, JSON.stringify(params), ft, "POST")
+        this.sendAJAX(url, JSON.stringify(params), "POST", ft)
     }
     /*PUT*/
     coreUtil.sendPut = function(url, params, ft){
-        this.sendAJAX(url, JSON.stringify(params), ft, "PUT")
+        this.sendAJAX(url, JSON.stringify(params), "PUT", ft)
     }
     /*DELETE*/
     coreUtil.sendDelete = function(url, params, ft){
-        this.sendAJAX(url, JSON.stringify(params), ft, "DELETE")
+        this.sendAJAX(url, JSON.stringify(params), "DELETE", ft)
     }
 
 
     /*ajax*/
-    coreUtil.sendAJAX = function(url, params, ft, method){
+    coreUtil.sendAJAX = function(url, params, method, ft){
         var loadIndex = top.layer.load(0, {shade: false});
         $.ajax({
             url: url,

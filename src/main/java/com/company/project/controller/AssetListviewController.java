@@ -109,7 +109,7 @@ public class AssetListviewController {
 
         System.out.print(queryWrapper);
 
-        IPage<AssetListviewEntity> iPage = assetListviewService.page(page, queryWrapper);
+        Page<AssetListviewDTO> iPage = assetListviewService.newPage(page, queryWrapper);
         return DataResult.success(iPage);
     }
 

@@ -1,8 +1,8 @@
 package com.company.project.service.impl;
 
-import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.company.project.common.exception.BusinessException;
+import com.company.project.dto.StockDetailDto;
 import com.company.project.entity.ActionRecordEntity;
 import com.company.project.entity.StocktakelistEntity;
 import com.company.project.mapper.*;
@@ -39,7 +39,7 @@ public class StocktakelistDetailServiceImpl extends ServiceImpl<StocktakelistDet
     @Resource private AssetPlaceMapper assetPlaceMapper;
 
     @Override
-    public IPage<StocktakelistDetailEntity> listByPage(Page<StocktakelistDetailEntity> page, String listId){
+    public Page<StockDetailDto> listByPage(Page<StocktakelistDetailEntity> page, String listId){
 
         StocktakelistEntity stocktakelistEntity = stocktakelistMapper.selectById(listId);
         if (stocktakelistEntity == null) {
@@ -49,12 +49,10 @@ public class StocktakelistDetailServiceImpl extends ServiceImpl<StocktakelistDet
         LambdaQueryWrapper<StocktakelistDetailEntity> wrapper = Wrappers.lambdaQuery();
         wrapper.eq(StocktakelistDetailEntity::getListId, listId);
 
-        IPage<StocktakelistDetailEntity> result = stocktakelistDetailMapper.selectPage(page , wrapper);
+        Page<StockDetailDto> result = stocktakelistDetailMapper.newPage(page, wrapper);
         if (!CollectionUtils.isEmpty(result.getRecords())) {
             result.getRecords().parallelStream().forEach(entity -> entity.setListId(stocktakelistEntity.getId()));
         }
-
-
         return result;
     }
 

@@ -279,16 +279,11 @@
         [
           {width: 110, field: 'assetCode', title: '資產編號', sort: true},
           {field: 'assetName', title: '資產名稱', sort: true},
-          {width: 180, field: 'assetType', title: '種類', templet: function (item) {
-                        return CoreUtil.selecTypetId(datas, item.assetType);
-                        }
-                    },
+          {width: 180, field: 'typeName', title: '種類'},
           {width: 160, field: 'buydate', title: '購入日期'},
-          {width: 210, field: 'deptId', title: '所屬部門', templet: function (item) {
-                        return CoreUtil.selectDeptId(departdatas, item.deptId);
-                        }
-          },
-          {width: 180, toolbar: "#tool", title: '操作'}
+          {width: 210, field: 'deptName', title: '所屬部門' },
+          {width: 180, toolbar: "#tool", title: '操作'},
+          {width: 180, field: 'assetType2Entity.typeName', title: '種類'}
         ]
       ]
       , toolbar: '#toolbar'
@@ -297,8 +292,9 @@
 
 
     table.on('toolbar(showTable)', function(obj){
+        console.log(obj)
       switch(obj.event){
-      
+
         case 'add':
           $(".table_div").hide();
           $(".operation").show();
@@ -414,7 +410,7 @@
         content: "確定要删除?",
         yes: function(index, layero){
           layer.close(index); 
-          CoreUtil.sendDelete("/assetListview/delete",ids,function (res) {
+          CoreUtil.sendPut("/assetListview/delete",ids,function (res) {
             layer.msg(res.msg, {time:1000},function () {
               search();
             });

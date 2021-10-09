@@ -201,18 +201,15 @@
             }
             , cols: [
                 [
-                    {field: 'assetCode', title: '資產編號', sort: true, templet: function (item) {
-                        return CoreUtil.selectAssetCode(assetdatas, item.assetCode);
-                        }
-                    },
-                    {field: 'assetCode', title: '資產名稱', sort: true, templet: function (item) {
-                        return CoreUtil.selectAssetName(assetdatas, item.assetCode);
-                        }
-                    },
-                    {field: 'assetPlace', title: '地點', sort: true, templet: function (item) {
-                        return CoreUtil.selecPlacetId(placedatas, item.assetPlace);
-                        }
-                    },
+                    {field: 'assetCode', title: '資產編號', sort: true },
+                    {field: 'assetName', title: '資產名稱', sort: true },
+                    {field: 'placeName', title: '檢查地點', sort: false , templet: function (item) {
+                            if(!item.placeName){
+                                return "錯誤";
+                            }else{
+                                return item.placeName;
+                            }
+                        }},
                     {field: 'status', title: '狀態', sort: true, templet: function (item) {
                             var asset = CoreUtil.selectAssetName(assetdatas, item.assetCode);
                             if(asset != "(此資產不存在)"){

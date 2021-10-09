@@ -40,8 +40,8 @@
     </springProfile>
 
     <!-- 打印sql -->
-   <springProfile name="dev">
-       <!-- <logger name="com.company.project" level="DEBUG"/>-->
+   <springProfile name="prod">
+        <logger name="com.company.project" level="DEBUG"/>
         <root level="${LOG_LEVEL}">
             <appender-ref ref="CONSOLE"/>
         </root>

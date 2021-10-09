@@ -1,7 +1,7 @@
 package com.company.project.service;
 
-import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.company.project.dto.StockDetailDto;
 import com.company.project.entity.StocktakelistDetailEntity;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 /**
@@ -18,7 +18,7 @@ public interface StocktakelistDetailService extends IService<StocktakelistDetail
      * @param listId listId
      * @return IPage
      */
-    IPage<StocktakelistDetailEntity> listByPage(Page<StocktakelistDetailEntity> page, String listId);
+    Page<StockDetailDto> listByPage(Page<StocktakelistDetailEntity> page, String listId);
 
     void saveDetail(StocktakelistDetailEntity entity);
 }

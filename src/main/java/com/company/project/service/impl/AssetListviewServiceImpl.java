@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.company.project.common.config.FileUploadProperties;
 import com.company.project.common.exception.BusinessException;
 import com.company.project.common.utils.DataResult;
@@ -16,7 +17,6 @@ import com.company.project.mapper.AssetPlaceMapper;
 import com.company.project.service.AssetPhotoService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.FileUtils;
-import org.apache.shiro.authz.annotation.RequiresAuthentication;
 import org.springframework.stereotype.Service;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 
@@ -54,6 +54,11 @@ public class AssetListviewServiceImpl extends ServiceImpl<AssetListviewMapper, A
     @Resource private ActionRecordMapper actionRecordMapper;
 
     @Resource private ActionRecordEntity actionRecordEntity;
+
+    @Override
+    public Page<AssetListviewDTO> newPage(Page page, LambdaQueryWrapper<AssetListviewEntity> queryWrapper){
+        return this.assetListviewMapper.page(page, queryWrapper);
+    }
 
     @Override
     public void newAsset(AssetListviewEntity vo){

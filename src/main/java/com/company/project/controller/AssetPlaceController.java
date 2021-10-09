@@ -2,6 +2,7 @@ package com.company.project.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
+import com.company.project.dto.AssetPlaceDto;
 import com.company.project.entity.AssetListviewEntity;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,7 +53,8 @@ public class AssetPlaceController {
             queryWrapper.eq(AssetPlaceEntity::getPlaceId, assetPlace.getPlaceId());
         }
         System.out.print(assetPlace);
-        IPage<AssetPlaceEntity> iPage = assetPlaceService.page(page, queryWrapper);
+        // IPage<AssetPlaceEntity> iPage = assetPlaceService.page(page, queryWrapper);
+        Page<AssetPlaceDto> iPage = assetPlaceService.newPage(page, queryWrapper);
         return DataResult.success(iPage);
     }
 
