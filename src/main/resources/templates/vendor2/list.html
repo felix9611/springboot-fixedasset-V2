@@ -217,7 +217,7 @@
     //删除
     var tipDialog=function (ids) {
       layer.open({
-        content: "确定要删除么?",
+        content: "確定要删除么?",
         yes: function(index, layero){
           layer.close(index); //如果设定了yes回调，需进行手工关闭
           CoreUtil.sendDelete("/vendor2/delete",ids,function (res) {

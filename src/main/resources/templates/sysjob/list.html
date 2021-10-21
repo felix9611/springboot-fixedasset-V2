@@ -298,7 +298,7 @@
         //删除
         var tipDialog = function (ids) {
             layer.open({
-                content: "确定要删除么?",
+                content: "確定要删除么?",
                 yes: function (index, layero) {
                     layer.close(index); //如果设定了yes回调，需进行手工关闭
                     CoreUtil.sendDelete("/sysJob/delete", ids, function (res) {
@@ -313,7 +313,7 @@
         //暂停
         var tipDialogPause = function (ids) {
             layer.open({
-                content: "确定要暂停么?",
+                content: "確定要暂停么?",
                 yes: function (index, layero) {
                     layer.close(index); //如果设定了yes回调，需进行手工关闭
                     CoreUtil.sendPost("/sysJob/pause", ids, function (res) {
@@ -328,7 +328,7 @@
         //恢复
         var tipDialogResume = function (ids) {
             layer.open({
-                content: "确定要恢复么?",
+                content: "確定要恢复么?",
                 yes: function (index, layero) {
                     layer.close(index); //如果设定了yes回调，需进行手工关闭
                     CoreUtil.sendPost("/sysJob/resume", ids, function (res) {
@@ -344,7 +344,7 @@
         //立即执行
         var tipDialogRun = function (ids) {
             layer.open({
-                content: "确定要立即执行么?",
+                content: "確定要立即执行么?",
                 yes: function (index, layero) {
                     layer.close(index); //如果设定了yes回调，需进行手工关闭
                     CoreUtil.sendPost("/sysJob/run", ids, function (res) {

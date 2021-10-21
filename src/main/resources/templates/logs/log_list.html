@@ -136,10 +136,10 @@
             }
         });
 
-        //删除前确认对话框
+        //删除前確认对话框
         var tipDialog = function (logIds) {
             layer.open({
-                content: '确定要删除么',
+                content: '確定要删除么',
                 yes: function (index, layero) {
                     layer.close(index); //如果设定了yes回调，需进行手工关闭
                     CoreUtil.sendDelete("/sys/logs", logIds, function (res) {

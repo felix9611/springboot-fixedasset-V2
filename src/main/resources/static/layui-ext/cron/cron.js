@@ -61,7 +61,7 @@ layui.define(["form"], function (exports) {
     value: "* * * * * ?", // 当前表达式值，每秒执行一次
     lang: "cn", //语言，只支持cn/en，即中文和英文
     trigger: "focus", //呼出控件的事件
-    done: null, //控件选择完毕后的回调，点击运行/确定也均会触发
+    done: null, //控件选择完毕后的回调，点击运行/確定也均会触发
     run: null, // 最近运行时间接口
   };
 
@@ -174,7 +174,7 @@ layui.define(["form"], function (exports) {
       .on("keydown", function (e) {
         if (e.keyCode === 13) {
           e.preventDefault();
-          layer.msg("取消事件默认动作，点击确定按钮");
+          layer.msg("取消事件默认动作，点击確定按钮");
           // $(that.footer).find(ELEM_CONFIRM)[0].click();
         }
       });
@@ -1058,7 +1058,7 @@ layui.define(["form"], function (exports) {
           options.done(cronStr);
         },
 
-        //确定
+        //確定
         confirm: function () {
           if (!active.calculate()) {
             return;
