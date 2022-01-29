@@ -5,10 +5,8 @@ import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.company.project.common.exception.BusinessException;
 import com.company.project.common.exception.code.BaseResponseCode;
-import com.company.project.entity.SysRole;
-import com.company.project.entity.SysRoleDeptEntity;
-import com.company.project.entity.SysRolePermission;
-import com.company.project.entity.SysUserRole;
+import com.company.project.entity.*;
+import com.company.project.mapper.ActionRecordMapper;
 import com.company.project.mapper.SysRoleMapper;
 import com.company.project.service.*;
 import com.company.project.vo.req.RolePermissionOperationReqVO;
@@ -50,12 +48,24 @@ public class RoleServiceImpl extends ServiceImpl<SysRoleMapper, SysRole> impleme
     @Resource
     private SysRoleDeptService sysRoleDeptService;
 
+    @Resource private ActionRecordMapper actionRecordMapper;
+
+    @Resource private ActionRecordEntity actionRecordEntity;
+
     @Transactional(rollbackFor = Exception.class)
     @Override
     public void addRole(SysRole vo) {
 
         vo.setStatus(1);
         sysRoleMapper.insert(vo);
+
+        actionRecordEntity.setActionName("Create Role");
+        actionRecordEntity.setActionFrom("Role");
+        actionRecordEntity.setActionMethod("POST");
+        actionRecordEntity.setActionData("Created" + vo.toString());
+        actionRecordEntity.setActionSuccess("Success");
+        actionRecordMapper.insert(actionRecordEntity);
+
         if (!CollectionUtils.isEmpty(vo.getPermissions())) {
             RolePermissionOperationReqVO reqVO = new RolePermissionOperationReqVO();
             reqVO.setRoleId(vo.getId());
@@ -80,6 +90,13 @@ public class RoleServiceImpl extends ServiceImpl<SysRoleMapper, SysRole> impleme
             reqVO.setRoleId(sysRole.getId());
             reqVO.setPermissionIds(vo.getPermissions());
             rolePermissionService.addRolePermission(reqVO);
+
+            actionRecordEntity.setActionName("Update Role");
+            actionRecordEntity.setActionFrom("Role");
+            actionRecordEntity.setActionMethod("PUT");
+
+            actionRecordEntity.setActionSuccess("Success");
+            actionRecordMapper.insert(actionRecordEntity);
             // 刷新权限
             httpSessionService.refreshRolePermission(sysRole.getId());
         }

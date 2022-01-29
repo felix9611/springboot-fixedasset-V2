@@ -14,15 +14,15 @@
 <form class="layui-form " action="" lay-filter="info" style="width: 700px;margin-top: 10px">
       <input name="id" hidden/>
         <div class="layui-form-item">
-      <label class="layui-form-label">部門代號</label>
+      <label class="layui-form-label">Department Code</label>
       <div class="layui-input-block">
-        <input type="deptCode" name="deptCode" placeholder="部門代號" autocomplete="off" class="layui-input">
+        <input type="deptCode" name="deptCode" placeholder="Department Code" autocomplete="off" class="layui-input">
       </div>
     </div>
         <div class="layui-form-item">
-      <label class="layui-form-label">部門名稱</label>
+      <label class="layui-form-label">Department Name</label>
       <div class="layui-input-block">
-        <input type="deptName" name="deptName" placeholder="部門名稱" autocomplete="off" class="layui-input">
+        <input type="deptName" name="deptName" placeholder="Department Name" autocomplete="off" class="layui-input">
       </div>
     </div>
         <div class="layui-form-item">
@@ -45,7 +45,7 @@
   <div id="searchParam"  shiro:hasPermission="department:list">
     <div class="layui-form-item">
       <div class="layui-input-inline">
-        <input type="text" id="deptName" class="layui-input"  autocomplete="off" placeholder="輸入部門名稱">
+        <input type="text" id="deptName" class="layui-input"  autocomplete="off" placeholder="輸入Department Name">
       </div>
 
       <div class="layui-input-inline ">
@@ -102,9 +102,9 @@
       }
       , cols: [
         [
-          {field: 'deptCode', title: '部門代號', sort: true},
-          {field: 'deptName', title: '部門名稱', sort: true},
-          {width: 120, toolbar: "#tool", title: '動作'}
+          {field: 'deptCode', title: 'Department Code', sort: true},
+          {field: 'deptName', title: 'Department Name', sort: true},
+          {width: 120, toolbar: "#tool", title: 'Action'}
         ]
       ]
       , toolbar: '#toolbar'

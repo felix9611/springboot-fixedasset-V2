@@ -47,7 +47,9 @@ public class UserRoleServiceImpl extends ServiceImpl<SysUserRoleMapper, SysUserR
             list.add(sysUserRole);
         }
         sysUserRoleMapper.delete(Wrappers.<SysUserRole>lambdaQuery().eq(SysUserRole::getUserId, vo.getUserId()));
-        //批量插入
+
+
+
         this.saveBatch(list);
     }
 

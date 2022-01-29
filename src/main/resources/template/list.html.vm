@@ -101,7 +101,7 @@
 #foreach($column in $columns)
           {field: '${column.attrname}', title: '${column.comments}', sort: true},
 #end
-          {width: 120, toolbar: "#tool", title: '操作'}
+          {width: 120, toolbar: "#tool", title: 'Action'}
         ]
       ]
       , toolbar: '#toolbar'

@@ -115,9 +115,9 @@
                     [
                         {type: 'numbers'},
                         {field: 'deptNo', title: '部門編碼', width: 150},
-                        {field: 'name', title: '部門名稱',},
+                        {field: 'name', title: 'Department Name',},
                         {
-                            field: 'pidName', title: '上級部門名稱', templet: function (item) {
+                            field: 'pidName', title: '上級Department Name', templet: function (item) {
                                 if (item.pidName === null || item.pidName === undefined) {
                                     return "最頂級部門";
                                 } else {
@@ -139,7 +139,7 @@
                             }
                         },
                         {field: 'createTime', title: '創建時間', minWidth: 120},
-                        {title: '操作', width: 250, toolbar: '#tool'}
+                        {title: 'Action', width: 250, toolbar: '#tool'}
                     ]
                 ]
             });

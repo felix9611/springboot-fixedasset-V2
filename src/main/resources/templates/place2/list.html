@@ -14,15 +14,15 @@
 <form class="layui-form " action="" lay-filter="info" style="width: 700px;margin-top: 10px">
       <input name="id" hidden/>
         <div class="layui-form-item">
-      <label class="layui-form-label">地點代號</label>
+      <label class="layui-form-label">Place Code</label>
       <div class="layui-input-block">
-        <input type="placeCode" name="placeCode" placeholder="地點代號" autocomplete="off" class="layui-input">
+        <input type="placeCode" name="placeCode" placeholder="Place Code" autocomplete="off" class="layui-input">
       </div>
     </div>
         <div class="layui-form-item">
-      <label class="layui-form-label">地點名稱</label>
+      <label class="layui-form-label">Place Name</label>
       <div class="layui-input-block">
-        <input type="placeName" name="placeName" placeholder="地點名稱" autocomplete="off" class="layui-input">
+        <input type="placeName" name="placeName" placeholder="Place Name" autocomplete="off" class="layui-input">
       </div>
     </div>
   <div class="layui-form-item">
@@ -39,7 +39,7 @@
   <div id="searchParam"  shiro:hasPermission="place2:list">
     <div class="layui-form-item">
       <div class="layui-input-inline">
-        <input type="text" id="placeName" class="layui-input"  autocomplete="off" placeholder="輸入地點名稱">
+        <input type="text" id="placeName" class="layui-input"  autocomplete="off" placeholder="輸入Place Name">
       </div>
 
       <div class="layui-input-inline ">
@@ -144,7 +144,7 @@
         case 'edit':
           $(".table_div").hide();
           $(".operation").show();
-          $(".title").html("編輯");
+          $(".title").html("Edit");
           $(".operation input[name=id]").val(data.id);
           $(".operation input[name=placeCode]").val(data.placeCode);
           $(".operation input[name=placeName]").val(data.placeName);

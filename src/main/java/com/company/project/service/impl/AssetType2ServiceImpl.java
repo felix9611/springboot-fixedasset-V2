@@ -84,15 +84,13 @@ public class AssetType2ServiceImpl extends ServiceImpl<AssetType2Mapper, AssetTy
     public void updateActive(AssetType2Entity assetType2) {
         assetType2.setActive("0");
         assetType2Mapper.updateById(assetType2);
-/*
-        if(set == 1){
-            actionRecordEntity.setActionName("DELETE");
-            actionRecordEntity.setActionMethod("PUT");
-            actionRecordEntity.setActionFrom("種類管理");
-            actionRecordEntity.setActionData("已被設為無效: " + assetType2.toString());
-            actionRecordEntity.setActionSuccess("Success");
-            actionRecordMapper.insert(actionRecordEntity);
-        } */
+
+        actionRecordEntity.setActionName("DELETE");
+        actionRecordEntity.setActionMethod("PUT");
+        actionRecordEntity.setActionFrom("種類管理");
+        actionRecordEntity.setActionData("已被設為無效: " + assetType2.toString());
+        actionRecordEntity.setActionSuccess("Success");
+        actionRecordMapper.insert(actionRecordEntity);
     }
 
     @Override
