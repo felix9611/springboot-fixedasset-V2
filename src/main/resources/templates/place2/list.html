@@ -96,9 +96,9 @@
       }
       , cols: [
         [
-          {field: 'placeCode', title: '地點代號', sort: true},
-          {field: 'placeName', title: '地點名稱', sort: true},
-          {width: 120, toolbar: "#tool", title: '操作'}
+          {field: 'placeCode', title: 'Place Code', sort: true},
+          {field: 'placeName', title: 'Place Name', sort: true},
+          {width: 120, toolbar: "#tool", title: 'Action'}
         ]
       ]
       , toolbar: '#toolbar'
@@ -124,7 +124,7 @@
         case 'add':
           $(".table_div").hide();
           $(".operation").show();
-          $(".title").html("新增");
+          $(".title").html("Add");
           $(".operation input[name=id]").val("");
           $(".operation input[name=placeCode]").val("");
           $(".operation input[name=placeName]").val("");
