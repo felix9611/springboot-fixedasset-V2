@@ -12,7 +12,7 @@
   <div id="searchParam"  shiro:hasPermission="sysGenerator:list">
     <div class="layui-form-item">
       <div class="layui-input-inline">
-        <input type="text" id="tableName" class="layui-input"  autocomplete="off" placeholder="請輸入表名">
+        <input type="text" id="tableName" class="layui-input"  autocomplete="off" placeholder="By table name">
       </div>
 
       <div class="layui-input-inline ">
@@ -25,11 +25,11 @@
 </div>
 <script type="text/html" id="toolbar">
   <div class="layui-btn-container">
-    <button class="layui-btn layui-btn-sm" lay-event="batchGen"  shiro:hasPermission="sysGenerator:add">批量產生</button>
+    <button class="layui-btn layui-btn-sm" lay-event="batchGen"  shiro:hasPermission="sysGenerator:add">Batch Generate</button>
   </div>
 </script>
 <script type="text/html" id="tool">
-  <a class="layui-btn layui-btn-xs" lay-event="gen" shiro:hasPermission="sysGenerator:add">產生</a>
+  <a class="layui-btn layui-btn-xs" lay-event="gen" shiro:hasPermission="sysGenerator:add">Generate</a>
 </script>
 
 </body>
@@ -70,9 +70,9 @@
       , cols: [
         [
           {type: 'checkbox', fixed: 'left'},
-          {field: 'tableName', title: '表名', sort: true},
-          {field: 'tableComment', title: '備註',  sort: true},
-          {field: 'createTime', title: '創建時間',  sort: true},
+          {field: 'tableName', title: 'Table Name', sort: true},
+          {field: 'tableComment', title: 'Remark',  sort: true},
+          {field: 'createTime', title: 'Created Datetime',  sort: true},
           { toolbar: "#tool", title: 'Action'}
         ]
       ]
@@ -86,7 +86,7 @@
                   var checkStatus = table.checkStatus(obj.config.id);
                   var data = checkStatus.data;
                   if (data.length == 0) {
-                      layer.msg("請選擇要批量產生CRUD的表");
+                      layer.msg("Please select the table to generate CRUD in batches");
                   } else {
                       var tables = [];
                       $(data).each(function (index, item) {
