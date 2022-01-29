@@ -33,8 +33,8 @@
     </div>
   <div class="layui-form-item">
   <div class="layui-input-block">
-    <button type="submit" class="layui-btn" lay-submit="" lay-filter="submit">儲存</button>
-    <button  class="layui-btn layui-btn-primary" id="btn_cancel">返回</button>
+    <button type="submit" class="layui-btn" lay-submit="" lay-filter="submit">Save</button>
+    <button  class="layui-btn layui-btn-primary" id="btn_cancel">Back</button>
   </div>
 </div>
 </form>
@@ -49,7 +49,7 @@
       </div>
 
       <div class="layui-input-inline ">
-        <button class="layui-btn" onclick="search()"  id="search">查詢</button>
+        <button class="layui-btn" onclick="search()"  id="search">Inquire</button>
       </div>
     </div>
 
@@ -58,12 +58,12 @@
 </div>
 <script type="text/html" id="toolbar">
   <div class="layui-btn-container">
-    <button class="layui-btn layui-btn-sm" lay-event="add"  shiro:hasPermission="department:add">新增</button>
+    <button class="layui-btn layui-btn-sm" lay-event="add"  shiro:hasPermission="department:add">Add</button>
   </div>
 </script>
 <script type="text/html" id="tool">
-  <a class="layui-btn layui-btn-xs" lay-event="edit" shiro:hasPermission="department:update">編輯</a>
-  <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del" shiro:hasPermission="department:delete">删除</a>
+  <a class="layui-btn layui-btn-xs" lay-event="edit" shiro:hasPermission="department:update">Edit</a>
+  <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del" shiro:hasPermission="department:delete">Delete</a>
 </script>
 
 </body>

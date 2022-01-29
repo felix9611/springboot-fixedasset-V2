@@ -46,7 +46,7 @@
             <div class="layui-form-item">
                 <div class="layui-input-block">
                     <button type="submit" class="layui-btn" lay-submit="" lay-filter="submit">送出</button>
-                    <button class="layui-btn layui-btn-primary" id="btn_cancel">返回</button>
+                    <button class="layui-btn layui-btn-primary" id="btn_cancel">Back</button>
                 </div>
             </div>
         </form>
@@ -81,7 +81,7 @@
             <div class="layui-form-item">
                 <div class="layui-input-block">
                     <button type="submit" class="layui-btn" lay-submit="" lay-filter="submit_datascope">送出</button>
-                    <button class="layui-btn layui-btn-primary" id="btn_cancel">返回</button>
+                    <button class="layui-btn layui-btn-primary" id="btn_cancel">Back</button>
                 </div>
             </div>
         </form>
@@ -104,7 +104,7 @@
                 </select>
             </div>
             <div class="layui-input-inline ">
-                <button class="layui-btn" onclick="search()" id="search">查詢</button>
+                <button class="layui-btn" onclick="search()" id="search">Inquire</button>
             </div>
         </div>
 
@@ -114,11 +114,11 @@
 </body>
 <script type="text/html" id="toolbar">
     <div class="layui-btn-container">
-        <button class="layui-btn layui-btn-sm" lay-event="addNewRole" shiro:hasPermission="sys:role:add">新增</button>
+        <button class="layui-btn layui-btn-sm" lay-event="addNewRole" shiro:hasPermission="sys:role:add">Add</button>
     </div>
 </script>
 <script type="text/html" id="tool">
-    <a class="layui-btn layui-btn-xs" lay-event="edit" shiro:hasPermission="sys:role:update">編輯</a>
+    <a class="layui-btn layui-btn-xs" lay-event="edit" shiro:hasPermission="sys:role:update">Edit</a>
     <a class="layui-btn layui-btn-xs" lay-event="dataScope" shiro:hasPermission="sys:role:bindDept">數據權限</a>
     <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del" shiro:hasPermission="sys:role:deleted">刪除</a>
 </script>

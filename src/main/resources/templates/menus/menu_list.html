@@ -81,7 +81,7 @@
             <div class="layui-form-item">
                 <div class="layui-input-block">
                     <button type="submit" class="layui-btn" lay-submit="" lay-filter="submit">送出</button>
-                    <button class="layui-btn layui-btn-primary" id="btn_cancel">返回</button>
+                    <button class="layui-btn layui-btn-primary" id="btn_cancel">Back</button>
                 </div>
             </div>
         </form>
@@ -93,11 +93,11 @@
 <div id="menuTree" style="display: none"></div>
 <script type="text/html" id="toolbar">
     <div class="layui-btn-container">
-        <button class="layui-btn layui-btn-sm" lay-event="addMenu" shiro:hasPermission="sys:permission:add">新增</button>
+        <button class="layui-btn layui-btn-sm" lay-event="addMenu" shiro:hasPermission="sys:permission:add">Add</button>
     </div>
 </script>
 <script type="text/html" id="tool">
-    <a class="layui-btn layui-btn-xs" lay-event="edit" shiro:hasPermission="sys:permission:update">編輯</a>
+    <a class="layui-btn layui-btn-xs" lay-event="edit" shiro:hasPermission="sys:permission:update">Edit</a>
     <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del"
        shiro:hasPermission="sys:permission:deleted">刪除</a>
 </script>

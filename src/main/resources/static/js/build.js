@@ -102,7 +102,7 @@ layui.use(['element', 'laydate', 'form'], function () {
         elem.removeClass('drag-box');
         var item = $("<div class='build-item'>" +
             "<div class='control'><a class='edit'>編輯HTML</a> | " +
-            "<a class='remove'>删除</a></div>" +
+            "<a class='remove'>Delete</a></div>" +
             "</div>");
         shellItem.after(item.append(elem));
 

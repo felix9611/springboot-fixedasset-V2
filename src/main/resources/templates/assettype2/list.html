@@ -14,22 +14,22 @@
 <form class="layui-form " action="" lay-filter="info" style="width: 700px;margin-top: 10px">
       <input name="id" hidden/>
         <div class="layui-form-item">
-      <label class="layui-form-label">種類代號</label>
+      <label class="layui-form-label">Type Code</label>
       <div class="layui-input-block">
-        <input type="typeCode" name="typeCode" placeholder="種類代號" autocomplete="off" class="layui-input">
+        <input type="typeCode" name="typeCode" placeholder="Type Code" autocomplete="off" class="layui-input">
       </div>
     </div>
         <div class="layui-form-item">
-      <label class="layui-form-label">種類名稱</label>
+      <label class="layui-form-label">Type Name</label>
       <div class="layui-input-block">
-        <input type="typeName" name="typeName" placeholder="種類名稱" autocomplete="off" class="layui-input">
+        <input type="typeName" name="typeName" placeholder="Type Name" autocomplete="off" class="layui-input">
       </div>
     </div>
 
   <div class="layui-form-item">
   <div class="layui-input-block">
-    <button type="submit" class="layui-btn" lay-submit="" lay-filter="submit">儲存</button>
-    <button  class="layui-btn layui-btn-primary" id="btn_cancel">返回</button>
+    <button type="submit" class="layui-btn" lay-submit="" lay-filter="submit">Save</button>
+    <button  class="layui-btn layui-btn-primary" id="btn_cancel">Back</button>
   </div>
 </div>
 </form>
@@ -40,11 +40,11 @@
   <div id="searchParam"  shiro:hasPermission="assetType2:list">
     <div class="layui-form-item">
       <div class="layui-input-inline">
-        <input type="text" id="Tname" class="layui-input"  autocomplete="off" placeholder="輸入類別名稱">
+        <input type="text" id="Tname" class="layui-input"  autocomplete="off" placeholder="By Type Name">
       </div>
 
       <div class="layui-input-inline ">
-        <button class="layui-btn" onclick="search()"  id="search">查詢</button>
+        <button class="layui-btn" onclick="search()"  id="search">Inquire</button>
       </div>
     </div>
 
@@ -53,12 +53,12 @@
 </div>
 <script type="text/html" id="toolbar">
   <div class="layui-btn-container">
-    <button class="layui-btn layui-btn-sm" lay-event="add"  shiro:hasPermission="assetType2:add">增加</button>
+    <button class="layui-btn layui-btn-sm" lay-event="add"  shiro:hasPermission="assetType2:add">Add</button>
   </div>
 </script>
 <script type="text/html" id="tool">
-  <a class="layui-btn layui-btn-xs" lay-event="edit" shiro:hasPermission="assetType2:update">編輯</a>
-  <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del" shiro:hasPermission="assetType2:delete">删除</a>
+  <a class="layui-btn layui-btn-xs" lay-event="edit" shiro:hasPermission="assetType2:update">Edit</a>
+  <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del" shiro:hasPermission="assetType2:delete">Delete</a>
 </script>
 
 </body>
@@ -97,9 +97,9 @@
       }
       , cols: [
         [
-          {field: 'typeCode', title: '種類代號', sort: true},
-          {field: 'typeName', title: '種類名類', sort: true},
-          {width: 120, toolbar: "#tool", title: '操作'}
+          {field: 'typeCode', title: 'Type Code', sort: true},
+          {field: 'typeName', title: 'Type Name', sort: true},
+          {width: 120, toolbar: "#tool", title: 'Action'}
         ]
       ]
       , toolbar: '#toolbar'
@@ -112,7 +112,7 @@
         case 'add':
           $(".table_div").hide();
           $(".operation").show();
-          $(".title").html("新增");
+          $(".title").html("Add");
           $(".operation input[name=id]").val("");
           $(".operation input[name=typeCode]").val("");
           $(".operation input[name=typeName]").val("");
@@ -136,7 +136,7 @@
         case 'edit':
           $(".table_div").hide();
           $(".operation").show();
-          $(".title").html("編輯");
+          $(".title").html("Edit");
           $(".operation input[name=id]").val(data.id);
           $(".operation input[name=typeCode]").val(data.typeCode);
           $(".operation input[name=typeName]").val(data.typeName);
@@ -162,7 +162,7 @@
 
     var tipDialog=function (id) {
       layer.open({
-        content: "確定要删除?",
+        content: "Sure you want to delete ?",
         yes: function(index, layero){
           layer.close(index);
           console.log(id);

@@ -27,8 +27,8 @@
     </div>
   <div class="layui-form-item">
   <div class="layui-input-block">
-    <button type="submit" class="layui-btn" lay-submit="" lay-filter="submit">保存</button>
-    <button  class="layui-btn layui-btn-primary" id="btn_cancel">返回</button>
+    <button type="submit" class="layui-btn" lay-submit="" lay-filter="submit">Submit</button>
+    <button  class="layui-btn layui-btn-primary" id="btn_cancel">Back</button>
   </div>
 </div>
 </form>
@@ -54,12 +54,12 @@
 <script type="text/html" id="toolbar">
   <div class="layui-btn-container">
     <button class="layui-btn layui-btn-sm" lay-event="add"  shiro:hasPermission="location:add">添加</button>
-    <button class="layui-btn layui-btn-sm" lay-event="batchDeleted" shiro:hasPermission="location:delete">删除</button>
+    <button class="layui-btn layui-btn-sm" lay-event="batchDeleted" shiro:hasPermission="location:delete">Delete</button>
   </div>
 </script>
 <script type="text/html" id="tool">
   <a class="layui-btn layui-btn-xs" lay-event="edit" shiro:hasPermission="location:update">编辑</a>
-  <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del" shiro:hasPermission="location:delete">删除</a>
+  <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del" shiro:hasPermission="location:delete">Delete</a>
 </script>
 
 </body>

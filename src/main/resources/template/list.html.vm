@@ -26,8 +26,8 @@
 #end
 <div class="layui-form-item">
   <div class="layui-input-block">
-    <button type="submit" class="layui-btn" lay-submit="" lay-filter="submit">保存</button>
-    <button  class="layui-btn layui-btn-primary" id="btn_cancel">返回</button>
+    <button type="submit" class="layui-btn" lay-submit="" lay-filter="submit">Submit</button>
+    <button  class="layui-btn layui-btn-primary" id="btn_cancel">Back</button>
   </div>
 </div>
 </form>
@@ -42,8 +42,8 @@
       </div>
 
       <div class="layui-input-inline ">
-        <button class="layui-btn" onclick="search()"  id="search">查詢</button>
-        <button class="layui-btn"   id="export">導出全部</button>
+        <button class="layui-btn" onclick="search()"  id="search">Inquire</button>
+        <button class="layui-btn"   id="export">Export</button>
       </div>
     </div>
 
@@ -52,13 +52,13 @@
 </div>
 <script type="text/html" id="toolbar">
   <div class="layui-btn-container">
-    <button class="layui-btn layui-btn-sm" lay-event="add"  shiro:hasPermission="${classname}:add">新增</button>
-    <button class="layui-btn layui-btn-sm" lay-event="batchDeleted" shiro:hasPermission="${classname}:delete">删除</button>
+    <button class="layui-btn layui-btn-sm" lay-event="add"  shiro:hasPermission="${classname}:add">Add</button>
+    <button class="layui-btn layui-btn-sm" lay-event="batchDeleted" shiro:hasPermission="${classname}:delete">Delete</button>
   </div>
 </script>
 <script type="text/html" id="tool">
-  <a class="layui-btn layui-btn-xs" lay-event="edit" shiro:hasPermission="${classname}:update">編輯</a>
-  <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del" shiro:hasPermission="${classname}:delete">删除</a>
+  <a class="layui-btn layui-btn-xs" lay-event="edit" shiro:hasPermission="${classname}:update">Edit</a>
+  <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del" shiro:hasPermission="${classname}:delete">Delete</a>
 </script>
 
 </body>

@@ -47,7 +47,7 @@ $('body').on('click', '[data-bgcolor]', function () {
     var bgColorHtml = buildBgColorHtml();
     var html = '<div class="layuimini-color">\n' +
         '<div class="color-title">\n' +
-        '<span>配色方案</span>\n' +
+        '<span>Coloring Scheme</span>\n' +
         '</div>\n' +
         '<div class="color-content">\n' +
         '<ul>\n' + bgColorHtml + '</ul>\n' +

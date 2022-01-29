@@ -15,22 +15,22 @@
       <input name="id" hidden/>
     <div class="layui-form-item">
         <div class="layui-form-item">
-            <label class="layui-form-label">資產編號</label>
+            <label class="layui-form-label">Asset Code</label>
             <div class="layui-input-block">
-                <input type="assetCode" name="assetCode" placeholder="會自動產生" autocomplete="off" class="layui-input" readonly>
+                <input type="assetCode" name="assetCode" placeholder="Will auto" autocomplete="off" class="layui-input" readonly>
             </div>
         </div>
-        <label class="layui-form-label">資產名稱</label>
+        <label class="layui-form-label">Asset Name</label>
         <div class="layui-input-block">
-            <input type="assetName" name="assetName" placeholder="資產名稱" autocomplete="off" class="layui-input">
+            <input type="assetName" name="assetName" placeholder="Asset Name" autocomplete="off" class="layui-input">
         </div>
     </div>
     <div class="row">
         <div class="layui-form-item">
-            <label class="layui-form-label">種類</label>
+            <label class="layui-form-label">Asset Type</label>
             <div class="layui-input-block">
                 <select id="assetType" name="assetType" lay-filter="select-type" th:with="assetType=${@assetType2Service.getAssettype()}">
-                    <option value="">請選擇</option>
+                    <option value="">Select</option>
                     <option th:each="dict : ${assetType}" th:text="${dict.typeName}" th:value="${dict.id}"></option>
                 </select>
 
@@ -38,41 +38,41 @@
 
         </div>
         <div class="layui-form-item">
-            <label class="layui-form-label">單位</label>
+            <label class="layui-form-label">Unit</label>
             <div class="layui-input-block">
-                <input type="unit" name="unit" placeholder="單位" autocomplete="off" class="layui-input">
+                <input type="unit" name="unit" placeholder="Unit" autocomplete="off" class="layui-input">
             </div>
         </div>
         <div class="row">
             <div class="layui-form-item">
-                <label class="layui-form-label">購買日期</label>
+                <label class="layui-form-label">Buy Date</label>
                 <div class="layui-input-block">
 
-                    <input type="text" id="buydate" name="buydate" placeholder="購買日期" autocomplete="off" class="layui-input">
+                    <input type="text" id="buydate" name="buydate" placeholder="Buy Date" autocomplete="off" class="layui-input">
                 </div>
             </div>
         </div>
 
         <div class="layui-form-item">
-            <label class="layui-form-label">購買成本</label>
+            <label class="layui-form-label">Cost</label>
             <div class="layui-input-block">
-                <input type="cost" name="cost" placeholder="購買成本" autocomplete="off" class="layui-input">
+                <input type="cost" name="cost" placeholder="Cost" autocomplete="off" class="layui-input">
             </div>
         </div>
     </div>
     <div class="layui-form-item">
-        <label class="layui-form-label">內容</label>
+        <label class="layui-form-label">Detail</label>
         <div class="layui-input-block">
-            <textarea placeholder="內容" class="layui-textarea" id="description" name="description"></textarea>
+            <textarea placeholder="Detail" class="layui-textarea" id="description" name="description"></textarea>
             <!--<input type="description" name="description" placeholder="內容" autocomplete="off" class="layui-input">-->
 
         </div>
     </div>
     <div class="layui-form-item">
-        <label class="layui-form-label">發票日期</label>
+        <label class="layui-form-label">Invoiceno Date</label>
         <div class="layui-input-block">
 
-            <input type="text" id="invoicenodate"  name="invoicenodate" placeholder="發票日" autocomplete="off" class="layui-input">
+            <input type="text" id="invoicenodate"  name="invoicenodate" placeholder="Invoiceno Date" autocomplete="off" class="layui-input">
         </div>
     </div>
     <div class="layui-form-item">
@@ -82,51 +82,51 @@
         </div>
     </div>
     <div class="layui-form-item">
-        <label class="layui-form-label">發票編號</label>
+        <label class="layui-form-label">Invoice No.</label>
         <div class="layui-input-block">
-            <input type="invoiceno" name="invoiceno" placeholder="發票編號" autocomplete="off" class="layui-input">
+            <input type="invoiceno" name="invoiceno" placeholder="Invoice No." autocomplete="off" class="layui-input">
         </div>
     </div>
     <div class="layui-form-item">
-        <label class="layui-form-label">地點</label>
+        <label class="layui-form-label">Place</label>
         <div class="layui-input-block">
             <select id="place" name="place" lay-filter="select-place" th:with="place=${@place2Service.getPlacetSel()}">
-                <option value="">請選擇</option>
+                <option value="">Selete</option>
                 <option th:each="dict : ${place}" th:text="${dict.placeName}" th:value="${dict.id}"></option>
             </select>
         </div>
     </div>
     <div class="layui-form-item">
-        <label class="layui-form-label">負責職員</label>
+        <label class="layui-form-label">Staff</label>
         <div class="layui-input-block">
             <select id="responStaff" name="responStaff" lay-filter="select-staff" th:with="staffId=${@UserService.getUserS()}">
-                <option value="">請選擇</option>
+                <option value="">Select</option>
                 <option th:each="dict : ${staffId}" th:text="${dict.realName}" th:value="${dict.id}"></option>
             </select>
         </div>
     </div>
     <div class="layui-form-item">
-        <label class="layui-form-label">所屬部門</label>
+        <label class="layui-form-label">Department</label>
         <div class="layui-input-block">
             <select id="deptId" name="deptId" lay-filter="select-dept" th:with="deptId=${@departmentService.getDeptId()}">
-                <option value="">請選擇</option>
+                <option value="">Select</option>
                 <option th:each="dict : ${deptId}" th:text="${dict.deptName}" th:value="${dict.id}"></option>
             </select>
             <!--<input type="deptId" name="deptId" placeholder="所屬部門" autocomplete="off" class="layui-input">-->
         </div>
     </div>
     <div class="layui-form-item">
-        <label class="layui-form-label">備註</label>
+        <label class="layui-form-label">Remark</label>
         <div class="layui-input-block">
             <!--<input type="remark" name="remark" placeholder="備註" autocomplete="off" class="layui-input">-->
-            <textarea placeholder="備註" class="layui-textarea" id="remark" name="remark"></textarea>
+            <textarea placeholder="Remark" class="layui-textarea" id="remark" name="remark"></textarea>
 
         </div>
     </div>
   <div class="layui-form-item">
   <div class="layui-input-block">
-    <button type="submit" class="layui-btn" lay-submit="" lay-filter="submit">保存</button>
-    <button  class="layui-btn layui-btn-primary" id="btn_cancel">返回</button>
+    <button type="submit" class="layui-btn" lay-submit="" lay-filter="submit">Submit</button>
+    <button  class="layui-btn layui-btn-primary" id="btn_cancel">Back</button>
   </div>
 </div>
 </form>
@@ -137,10 +137,10 @@
   <div id="searchParam"  shiro:hasPermission="assetListview:list">
     <div class="layui-form-item">
         <div class="layui-input-inline">
-            <input type="text" id="assetCode" class="layui-input"  autocomplete="off" placeholder="資產編號搜尋">
+            <input type="text" id="assetCode" class="layui-input"  autocomplete="off" placeholder="By Asset Code">
         </div>
         <div class="layui-input-inline">
-            <input type="text" id="assetName" class="layui-input"  autocomplete="off" placeholder="資產名稱搜尋">
+            <input type="text" id="assetName" class="layui-input"  autocomplete="off" placeholder="By Asset Name">
         </div>
 
 
@@ -159,8 +159,8 @@
         </div>
 
       <div class="layui-input-inline ">
-        <button class="layui-btn" onclick="search()"  id="search">查詢</button>
-        <button class="layui-btn"   id="export">導出全部</button>
+        <button class="layui-btn" onclick="search()"  id="search">Inquire</button>
+        <button class="layui-btn"   id="export">Export</button>
       </div>
     </div>
 
@@ -170,23 +170,23 @@
 <div class="operation1" hidden>
         <div id="detail"  shiro:hasPermission="assetListview:getInfo">
                 <div class="detail-row">
-                    <label class="left-itme">資產編號</label>
+                    <label class="left-itme">Asset Code</label>
                     <label id="assetCodeStr" />
                 </div>
                 <div class="detail-row">
-                    <label class="left-itme">資產名稱</label>
+                    <label class="left-itme">Asset Name</label>
                     <span id="assetNameStr" />
                 </div>
                 <div class="detail-row">
-                    <label class="left-itme">資產種類</label>
+                    <label class="left-itme">Asset Type</label>
                     <span id="typeNameStr" />
                 </div>
                 <div class="detail-row">
-                    <label class="left-itme">單位</label>
+                    <label class="left-itme">Unit</label>
                     <span id="unitStr" />
                 </div>
                 <div class="detail-row">
-                    <label class="left-itme">內容</label>
+                    <label class="left-itme">Detail</label>
                     <span id="descriptionStr" />
                 </div>
                 <div class="layui-form-item">
@@ -194,44 +194,44 @@
                     <span id="serialNumStr" />
                 </div>
                 <div class="layui-form-item">
-                    <label class="detail-left">購買日期</label>
+                    <label class="detail-left">But Date</label>
                     <span  id="buyDateStr" />
                 </div>
                 <div class="layui-form-item">
-                    <label class="detail-left">購買成本</label>
+                    <label class="detail-left">Cost</label>
                     <span  id="buyCostStr" />
                 </div>
                 <div class="layui-form-item">
-                    <label class="detail-left">發票編號</label>
+                    <label class="detail-left">Invoice No.</label>
                     <span id="invoiceNoStr" />
                 </div>
                 <div class="layui-form-item">
-                    <label class="detail-left">發票日期</label>
+                    <label class="detail-left">Invoice Date</label>
                     <span id="invoiceDateStr" />
                 </div>
                 <div class="layui-form-item">
-                    <label class="detail-left">所屬部門</label>
+                    <label class="detail-left">Department</label>
                     <span id="deptNameStr" />
                 </div>
                 <div class="layui-form-item">
-                    <label class="detail-left">備註</label>
+                    <label class="detail-left">Remark</label>
                     <span id="remarkStr" />
                 </div>
                 <div class="layui-input-block">
-                    <button  class="layui-btn layui-btn-primary" id="btn_back">返回</button>
+                    <button  class="layui-btn layui-btn-primary" id="btn_back">Back</button>
                 </div>
     </div>
 </div>
 <script type="text/html" id="toolbar">
   <div class="layui-btn-container">
-    <button class="layui-btn layui-btn-sm" lay-event="add"  shiro:hasPermission="assetListview:add">新增</button>
-    <button class="layui-btn layui-btn-sm" lay-event="batchDeleted" shiro:hasPermission="assetListview:delete">删除</button>
+    <button class="layui-btn layui-btn-sm" lay-event="add"  shiro:hasPermission="assetListview:add">Add</button>
+    <button class="layui-btn layui-btn-sm" lay-event="batchDeleted" shiro:hasPermission="assetListview:delete">Delete</button>
   </div>
 </script>
 <script type="text/html" id="tool">
-    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="detail" shiro:hasPermission="assetListview:getInfo">詳細</a>
-    <a class="layui-btn layui-btn-xs" lay-event="edit" shiro:hasPermission="assetListview:update">編輯</a>
-    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del" shiro:hasPermission="assetListview:delete">删除</a>
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="detail" shiro:hasPermission="assetListview:getInfo">Detail</a>
+    <a class="layui-btn layui-btn-xs" lay-event="edit" shiro:hasPermission="assetListview:update">Edit</a>
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del" shiro:hasPermission="assetListview:delete">Delete</a>
 </script>
 
 </body>
@@ -265,24 +265,24 @@
       , contentType: 'application/json'
       , headers: {"authorization": token}
       , page: true 
-      , url: '/assetListview/listByPage' //数据接口
+      , url: '/assetListview/listByPage' // data api
       , method: 'POST'
-      , parseData: function (res) { //将原始数据解析成 table 组件所规定的数据
+      , parseData: function (res) {
         return {
-          "code": res.code, //解析接口状态
-          "msg": res.msg, //解析提示文本
-          "count": CoreUtil.isEmpty(res.data) ? 0 : res.data.total, //解析数据长度
-          "data": CoreUtil.isEmpty(res.data) ? null : res.data.records //解析数据列表
+          "code": res.code,
+          "msg": res.msg,
+          "count": CoreUtil.isEmpty(res.data) ? 0 : res.data.total,
+          "data": CoreUtil.isEmpty(res.data) ? null : res.data.records
         }
       }
       , cols: [
         [
-          {width: 110, field: 'assetCode', title: '資產編號', sort: true},
-          {field: 'assetName', title: '資產名稱', sort: true},
-          {width: 180, field: 'typeName', title: '種類'},
-          {width: 160, field: 'buydate', title: '購入日期'},
-          {width: 210, field: 'deptName', title: '所屬部門' },
-          {width: 180, toolbar: "#tool", title: '操作'}
+          {width: 110, field: 'assetCode', title: 'Asset Code', sort: true},
+          {field: 'assetName', title: 'Asset Name', sort: true},
+          {width: 180, field: 'typeName', title: 'Type'},
+          {width: 160, field: 'buydate', title: 'Buy Date'},
+          {width: 210, field: 'deptName', title: 'Department' },
+          {width: 180, toolbar: "#tool", title: 'Action'}
         ]
       ]
       , toolbar: '#toolbar'
@@ -297,7 +297,7 @@
         case 'add':
           $(".table_div").hide();
           $(".operation").show();
-          $(".title").html("新增");
+          $(".title").html("Create");
           $(".operation input[name=id]").val("");
           $(".operation input[name=assetCode]").val("");
           $(".operation input[name=assetName]").val("");
@@ -330,7 +330,7 @@
         case 'edit':
           $(".table_div").hide();
           $(".operation").show();
-          $(".title").html("編輯");
+          $(".title").html("Edit");
           $(".operation input[name=id]").val(data.id);
           $(".operation input[name=assetCode]").val(data.assetCode);
           $(".operation input[name=assetName]").val(data.assetName);
@@ -406,7 +406,7 @@
     //删除
     var tipDialog=function (ids) {
       layer.open({
-        content: "確定要删除?",
+        content: "Sure you want to delete?",
         yes: function(index, layero){
           layer.close(index); 
           CoreUtil.sendPut("/assetListview/delete",ids,function (res) {
