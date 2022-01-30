@@ -169,13 +169,13 @@
                         var x = document.getElementsByClassName("layui-unselect layui-form-switch");
                         x[0].setAttribute("class", "layui-unselect layui-form-switch layui-form-onswitch");
                         var d = document.getElementsByTagName('em')[0];
-                        d.firstChild.nodeValue = '啟用';
+                        d.firstChild.nodeValue = 'Active';
                     } else {
                         $(".operation_dept input[name=status]").attr('type', 'hidden').removeAttr("checked").val(0);
                         var x = document.getElementsByClassName("layui-unselect layui-form-switch");
                         x[0].setAttribute("class", "layui-unselect layui-form-switch");
                         var d = document.getElementsByTagName('em')[0];
-                        d.firstChild.nodeValue = '停用';
+                        d.firstChild.nodeValue = 'Stopped';
                     }
                     form.render(); //更新全部
                     initTree(data.id);
@@ -200,7 +200,7 @@
                     var x = document.getElementsByClassName("layui-unselect layui-form-switch");
                     x[0].setAttribute("class", "layui-unselect layui-form-switch layui-form-onswitch");
                     var d = document.getElementsByTagName('em')[0];
-                    d.firstChild.nodeValue = '啟用';
+                    d.firstChild.nodeValue = 'Active';
                     form.render(); //更新全部
                     initTree("");
                     break;

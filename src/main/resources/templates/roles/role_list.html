@@ -16,27 +16,27 @@
             <input name="pid" hidden/>
 
             <div class="layui-form-item">
-                <label class="layui-form-label">角色名稱</label>
+                <label class="layui-form-label">Role Name</label>
                 <div class="layui-input-block">
-                    <input type="name" name="name" placeholder="角色名稱" autocomplete="off" class="layui-input">
+                    <input type="name" name="name" placeholder="Role Name" autocomplete="off" class="layui-input">
                 </div>
             </div>
             <div class="layui-form-item">
-                <div class="layui-form-label ">備註欄</div>
+                <div class="layui-form-label ">Remark</div>
                 <div class="layui-input-block">
-                    <input type="description" name="description" placeholder="備註欄" autocomplete="off"
+                    <input type="description" name="description" placeholder="Remark" autocomplete="off"
                            class="layui-input">
                 </div>
             </div>
 
             <div class="layui-form-item">
-                <label class="layui-form-label">狀態</label>
+                <label class="layui-form-label">Status</label>
                 <div class="layui-input-block">
-                    <input type="checkbox" name="status" lay-skin="switch" lay-filter="switch" lay-text="啟用|停用" checked>
+                    <input type="checkbox" name="status" lay-skin="switch" lay-filter="switch" lay-text="Active|Stopped" checked>
                 </div>
             </div>
             <div class="layui-form-item">
-                <label class="layui-form-label">請設置權限</label>
+                <label class="layui-form-label">Please set permissions </label>
             </div>
             <div class="layui-form-item" >
                 <div class="layui-tree">
@@ -45,7 +45,7 @@
             </div>
             <div class="layui-form-item">
                 <div class="layui-input-block">
-                    <button type="submit" class="layui-btn" lay-submit="" lay-filter="submit">送出</button>
+                    <button type="submit" class="layui-btn" lay-submit="" lay-filter="submit">Submit</button>
                     <button class="layui-btn layui-btn-primary" id="btn_cancel">Back</button>
                 </div>
             </div>
@@ -58,16 +58,16 @@
         <form class="layui-form " action="" lay-filter="deptInfo" style="width: 700px;margin-top: 10px">
             <input name="roleId" hidden/>
             <div class="layui-form-item">
-                <label class="layui-form-label">數據範圍</label>
+                <label class="layui-form-label">Data Range</label>
                 <div class="layui-input-block">
                     <input id="dataScope" name="dataScope" hidden/>
                     <select id="dataScopeS" name="dataScopeS" lay-filter="select-datascope">
-                        <option value="">請選擇</option>
-                        <option value="1">所有</option>
-                        <option value="2">自定部門</option>
-                        <option value="3">本部門及以下部门</option>
-                        <option value="4">本部門</option>
-                        <option value="5">自己</option>
+                        <option value="">Please Choose</option>
+                        <option value="1">All</option>
+                        <option value="2">Custom Department </option>
+                        <option value="3">This department and the following departments</option>
+                        <option value="4">This Department</option>
+                        <option value="5">Self</option>
                     </select>
                 </div>
             </div>
@@ -80,7 +80,7 @@
             </div>
             <div class="layui-form-item">
                 <div class="layui-input-block">
-                    <button type="submit" class="layui-btn" lay-submit="" lay-filter="submit_datascope">送出</button>
+                    <button type="submit" class="layui-btn" lay-submit="" lay-filter="submit_datascope">Submit</button>
                     <button class="layui-btn layui-btn-primary" id="btn_cancel">Back</button>
                 </div>
             </div>
@@ -91,16 +91,16 @@
     <div id="searchParam" shiro:hasPermission="sys:role:list">
         <div class="layui-form-item">
             <div class="layui-input-inline">
-                <input type="text" id="roleName" class="layui-input" autocomplete="off" placeholder="請輸入角色名稱">
+                <input type="text" id="roleName" class="layui-input" autocomplete="off" placeholder="Please enter a role name">
             </div>
             <div class="layui-input-inline">
-                <input type="text" readonly class="layui-input" id="createTime" placeholder="創建時間">
+                <input type="text" readonly class="layui-input" id="createTime" placeholder="Created At">
             </div>
             <div class="layui-input-inline layui-form">
                 <select id="status">
-                    <option value="">請選擇角色狀態</option>
-                    <option value="1">正常</option>
-                    <option value="0">停用</option>
+                    <option value="">Please select a role status</option>
+                    <option value="1">Active</option>
+                    <option value="0">Stopped</option>
                 </select>
             </div>
             <div class="layui-input-inline ">
@@ -119,8 +119,8 @@
 </script>
 <script type="text/html" id="tool">
     <a class="layui-btn layui-btn-xs" lay-event="edit" shiro:hasPermission="sys:role:update">Edit</a>
-    <a class="layui-btn layui-btn-xs" lay-event="dataScope" shiro:hasPermission="sys:role:bindDept">數據權限</a>
-    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del" shiro:hasPermission="sys:role:deleted">刪除</a>
+    <a class="layui-btn layui-btn-xs" lay-event="dataScope" shiro:hasPermission="sys:role:bindDept">Data Permission</a>
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del" shiro:hasPermission="sys:role:deleted">Delete</a>
 </script>
 <script src="/layui/layui.all.js"></script>
 <script src="/js/core.util.js"></script>
@@ -162,16 +162,16 @@
             , cols: [
                 [
                     {type: 'checkbox', fixed: 'left'},
-                    {field: 'name', title: '角色名稱', width: 200},
-                    {field: 'createTime', title: '創建時間', minWidth: 120},
-                    {field: 'updateTime', title: '更新時間', minWidth: 120},
+                    {field: 'name', title: 'Role Name', width: 200},
+                    {field: 'createTime', title: 'Created At', minWidth: 120},
+                    {field: 'updateTime', title: 'Updated At', minWidth: 120},
                     {
-                        field: 'status', title: '狀態', width: 100, templet: function (item) {
+                        field: 'status', title: 'Status', width: 100, templet: function (item) {
                             if (item.status === 1) {
-                                return '  <input type="checkbox" lay-skin="switch" lay-text="正常|停用" checked disabled>';
+                                return '  <input type="checkbox" lay-skin="switch" lay-text="Active|Stopped" checked disabled>';
                             }
                             if (item.status === 0) {
-                                return '  <input type="checkbox" lay-skin="switch" lay-text="正常|停用" disabled>';
+                                return '  <input type="checkbox" lay-skin="switch" lay-text="Active|Stopped" disabled>';
                             }
                         }
                     },
@@ -206,7 +206,7 @@
                     $(".role_table_div").hide();
                     //显示编辑窗口
                     $(".operation_role").show();
-                    $(".title").html("新增角色");
+                    $(".title").html("Add Role");
                     $(".operation_role input[name=id]").val("");
                     $(".operation_role input[name=pid]").val("");
                     $(".operation_role input[name=name]").val("");
@@ -216,7 +216,7 @@
                     var x = document.getElementsByClassName("layui-unselect layui-form-switch");
                     x[0].setAttribute("class", "layui-unselect layui-form-switch layui-form-onswitch");
                     var d = document.getElementsByTagName('em')[0];
-                    d.firstChild.nodeValue = '啟用';
+                    d.firstChild.nodeValue = 'Active';
                     form.render(); //更新全部
                     initTree();
                     break;
@@ -232,7 +232,7 @@
                     $(".role_table_div").hide();
                     //显示编辑窗口
                     $(".operation_role").show();
-                    $(".title").html("編輯角色");
+                    $(".title").html("Edit Role");
                     getRoleDetail(data.id);
                     break;
                 case 'dataScope':
@@ -241,7 +241,7 @@
                     $(".operation_role").hide();
                     $(".operation_role_dataScope").show();
 
-                    $(".title").html("數據權限");
+                    $(".title").html("Data Permission");
                     getRoleDetail(data.id);
                     break;
             }
@@ -258,13 +258,13 @@
                     var x = document.getElementsByClassName("layui-unselect layui-form-switch");
                     x[0].setAttribute("class", "layui-unselect layui-form-switch layui-form-onswitch");
                     var d = document.getElementsByTagName('em')[0];
-                    d.firstChild.nodeValue = '啟用';
+                    d.firstChild.nodeValue = 'Active';
                 } else {
                     $(".operation_role input[name=status]").attr('type', 'hidden').removeAttr("checked").val(0);
                     var x = document.getElementsByClassName("layui-unselect layui-form-switch");
                     x[0].setAttribute("class", "layui-unselect layui-form-switch");
                     var d = document.getElementsByTagName('em')[0];
-                    d.firstChild.nodeValue = '停用';
+                    d.firstChild.nodeValue = 'Stopped';
                 }
                 $(".operation_role_dataScope input[name=roleId]").val(res.data.id);
                 if (!CoreUtil.isEmpty(res.data.dataScope)) {
@@ -371,7 +371,7 @@
         form.on('submit(submit_datascope)', function (data) {
 
             if (CoreUtil.isEmpty($("#dataScope").val())) {
-                layer.msg("请选择数据范围");
+                layer.msg("Please select a data range");
                 return false;
             }
             var deptIds = [];

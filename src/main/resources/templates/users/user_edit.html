@@ -10,65 +10,65 @@
     <form class="layui-form layui-form-pane" action="" lay-filter="userInfo">
         <input name="id" hidden>
         <div class="layui-form-item">
-            <label class="layui-form-label">帳戶名稱</label>
+            <label class="layui-form-label">Username</label>
             <div class="layui-input-block">
                 <input th:if="${flagType} eq 'edit'" type="text" name="username" lay-verify="title" disabled="disabled"
-                       style="background:#eeeeee!important" autocomplete="off" placeholder="請輸入帳戶名稱"
+                       style="background:#eeeeee!important" autocomplete="off" placeholder="Username"
                        class="layui-input layui-disabled ">
                 <input th:if="${flagType} eq 'add'" type="text" name="username" lay-verify="title" autocomplete="off"
-                       placeholder="請輸入帳戶名稱" class="layui-input">
+                       placeholder="Username" class="layui-input">
             </div>
         </div>
         <div class="layui-form-item">
-            <label class="layui-form-label">姓名</label>
+            <label class="layui-form-label">Name</label>
             <div class="layui-input-block">
-                <input type="text" name="realName" placeholder="請輸入姓名" autocomplete="off" class="layui-input">
-            </div>
-        </div>
-
-        <div class="layui-form-item">
-            <label class="layui-form-label">暱稱</label>
-            <div class="layui-input-block">
-                <input type="text" name="nickName" placeholder="請輸入暱稱" autocomplete="off" class="layui-input">
+                <input type="text" name="realName" placeholder="Name" autocomplete="off" class="layui-input">
             </div>
         </div>
 
         <div class="layui-form-item">
-            <label class="layui-form-label">手機</label>
+            <label class="layui-form-label">Surename</label>
             <div class="layui-input-block">
-                <input type="tel" name="phone" placeholder="請輸入手機" lay-verify="required|phone" autocomplete="off"
+                <input type="text" name="nickName" placeholder="Surename" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <label class="layui-form-label">Phone No.</label>
+            <div class="layui-input-block">
+                <input type="tel" name="phone" placeholder="Phone No." lay-verify="required|phone" autocomplete="off"
                        class="layui-input">
             </div>
         </div>
         <div class="layui-form-item">
             <label class="layui-form-label">Email</label>
             <div class="layui-input-block">
-                <input type="text" name="email" lay-verify="email" placeholder="請輸入E-mail" autocomplete="off"
+                <input type="text" name="email" lay-verify="email" placeholder="E-mail" autocomplete="off"
                        class="layui-input">
             </div>
         </div>
 
         <div class="layui-form-item">
-            <label class="layui-form-label">狀態</label>
+            <label class="layui-form-label">States</label>
             <div class="layui-input-block">
-                <input th:if="${flagType} eq 'add'" type="checkbox" name="status" lay-skin="switch" lay-text="啟用|停用"
+                <input th:if="${flagType} eq 'add'" type="checkbox" name="status" lay-skin="switch" lay-text="Active|Stopped"
                        lay-filter="switch" checked="checked">
-                <input th:if="${flagType} eq 'edit'" type="checkbox" name="status" lay-skin="switch" lay-text="啟用|停用"
+                <input th:if="${flagType} eq 'edit'" type="checkbox" name="status" lay-skin="switch" lay-text="Active|Stopped"
                        lay-filter="switch" checked="checked" disabled="disabled">
             </div>
         </div>
 
         <div class="layui-form-item">
-            <label class="layui-form-label">單選</label>
+            <label class="layui-form-label">Sex</label>
             <div class="layui-input-block">
-                <input type="radio" name="sex" value="1" title="男">
-                <input type="radio" name="sex" value="2" title="女">
+                <input type="radio" name="sex" value="1" title="Man">
+                <input type="radio" name="sex" value="2" title="Female">
             </div>
         </div>
 
         <div class="layui-form-item">
             <div class="layui-input-block">
-                <button type="submit" class="layui-btn" lay-submit="" lay-filter="submit">送出</button>
+                <button type="submit" class="layui-btn" lay-submit="" lay-filter="submit">Submit</button>
             </div>
         </div>
     </form>
@@ -100,7 +100,7 @@
                     var x = document.getElementsByClassName("layui-unselect layui-form-switch layui-form-onswitch");
                     x[0].setAttribute("class", "layui-unselect layui-form-switch");
                     var d = document.getElementsByTagName('em')[0];
-                    d.firstChild.nodeValue = '停用';
+                    d.firstChild.nodeValue = 'Stopped';
                 }
                 form.render(); //更新全部
             }

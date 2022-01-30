@@ -19,34 +19,34 @@
             <input name="deptId" hidden/>
 
             <div class="layui-form-item">
-                <label class="layui-form-label">帳戶名稱</label>
+                <label class="layui-form-label">Username</label>
                 <div class="layui-input-block">
-                    <input type="username" name="username" placeholder="請輸入帳戶名稱" autocomplete="off" class="layui-input">
+                    <input type="username" name="username" placeholder="Username" autocomplete="off" class="layui-input">
                 </div>
             </div>
             <div class="layui-form-item">
-                <div class="layui-form-label ">密碼</div>
+                <div class="layui-form-label ">Password</div>
                 <div class="layui-input-block">
-                    <input type="password" name="password" placeholder="請輸入密碼" autocomplete="off" class="layui-input">
+                    <input type="password" name="password" placeholder="Password" autocomplete="off" class="layui-input">
                 </div>
             </div>
             <div class="layui-form-item">
-                <div class="layui-form-label ">手機</div>
+                <div class="layui-form-label ">Phone No.</div>
                 <div class="layui-input-block">
-                    <input type="phone" name="phone" placeholder="請輸入手機" autocomplete="off" class="layui-input">
+                    <input type="phone" name="phone" placeholder="Phone No." autocomplete="off" class="layui-input">
                 </div>
             </div>
             <div class="layui-form-item">
-                <div class="layui-form-label ">所屬部門</div>
+                <div class="layui-form-label ">Department</div>
                 <div class="layui-input-block">
-                    <input type="deptName" name="deptName" placeholder="請選擇所屬部門" autocomplete="off" class="layui-input"
+                    <input type="deptName" name="deptName" placeholder="Department" autocomplete="off" class="layui-input"
                            readonly="readonly" style="background:#eeeeee!important">
                 </div>
             </div>
             <div class="layui-form-item">
-                <label class="layui-form-label">狀態</label>
+                <label class="layui-form-label">Status</label>
                 <div class="layui-input-block">
-                    <input type="checkbox" name="status" lay-skin="switch" lay-filter="switch" lay-text="啟用|禁用" checked>
+                    <input type="checkbox" name="status" lay-skin="switch" lay-filter="switch" lay-text="Active|Stopped" checked>
                 </div>
             </div>
 
@@ -73,19 +73,19 @@
                 <div id="searchParam" shiro:hasPermission="sys:user:list">
                     <div class="layui-form-item">
                         <div class="layui-input-inline">
-                            <input type="text" id="username" class="layui-input" autocomplete="off" placeholder="請輸入帳戶名稱">
+                            <input type="text" id="username" class="layui-input" autocomplete="off" placeholder="Username">
                         </div>
                         <div class="layui-input-inline">
-                            <input type="text" id="nickName" class="layui-input" autocomplete="off" placeholder="請輸入用戶">
+                            <input type="text" id="nickName" class="layui-input" autocomplete="off" placeholder="Nickname">
                         </div>
                         <div class="layui-input-inline">
                             <input type="text" readonly class="layui-input" id="createTime" placeholder="創建時間">
                         </div>
                         <div class="layui-input-inline layui-form">
                             <select id="status">
-                                <option value="">請選擇帳戶狀態</option>
-                                <option value="1">正常</option>
-                                <option value="2">禁用</option>
+                                <option value="">Status</option>
+                                <option value="1">Active</option>
+                                <option value="2">Stopped</option>
                             </select>
                         </div>
                         <div class="layui-input-inline ">
@@ -106,13 +106,12 @@
 </body>
 <script type="text/html" id="toolbar">
     <div class="layui-btn-container">
-        <button class="layui-btn layui-btn-sm" lay-event="addNewUser" shiro:hasPermission="sys:user:add">增加</button>
-        <button class="layui-btn layui-btn-sm" lay-event="batchDeleted" shiro:hasPermission="sys:user:deleted">删除
-        </button>
+        <button class="layui-btn layui-btn-sm" lay-event="addNewUser" shiro:hasPermission="sys:user:add">Add</button>
+        <button class="layui-btn layui-btn-sm" lay-event="batchDeleted" shiro:hasPermission="sys:user:deleted">Delete</button>
     </div>
 </script>
 <script type="text/html" id="tool">
-    <a class="layui-btn  layui-btn-xs" lay-event="operationRole" shiro:hasPermission="sys:user:role:update">賦予角色</a>
+    <a class="layui-btn  layui-btn-xs" lay-event="operationRole" shiro:hasPermission="sys:user:role:update">Assign roles</a>
     <a class="layui-btn layui-btn-xs" lay-event="edit" shiro:hasPermission="sys:user:update">Edit</a>
     <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del" shiro:hasPermission="sys:user:deleted">Delete</a>
 </script>
@@ -157,36 +156,36 @@
             , cols: [
                 [
                     {type: 'checkbox', fixed: 'left'},
-                    {field: 'username', title: '帳戶', width: 130},
-                    {field: 'phone', title: '手機', width: 130},
-                    {field: 'deptName', title: '所屬部門', width: 120},
-                    {field: 'realName', title: '真名', width: 120},
-                    {field: 'nickName', title: '別名', width: 130},
+                    {field: 'username', title: 'Username', width: 130},
+                    {field: 'phone', title: 'Phone No.', width: 130},
+                    {field: 'deptName', title: 'Department', width: 120},
+                    {field: 'realName', title: 'Name', width: 120},
+                    {field: 'nickName', title: 'Nickname', width: 130},
                     {field: 'email', title: 'E-mail', width: 150},
                     {
-                        field: 'sex', title: '性别', width: 100, templet: function (item) {
+                        field: 'sex', title: 'Sex', width: 100, templet: function (item) {
                             if (item.sex === 1) {
-                                return "男";
+                                return "Man";
                             }
                             if (item.sex === 2) {
-                                return "女";
+                                return "Female";
                             }
                         }
                     },
-                    {field: 'createTime', title: '創建時間', minWidth: 120},
-                    {field: 'updateTime', title: '更新時間', minWidth: 120},
+                    {field: 'createTime', title: 'Create At', minWidth: 120},
+                    {field: 'updateTime', title: 'Update At', minWidth: 120},
                     {
-                        field: 'status', title: '狀態', width: 100, templet: function (item) {
+                        field: 'status', title: 'Status', width: 100, templet: function (item) {
                             if (item.status === 1) {
-                                return '  <input type="checkbox" lay-skin="switch" lay-text="啟用|停用" checked disabled>';
+                                return '  <input type="checkbox" lay-skin="switch" lay-text="Active|Stopped" checked disabled>';
                             }
                             if (item.status === 2) {
-                                return '  <input type="checkbox" lay-skin="switch" lay-text="啟用|停用" disabled>';
+                                return '  <input type="checkbox" lay-skin="switch" lay-text="Active|Stopped" disabled>';
                             }
                         }
                     },
                     {
-                        field: 'createWhere', title: '註冊', width: 100, templet: function (item) {
+                        field: 'createWhere', title: 'Register', width: 100, templet: function (item) {
                             if (item.createWhere === 1) {
                                 return "Web";
                             }
@@ -227,17 +226,17 @@
                     var checkStatus = table.checkStatus(obj.config.id);
                     var data = checkStatus.data;
                     if (data.length == 0) {
-                        layer.msg("请选择要批量删除的用户");
+                        layer.msg("Please select users to delete in bulk ");
                     } else {
                         var userIds = [];
                         $(data).each(function (index, item) {
                             userIds.push(item.id);
                         });
-                        tipDialog(userIds, "選中的");
+                        tipDialog(userIds, "Chosen");
                     }
                     break;
                 case 'addNewUser':
-                    $(".title").html("新增用户");
+                    $(".title").html("Create User");
                     $(".user_table_div").hide();
                     $("#leftTree").hide();
                     $(".operation_user").show();
@@ -252,7 +251,7 @@
                     var x = document.getElementsByClassName("layui-unselect layui-form-switch");
                     x[0].setAttribute("class", "layui-unselect layui-form-switch layui-form-onswitch");
                     var d = document.getElementsByTagName('em')[0];
-                    d.firstChild.nodeValue = '啟用';
+                    d.firstChild.nodeValue = 'Active';
                     form.render(); //更新全部
 
                     break;
@@ -271,7 +270,7 @@
                     $(".user_table_div").hide();
                     $("#leftTree").hide();
                     $(".operation_user").show();
-                    $(".title").html("編輯用户");
+                    $(".title").html("Edit");
                     $(".operation_user input[name=id]").val(data.id);
                     $(".operation_user input[name=deptId]").val(data.deptId);
                     $(".operation_user input[name=username]").val(data.username);
@@ -284,13 +283,13 @@
                         var x = document.getElementsByClassName("layui-unselect layui-form-switch");
                         x[0].setAttribute("class", "layui-unselect layui-form-switch layui-form-onswitch");
                         var d = document.getElementsByTagName('em')[0];
-                        d.firstChild.nodeValue = '啟用';
+                        d.firstChild.nodeValue = 'Active';
                     } else {
                         $(".operation_user input[name=status]").attr('type', 'hidden').removeAttr("checked").val(2);
                         var x = document.getElementsByClassName("layui-unselect layui-form-switch");
                         x[0].setAttribute("class", "layui-unselect layui-form-switch");
                         var d = document.getElementsByTagName('em')[0];
-                        d.firstChild.nodeValue = '停用';
+                        d.firstChild.nodeValue = 'Stopped';
                     }
                     form.render(); //更新全部
 
@@ -302,18 +301,18 @@
                             type: 1,
                             offset: '50px',
                             skin: 'layui-layer-molv',
-                            title: "賦予角色",
+                            title: "Assign Roles",
                             area: ['500px', '400px'],
                             shade: 0,
                             shadeClose: false,
                             content: jQuery("#roles"),
-                            btn: ['確定', '取消'],
+                            btn: ['Confirn', 'Cancel'],
                             yes: function (index) {
                                 //获得右侧数据
                                 var roleIds = [];
                                 var getData = transfer.getData('ownData');
                                 if (getData.length == 0) {
-                                    layer.msg("请选择要赋予用户的角色");
+                                    layer.msg("Please select a role to assign to the user");
                                 } else {
 
                                     $(getData).each(function (index, item) {
@@ -341,7 +340,7 @@
         });
         var tipDialog = function (userIds, username) {
             layer.open({
-                content: '確定要删除' + username + "用戶?",
+                content: 'Sure you want to delete User' + username,
                 yes: function (index, layero) {
                     layer.close(index); //如果设定了yes回调，需进行手工关闭
                     CoreUtil.sendDelete("/sys/user", userIds, function (res) {
@@ -432,7 +431,7 @@
             transfer.render({
                 elem: '#roles'
                 , data: data.allRole
-                , title: ['賦予角色', '持有角色']
+                , title: ['Give role', 'Hold role']
                 , showSearch: true
                 , value: data.ownRoles
                 , id: 'ownData'

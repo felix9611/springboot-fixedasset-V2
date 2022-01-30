@@ -99,7 +99,7 @@
 <script type="text/html" id="tool">
     <a class="layui-btn layui-btn-xs" lay-event="edit" shiro:hasPermission="sys:permission:update">Edit</a>
     <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del"
-       shiro:hasPermission="sys:permission:deleted">刪除</a>
+       shiro:hasPermission="sys:permission:deleted">Delete</a>
 </script>
 <script src="/layui/layui.all.js"></script>
 <script src="/js/core.util.js"></script>
@@ -215,7 +215,7 @@
                     var x = document.getElementsByClassName("layui-unselect layui-form-switch");
                     x[0].setAttribute("class", "layui-unselect layui-form-switch layui-form-onswitch");
                     var d = document.getElementsByTagName('em')[0];
-                    d.firstChild.nodeValue = '啟用';
+                    d.firstChild.nodeValue = 'Active';
                     form.render(); //更新全部
                     initTree("");
                     break;
@@ -277,13 +277,13 @@
                         var x = document.getElementsByClassName("layui-unselect layui-form-switch");
                         x[0].setAttribute("class", "layui-unselect layui-form-switch layui-form-onswitch");
                         var d = document.getElementsByTagName('em')[0];
-                        d.firstChild.nodeValue = '啟用';
+                        d.firstChild.nodeValue = 'Active';
                     } else {
                         $(".operation_menu input[name=status]").attr('type', 'hidden').removeAttr("checked").val(0);
                         var x = document.getElementsByClassName("layui-unselect layui-form-switch");
                         x[0].setAttribute("class", "layui-unselect layui-form-switch");
                         var d = document.getElementsByTagName('em')[0];
-                        d.firstChild.nodeValue = '停用';
+                        d.firstChild.nodeValue = 'Stopped';
                     }
                     form.render(); //更新全部
                     initTree(data.id);
