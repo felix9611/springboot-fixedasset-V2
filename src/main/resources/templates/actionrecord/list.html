@@ -16,7 +16,7 @@
   <div id="searchParam"  shiro:hasPermission="actionRecord:list">
     <div class="layui-form-item">
       <div class="layui-input-inline">
-        <input type="text" id="key" class="layui-input"  autocomplete="off" placeholder="請輸入">
+        <input type="text" id="key" class="layui-input"  autocomplete="off" placeholder="Enter Any">
       </div>
 
       <div class="layui-input-inline ">
@@ -64,12 +64,12 @@
       }
       , cols: [
         [
-          {field: 'actionName', title: '活動名稱', sort: true},
-          {field: 'actionMethod', title: '活動類型', sort: true},
-          {field: 'actionFrom', title: '活動單元', sort: true},
-          {field: 'actionData', title: '執行數據', sort: true},
-          {field: 'actionSuccess', title: '成功執行?', sort: true},
-          {field: 'createTime', title: '活動時間', sort: true},
+          {field: 'actionName', title: 'Activity name', sort: true},
+           {field: 'actionMethod', title: 'Activity type', sort: true},
+           {field: 'actionFrom', title: 'Activity From', sort: true},
+           {field: 'actionData', title: 'Data', sort: true},
+           {field: 'actionSuccess', title: 'Successfully?', sort: true},
+           {field: 'createTime', title: 'Activity At ', sort: true},
         ]
       ]
       , toolbar: '#toolbar'

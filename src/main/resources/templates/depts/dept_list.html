@@ -6,7 +6,7 @@
 <head>
 
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Department</title>
     <link rel="stylesheet" href="/layui/css/layui.css">
     <link rel="stylesheet" href="/css/custom.form.css">
 
@@ -20,30 +20,30 @@
             <input name="id" hidden/>
             <input name="pid" hidden/>
             <div class="layui-form-item">
-                <label class="layui-form-label">組織名稱</label>
+                <label class="layui-form-label">Name</label>
                 <div class="layui-input-block">
-                    <input type="name" name="name" placeholder="組織名稱" autocomplete="off" class="layui-input">
+                    <input type="name" name="name" placeholder="Name" autocomplete="off" class="layui-input">
                 </div>
             </div>
             <div class="layui-form-item">
-                <div class="layui-form-label ">所屬部門</div>
+                <div class="layui-form-label ">Department</div>
                 <div class="layui-input-block">
-                    <input type="pidName" name="pidName" placeholder="所屬部門" autocomplete="off" class="layui-input"
+                    <input type="pidName" name="pidName" placeholder="Department" autocomplete="off" class="layui-input"
                            readonly="readonly" style="background:#eeeeee!important">
                 </div>
             </div>
             <div class="layui-form-item">
-                <label class="layui-form-label ">部門經理名稱</label>
+                <label class="layui-form-label ">Manager</label>
                 <div class="layui-input-block">
-                    <input type="managerName" name="managerName" placeholder="请输入部门经理手机号" autocomplete="off"
+                    <input type="managerName" name="managerName" placeholder="Manager" autocomplete="off"
                            class="layui-input">
                 </div>
             </div>
 
             <div class="layui-form-item">
-                <div class="layui-form-label">部門經理手機</div>
+                <div class="layui-form-label">Manager Phone No.</div>
                 <div class="layui-input-block">
-                    <input type="phone" name="phone" placeholder="部門經理手機" autocomplete="off" class="layui-input">
+                    <input type="phone" name="phone" placeholder="Manager Phone No." autocomplete="off" class="layui-input">
                 </div>
             </div>
             <div class="layui-form-item">
@@ -114,22 +114,22 @@
                 cols: [
                     [
                         {type: 'numbers'},
-                        {field: 'deptNo', title: '部門編碼', width: 150},
+                        {field: 'deptNo', title: 'Deportment Code', width: 150},
                         {field: 'name', title: 'Department Name',},
                         {
-                            field: 'pidName', title: '上級Department Name', templet: function (item) {
+                            field: 'pidName', title: 'Upper Department Name', templet: function (item) {
                                 if (item.pidName === null || item.pidName === undefined) {
-                                    return "最頂級部門";
+                                    return "Top department";
                                 } else {
                                     return item.pidName;
                                 }
                             }
                         },
-                        {field: 'relationCode', title: '層級關係編碼'},
-                        {field: 'managerName', title: '部門經理'},
-                        {field: 'phone', title: '部門經理聯繫電話'},
+                        {field: 'relationCode', title: 'Hierarchical Coding'},
+                        {field: 'managerName', title: 'Department Manager'},
+                        {field: 'phone', title: 'Manager Phone'},
                         {
-                            field: 'status', title: '狀態', templet: function (item) {
+                            field: 'status', title: 'Status', templet: function (item) {
                                 if (item.status === 1) {
                                     return '  <input type="checkbox" lay-skin="switch" lay-text="Active|Stopped" checked disabled>';
                                 }
@@ -138,7 +138,7 @@
                                 }
                             }
                         },
-                        {field: 'createTime', title: '創建時間', minWidth: 120},
+                        {field: 'createTime', title: 'Created At', minWidth: 120},
                         {title: 'Action', width: 250, toolbar: '#tool'}
                     ]
                 ]
@@ -156,7 +156,7 @@
                     selectNode = null;
                     $(".dept-table").hide();
                     $(".operation_dept").show();
-                    $(".title").html("編輯部門");
+                    $(".title").html("Edit");
                     $(".operation_dept input[name=id]").val(data.id);
                     $(".operation_dept input[name=pid]").val(data.pid);
                     $(".operation_dept input[name=name]").val(data.name);
@@ -208,7 +208,7 @@
         });
         var deletedDept = function (deptId, menuName) {
             layer.open({
-                content: '確定要刪除' + menuName + "?",
+                content: 'Are sure you want to delete ' + menuName + "?",
                 yes: function (index, layero) {
                     layer.close(index); //如果设定了yes回调，需进行手工关闭
                     CoreUtil.sendDelete("/sys/dept/" + deptId, null, function (res) {
@@ -238,7 +238,7 @@
             layer.open({
                 type: 1,
                 skin: 'layui-layer-molv',
-                title: "選擇部門",
+                title: "Select department",
                 area: ['400px', '450px'],
                 shade: 0,
                 shadeClose: false,

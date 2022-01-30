@@ -173,7 +173,7 @@
     //删除
     var tipDialog=function (ids) {
       layer.open({
-        content: "確定要删除?",
+        content: "Are you sure you want to delete?",
         yes: function(index, layero){
           layer.close(index);
           CoreUtil.sendDelete("/location/delete",ids,function (res) {

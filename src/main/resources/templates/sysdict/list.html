@@ -163,7 +163,7 @@
                 [
                     {type: 'checkbox', fixed: 'left'},
                     {field: 'name', title: '種類別代碼', sort: true,event: 'setDetail'},
-                    {field: 'remark', title: '描述', sort: true,event: 'setDetail'},
+                    {field: 'remark', title: 'Describe ', sort: true,event: 'setDetail'},
                     {width: 120, toolbar: "#tool", title: 'Action'}
                 ]
             ]
@@ -360,7 +360,7 @@
         //删除
         var tipDialog = function (ids,containCurrentIdFlag) {
             layer.open({
-                content: "確定要删除?",
+                content: "Are you sure you want to delete?",
                 yes: function (index, layero) {
                     layer.close(index); //如果设定了yes回调，需进行手工关闭
                     CoreUtil.sendDelete("/sysDict/delete", ids, function (res) {
@@ -379,7 +379,7 @@
         //详情删除
         var tipDialogDetail = function (ids) {
             layer.open({
-                content: "確定要删除?",
+                content: "Are you sure you want to delete?",
                 yes: function (index, layero) {
                     layer.close(index); //如果设定了yes回调，需进行手工关闭
                     CoreUtil.sendDelete("/sysDictDetail/delete", ids, function (res) {

@@ -26,9 +26,9 @@
       </div>
     </div>
         <div class="layui-form-item">
-      <label class="layui-form-label">備註欄</label>
+      <label class="layui-form-label">Remark</label>
       <div class="layui-input-block">
-        <input type="deptRemark" name="deptRemark" placeholder="備註欄" autocomplete="off" class="layui-input">
+        <input type="deptRemark" name="deptRemark" placeholder="Remark" autocomplete="off" class="layui-input">
       </div>
     </div>
   <div class="layui-form-item">
@@ -117,7 +117,7 @@
         case 'add':
           $(".table_div").hide();
           $(".operation").show();
-          $(".title").html("新增");
+          $(".title").html("Add");
           $(".operation input[name=id]").val("");
           $(".operation input[name=deptCode]").val("");
           $(".operation input[name=deptName]").val("");
@@ -138,7 +138,7 @@
         case 'edit':
           $(".table_div").hide();
           $(".operation").show();
-          $(".title").html("編輯");
+          $(".title").html("Edit");
           $(".operation input[name=id]").val(data.id);
           $(".operation input[name=deptCode]").val(data.deptCode);
           $(".operation input[name=deptName]").val(data.deptName);
@@ -166,7 +166,7 @@
     //删除
     var tipDialog=function (ids) {
       layer.open({
-        content: "確定要删除?",
+        content: "Are you sure you want to delete?",
         yes: function(index, layero){
           layer.close(index); //如果设定了yes回调，需进行手工关闭
           CoreUtil.sendDelete("/department/delete",ids,function (res) {

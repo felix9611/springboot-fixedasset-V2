@@ -171,7 +171,7 @@
     //删除
     var tipDialog=function (data) {
       layer.open({
-        content: "確定要删除?",
+        content: "Are you sure you want to delete?",
         yes: function(index, layero){
           layer.close(index); //如果设定了yes回调，需进行手工关闭
           CoreUtil.sendDelete("/place2/delete",data,function (res) {
