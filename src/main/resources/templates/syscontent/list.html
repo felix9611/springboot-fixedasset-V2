@@ -14,22 +14,22 @@
         <form class="layui-form " action="" lay-filter="info" style="width: 700px;margin-top: 10px">
             <input name="id" hidden/>
             <div class="layui-form-item">
-                <label class="layui-form-label">标题</label>
+                <label class="layui-form-label">Title</label>
                 <div class="layui-input-block">
-                    <input type="title" name="title" placeholder="请输入标题" autocomplete="off" class="layui-input">
+                    <input type="title" name="title" placeholder="Titl" autocomplete="off" class="layui-input">
                 </div>
             </div>
             <div class="layui-form-item">
-                <label class="layui-form-label">类型</label>
+                <label class="layui-form-label">Type</label>
                 <div class="layui-input-block">
                     <select id="type" name="type" lay-filter="select-type" th:with="type=${@sysDictService.getType('content_type')}">
-                        <option value="0">请选择</option>
+                        <option value="0">Select</option>
                         <option th:each="dict : ${type}" th:text="${dict.label}" th:value="${dict.value}"></option>
                     </select>
                 </div>
             </div>
             <div class="layui-form-item">
-                <label class="layui-form-label">内容</label>
+                <label class="layui-form-label">Content</label>
                 <div class="layui-input-block">
                     <textarea id="content" name=content style="display: none;"></textarea>
                 </div>
@@ -49,11 +49,11 @@
     <div id="searchParam" shiro:hasPermission="sysContent:list">
         <div class="layui-form-item">
             <div class="layui-input-inline">
-                <input type="text" id="title" class="layui-input" autocomplete="off" placeholder="请输入标题">
+                <input type="text" id="title" class="layui-input" autocomplete="off" placeholder="Title">
             </div>
 
             <div class="layui-input-inline ">
-                <button class="layui-btn" onclick="search()">查询</button>
+                <button class="layui-btn" onclick="search()">Inquire</button>
             </div>
         </div>
 
@@ -62,13 +62,12 @@
 </div>
 <script type="text/html" id="toolbar">
     <div class="layui-btn-container">
-        <button class="layui-btn layui-btn-sm" lay-event="add" shiro:hasPermission="sysContent:add">添加</button>
-        <button class="layui-btn layui-btn-sm" lay-event="batchDeleted" shiro:hasPermission="sysContent:delete">删除
-        </button>
+        <button class="layui-btn layui-btn-sm" lay-event="add" shiro:hasPermission="sysContent:add">Add</button>
+        <button class="layui-btn layui-btn-sm" lay-event="batchDeleted" shiro:hasPermission="sysContent:delete">Delete</button>
     </div>
 </script>
 <script type="text/html" id="tool">
-    <a class="layui-btn layui-btn-xs" lay-event="preview" shiro:hasPermission="sysContent:list">查閱</a>
+    <a class="layui-btn layui-btn-xs" lay-event="preview" shiro:hasPermission="sysContent:list">Detail</a>
     <a class="layui-btn layui-btn-xs" lay-event="edit" shiro:hasPermission="sysContent:update">Edit</a>
     <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del" shiro:hasPermission="sysContent:delete">Delete</a>
 </script>

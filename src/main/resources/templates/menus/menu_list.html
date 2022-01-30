@@ -15,34 +15,34 @@
             <input name="id" hidden/>
             <input name="pid" hidden/>
             <div class="layui-form-item">
-                <label class="layui-form-label">類型</label>
+                <label class="layui-form-label">Type</label>
                 <div class="layui-input-block">
-                    <input type="radio" name="type" value="1" title="目錄" checked="" lay-filter="radio-type">
-                    <input type="radio" name="type" value="2" title="菜單" lay-filter="radio-type">
-                    <input type="radio" name="type" value="3" title="按钮" lay-filter="radio-type">
+                    <input type="radio" name="type" value="1" title="Catalog" checked="" lay-filter="radio-type">
+                    <input type="radio" name="type" value="2" title="Menu" lay-filter="radio-type">
+                    <input type="radio" name="type" value="3" title="Button" lay-filter="radio-type">
                 </div>
             </div>
             <div class="layui-form-item">
-                <label class="layui-form-label">菜單名稱</label>
+                <label class="layui-form-label">Name</label>
                 <div class="layui-input-block">
-                    <input type="name" name="name" placeholder="菜單名稱" autocomplete="off" class="layui-input">
+                    <input type="name" name="name" placeholder="Name" autocomplete="off" class="layui-input">
                 </div>
             </div>
             <div class="layui-form-item">
-                <div class="layui-form-label ">所屬菜單</div>
+                <div class="layui-form-label ">Pid Name</div>
                 <div class="layui-input-block">
-                    <input type="pidName" name="pidName" placeholder="請選擇所屬菜單" autocomplete="off" class="layui-input"
+                    <input type="pidName" name="pidName" placeholder="Pid Name" autocomplete="off" class="layui-input"
                            readonly="readonly" style="background:#eeeeee!important">
                 </div>
             </div>
             <div class="layui-form-item menu_url">
-                <label class="layui-form-label ">接口URL</label>
+                <label class="layui-form-label ">Interface URL</label>
                 <div class="layui-input-block">
-                    <input type="text" name="url" placeholder="請選擇接口URL" autocomplete="off" class="layui-input">
+                    <input type="text" name="url" placeholder="Interface URL" autocomplete="off" class="layui-input">
                 </div>
             </div>
             <div class="layui-form-item menu_target">
-                <label class="layui-form-label ">target</label>
+                <label class="layui-form-label ">Target</label>
                 <div class="layui-input-block">
                     <input type="radio" name="target" value="_self" title="_self" checked="">
                     <input type="radio" name="target" value="_blank" title="_blank">
@@ -50,14 +50,14 @@
             </div>
 
             <div class="layui-form-item menu-perms" hidden>
-                <div class="layui-form-label">授權標識</div>
+                <div class="layui-form-label">Authorization Code</div>
                 <div class="layui-input-block">
-                    <input type="perms" name="perms" placeholder="請輸入授權標識,如果 sys:user:list" autocomplete="off"
+                    <input type="perms" name="perms" placeholder="Example sys:user:list" autocomplete="off"
                            class="layui-input">
                 </div>
             </div>
             <div class="layui-form-item menu_icon" hidden>
-                <div class="layui-form-label">圖標</div>
+                <div class="layui-form-label">ICON</div>
                 <div class="layui-input-block">
                     <input type="text" id="iconPicker" name="icon" lay-filter="iconPicker" class="layui-input">
 
@@ -66,21 +66,21 @@
 
 
             <div class="layui-form-item">
-                <div class="layui-form-label">排序</div>
+                <div class="layui-form-label">Sort</div>
                 <div class="layui-input-block">
                     <input type="text" name="orderNum" lay-verify="number" onkeyup="value=zhzs(this.value)"
-                           placeholder="請輸入排序" autocomplete="off" class="layui-input">
+                           placeholder="Sort" autocomplete="off" class="layui-input">
                 </div>
             </div>
             <div class="layui-form-item">
-                <label class="layui-form-label">狀態</label>
+                <label class="layui-form-label">Status</label>
                 <div class="layui-input-block">
-                    <input type="checkbox" name="status" lay-skin="switch" lay-filter="switch" lay-text="啟用|停用" checked>
+                    <input type="checkbox" name="status" lay-skin="switch" lay-filter="switch" lay-text="Active|Stopped" checked>
                 </div>
             </div>
             <div class="layui-form-item">
                 <div class="layui-input-block">
-                    <button type="submit" class="layui-btn" lay-submit="" lay-filter="submit">送出</button>
+                    <button type="submit" class="layui-btn" lay-submit="" lay-filter="submit">Submit</button>
                     <button class="layui-btn layui-btn-primary" id="btn_cancel">Back</button>
                 </div>
             </div>
@@ -143,36 +143,36 @@
                 cols: [
                     [
                         {type: 'numbers'},
-                        {field: 'name', width: 150, title: '菜單名稱'},
-                        {field: 'url', width: 150, title: 'url'},
-                        {field: 'icon', width: 80, title: '圖標',templet:function (item) {
+                        {field: 'name', width: 150, title: 'Name'},
+                        {field: 'url', width: 150, title: 'URL'},
+                        {field: 'icon', width: 80, title: 'ICON',templet:function (item) {
                             return '<i class="icon-color layui-icon '+item.icon+'"></i>';
                             }},
                         {field: 'target', width: 80, title: 'target'},
                         {
-                            field: 'type',width: 70, title: '類型', templet: function (item) {
+                            field: 'type',width: 70, title: 'Type', templet: function (item) {
                                 if (item.type === 1) {
-                                    return '  <a class="layui-btn layui-btn-xs" >目錄</a>';
+                                    return '  <a class="layui-btn layui-btn-xs" >Catalog</a>';
                                 }
                                 if (item.type === 2) {
-                                    return '<a class="layui-btn layui-btn-xs layui-btn-normal" >菜單</a>';
+                                    return '<a class="layui-btn layui-btn-xs layui-btn-normal">Menu </a>';
                                 }
                                 if (item.type === 3) {
-                                    return '<a class="layui-btn layui-btn-xs layui-btn-warm " >按鈕</a>';
+                                    return '<a class="layui-btn layui-btn-xs layui-btn-warm " >Button</a>';
                                 }
                             }
                         },
-                        {field: 'pidName', title: '父級名稱'},
-                        {field: 'orderNum', title: '排序',width: 70},
-                        {field: 'perms', title: '資源標識',width: 150},
-                        {field: 'createTime', title: '創建時間', Width: 150},
+                        {field: 'pidName', title: 'Parent Name'},
+                        {field: 'orderNum', title: 'Sort',width: 70},
+                        {field: 'perms', title: 'Resource ID ',width: 150},
+                        {field: 'createTime', title: 'Created At', Width: 150},
                         {
-                            field: 'status', title: '狀態',width: 100, templet: function (item) {
+                            field: 'status', title: 'Status',width: 100, templet: function (item) {
                                 if (item.status === 1) {
-                                    return '  <input type="checkbox" lay-skin="switch" lay-text="啟用|停用" checked disabled>';
+                                    return '  <input type="checkbox" lay-skin="switch" lay-text="Active|Stopped" checked disabled>';
                                 }
                                 if (item.status === 0) {
-                                    return '  <input type="checkbox" lay-skin="switch" lay-text="啟用|停用" disabled>';
+                                    return '  <input type="checkbox" lay-skin="switch" lay-text="Active|Stopped" disabled>';
                                 }
                             }
                         },
@@ -189,7 +189,7 @@
                     selectNode = null;
                     $(".menu-table").hide();
                     $(".operation_menu").show();
-                    $(".title").html("新增菜單權限");
+                    $(".title").html("Add");
                     initRadio(1);
                     $(".menu-perms").hide();
                     $(".menu_target").hide();
@@ -208,7 +208,7 @@
                     $("input[name='icon']").attr("value","")
                     iconPicker.checkIcon('iconPicker', '');
                     if ($("#reset_icon").length === 0){
-                        $(".layui-select-title").append("<a id='reset_icon' onclick='resetIcon()' class=\"layui-btn  layui-btn-danger layui-btn-sm\">重置</a>")
+                        $(".layui-select-title").append("<a id='reset_icon' onclick='resetIcon()' class=\"layui-btn  layui-btn-danger layui-btn-sm\">Reset</a>")
                     }
                     $(".operation_menu input[name=status]").attr('checked', 'checked');
                     $(".operation_menu input[name=status]").attr('type', 'hidden').val(1);
@@ -250,7 +250,7 @@
                     selectNode = null;
                     $(".menu-table").hide();
                     $(".operation_menu").show();
-                    $(".title").html("編輯菜單權限");
+                    $(".title").html("Edit");
                     initRadio(data.type);
                     form.val('deptInfo', {
                         "target": data.target
@@ -268,7 +268,7 @@
                         iconPicker.checkIcon('iconPicker', "");
                     }
                     if ($("#reset_icon").length === 0){
-                        $(".layui-select-title").append("<a id='reset_icon' onclick='resetIcon()' class=\"layui-btn  layui-btn-danger layui-btn-sm\">重置</a>")
+                        $(".layui-select-title").append("<a id='reset_icon' onclick='resetIcon()' class=\"layui-btn  layui-btn-danger layui-btn-sm\">Reest</a>")
                     }
                     $("input[name='icon']").attr("value",data.icon)
                     if (data.status == 1) {
@@ -292,7 +292,7 @@
         });
         var deletedMenu = function (menuId, menuName) {
             layer.open({
-                content: '確定要刪除' + menuName + "?",
+                content: 'Sure you want to delete' + menuName + "?",
                 yes: function (index, layero) {
                     layer.close(index); //如果设定了yes回调，需进行手工关闭
                     CoreUtil.sendDelete("/sys/permission/" + menuId, null, function (res) {
@@ -345,12 +345,12 @@
             layer.open({
                 type: 1,
                 skin: 'layui-layer-molv',
-                title: "選擇菜單",
+                title: "Select",
                 area: ['400px', '450px'],
                 shade: 0,
                 shadeClose: false,
                 content: jQuery("#menuTree"),
-                btn: ['確定', '取消'],
+                btn: ['Confirm','Cancel'],
                 yes: function (index) {
                     if (selectNode.data != null) {
                         $(".operation_menu input[name=pid]").val(selectNode.data.id);

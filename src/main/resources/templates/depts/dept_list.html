@@ -47,14 +47,14 @@
                 </div>
             </div>
             <div class="layui-form-item">
-                <label class="layui-form-label">狀態</label>
+                <label class="layui-form-label">Status</label>
                 <div class="layui-input-block">
-                    <input type="checkbox" name="status" lay-skin="switch" lay-filter="switch" lay-text="啟用|停用" checked>
+                    <input type="checkbox" name="status" lay-skin="switch" lay-filter="switch" lay-text="Active|Stopped" checked>
                 </div>
             </div>
             <div class="layui-form-item">
                 <div class="layui-input-block">
-                    <button type="submit" class="layui-btn" lay-submit="" lay-filter="submit">送出</button>
+                    <button type="submit" class="layui-btn" lay-submit="" lay-filter="submit">Submit</button>
                     <button class="layui-btn layui-btn-primary" id="btn_cancel">Back</button>
                 </div>
             </div>
@@ -131,10 +131,10 @@
                         {
                             field: 'status', title: '狀態', templet: function (item) {
                                 if (item.status === 1) {
-                                    return '  <input type="checkbox" lay-skin="switch" lay-text="啟用|停用" checked disabled>';
+                                    return '  <input type="checkbox" lay-skin="switch" lay-text="Active|Stopped" checked disabled>';
                                 }
                                 if (item.status === 0) {
-                                    return '  <input type="checkbox" lay-skin="switch" lay-text="啟用|停用" disabled>';
+                                    return '  <input type="checkbox" lay-skin="switch" lay-text="Active|Stopped" disabled>';
                                 }
                             }
                         },

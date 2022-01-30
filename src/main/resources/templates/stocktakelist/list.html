@@ -15,9 +15,9 @@
         <form class="layui-form " action="" lay-filter="info">
             <input id="id" name="id" hidden/>
             <div class="layui-form-item">
-                <label class="layui-form-label">活動名稱</label>
+                <label class="layui-form-label">Activity Name</label>
                 <div class="layui-input-block">
-                    <input type="activityName" name="activityName" placeholder="活動名稱" autocomplete="off" class="layui-input">
+                    <input type="activityName" name="activityName" placeholder="Activity Name" autocomplete="off" class="layui-input">
                 </div>
             </div>
 
@@ -38,38 +38,38 @@
             <input id="detailId" name="id" hidden/>
             <input name="listId" hidden/>
             <div class="layui-form-item">
-                <label class="layui-form-label">資產編號</label>
+                <label class="layui-form-label">Asset Code</label>
                 <div class="layui-input-block">
-                    <input type="assetCode" name="assetCode" placeholder="資產編號" autocomplete="off" class="layui-input">
+                    <input type="assetCode" name="Asset Code" placeholder="Asset Code" autocomplete="off" class="layui-input">
                 </div>
             </div>
             <div class="layui-form-item">
-                <label class="layui-form-label">位置</label>
+                <label class="layui-form-label">Location</label>
                 <div class="layui-input-block">
                     <select id="assetPlace" name="assetPlace" lay-filter="select-type" th:with="place=${@place2Service.getPlacetSel()}">
-                        <option value="">請選擇</option>
+                        <option value="">Select</option>
                         <option th:each="dict : ${place}" th:text="${dict.placeName}" th:value="${dict.id}"></option>
                     </select>
                 </div>
             </div>
             <div class="layui-form-item">
-                <label class="layui-form-label">狀態</label>
+                <label class="layui-form-label">Status</label>
                 <div class="layui-input-block">
                     <!--<input type="status" name="status" placeholder="狀態" autocomplete="off" class="layui-input">-->
                     <select id="status" name="status" lay-filter="select-type">
-                        <option value="">請選擇</option>
-                        <option value="1">不存在</option>
-                        <option value="2">存在</option>
-                        <option value="3">存在(殘缺)</option>
-                        <option value="4">要維修</option>
-                        <option value="5">維修中</option>
+                        <option value="">Select</option>
+                        <option value="1">Does not exist</option>
+                        <option value="2">Exist</option>
+                        <option value="3">Exist (defect)</option>
+                        <option value="4">To repair</option>
+                        <option value="5">In maintenance</option>
                     </select>
                 </div>
             </div>
             <div class="layui-form-item">
-                <label class="layui-form-label">狀態說明(如有)</label>
+                <label class="layui-form-label">Status description (if any)</label>
                 <div class="layui-input-block">
-                    <input type="statusRemark" name="statusRemark" placeholder="狀態說明(如有)" autocomplete="off" class="layui-input">
+                    <input type="statusRemark" name="statusRemark" placeholder="Status description (if any)" autocomplete="off" class="layui-input">
                 </div>
             </div>
 
@@ -91,8 +91,8 @@
                 <div id="searchParam" shiro:hasPermission="sysDict:list">
                     <div class="layui-form-item">
                         <div class="layui-input-inline">
-                            <input type="text" id="name" class="layui-input" autocomplete="off" placeholder="请输入字典名称或描述 ">
-                            <input type="text" id="dictId" style="display: none" class="layui-input" autocomplete="off" placeholder="请输入字典名称或描述 ">
+                            <input type="text" id="name" class="layui-input" autocomplete="off" placeholder="Enter Any ">
+                            <input type="text" id="dictId" style="display: none" class="layui-input" autocomplete="off" placeholder="Enter Any ">
                         </div>
 
                         <div class="layui-input-inline ">
@@ -122,7 +122,7 @@
 
 <script type="text/html" id="toolbarDetail">
     <div class="layui-btn-container">
-        <button class="layui-btn layui-btn-sm" lay-event="add" shiro:hasPermission="stocktakelist:add">增加</button>
+        <button class="layui-btn layui-btn-sm" lay-event="add" shiro:hasPermission="stocktakelist:add">Add</button>
     </div>
 </script>
 
@@ -174,9 +174,9 @@
             }
             , cols: [
                 [
-                    {field: 'activityName', title: '活動名稱', sort: true,event: 'setDetail'},
-                    {field: 'startTime', title: '開始日期', sort: true,event: 'setDetail'},
-                    {field: 'createTime', title: '創建日期', sort: true,event: 'setDetail'},
+                    {field: 'activityName', title: 'Activity Name', sort: true,event: 'setDetail'},
+                    {field: 'startTime', title: 'Started At', sort: true,event: 'setDetail'},
+                    {field: 'createTime', title: 'Create At', sort: true,event: 'setDetail'},
                     {width: 120, toolbar: "#tool", title: 'Action'}
                 ]
             ]
@@ -201,25 +201,25 @@
             }
             , cols: [
                 [
-                    {field: 'assetCode', title: '資產編號', sort: true },
-                    {field: 'assetName', title: '資產名稱', sort: true },
-                    {field: 'placeName', title: '檢查地點', sort: false , templet: function (item) {
+                    {field: 'assetCode', title: 'Asset Code', sort: true },
+                    {field: 'assetName', title: 'Asset Name', sort: true },
+                    {field: 'placeName', title: 'Place', sort: false , templet: function (item) {
                             if(!item.placeName){
-                                return "錯誤";
+                                return "Error";
                             }else{
                                 return item.placeName;
                             }
                         }},
-                    {field: 'status', title: '狀態', sort: true, templet: function (item) {
+                    {field: 'status', title: 'Status', sort: true, templet: function (item) {
                             var asset = CoreUtil.selectAssetName(assetdatas, item.assetCode);
-                            if(asset != "(此資產不存在)"){
+                            if(asset != "(This asset does not exist)"){
                                 return CoreUtil.selectStatus(item.status);
                             }else{
-                                return "不存在";
+                                return "Not Exist";
                             }
                         }
                     },
-                    {field: 'statusRemark', title: '狀態備註欄', sort: true},
+                    {field: 'statusRemark', title: 'Remark', sort: true},
                 ]
             ]
             , toolbar: '#toolbarDetail'
@@ -237,7 +237,7 @@
                     layer.open({
                         type: 1,
                         skin: 'layui-layer-demo', //样式类名
-                        title: "新增盤點活動",
+                        title: "Add inventory activity",
                         shadeClose: true, //开启遮罩关闭
                         area: ['450px', '300px'], //宽高
                         shade: 0.6, //遮罩透明度
@@ -276,7 +276,7 @@
             switch (obj.event) {
                 case 'add':
                     if (CoreUtil.isEmpty(selectDictId)) {
-                        layer.msg("请先选中左侧行后，再执行添加操作", {time: 3000});
+                        layer.msg("Please select the row on the left before performing the add operation ", {time: 3000});
                         return;
                     }
                     $("#detailId").val("");
@@ -320,7 +320,7 @@
         //删除
         var tipDialog = function (ids,containCurrentIdFlag) {
             layer.open({
-                content: "確定要删除?",
+                content: "Sure you want to delete ?",
                 yes: function (index, layero) {
                     layer.close(index); //如果设定了yes回调，需进行手工关闭
                     CoreUtil.sendDelete("/stocktakelist/delete", ids, function (res) {
@@ -339,7 +339,7 @@
         //详情删除
         var tipDialogDetail = function (ids) {
             layer.open({
-                content: "確定要删除?",
+                content: "Sure you want to delete?",
                 yes: function (index, layero) {
                     layer.close(index); //如果设定了yes回调，需进行手工关闭
                     CoreUtil.sendDelete("/stocktakelistDetail/delete", ids, function (res) {
@@ -388,7 +388,7 @@
                     }*/
                 }else{
                     //layer.msg("請輸入所有欄位!");
-                    alert("請輸入所有欄位!");
+                    alert("Please enter all fields!");
                 }
             }
 
